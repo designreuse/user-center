@@ -1,0 +1,56 @@
+server:
+  port: 9090
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 4
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/club?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: anywhere
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    maxActive: 20
+    initialSize: 5
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 600000
+    minEvictableIdleTimeMillis: 1800000
+    validationQuery: select 'x'
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    auto-commit: false
+    connection-init-sqls: SET time_zone = '+8:00'
+  freemarker:
+    cache: false
+    suffix: .ftl
+    template-loader-path: classpath:/webapp
+    variables:
+      title: Club
+      domain: yingchengpeng.com
+  resources:
+    static-locations: classpath:/static
+
+mybatis:
+  mapper-locations:  classpath*:com.ychp.club.user.model.mysql
+  type-aliases-package: com.ychp.club.user.model
+  configuration:
+    cacheEnabled: false
+    lazyLoadingEnabled: false
+    multipleResultSetsEnabled: true
+    useColumnLabel: true
+    useGeneratedKeys: true
+    autoMappingBehavior: FULL
+    defaultExecutorType: REUSE
+    defaultStatementTimeout: 25
+    safeRowBoundsEnabled: false
+    mapUnderscoreToCamelCase: true
+    localCacheScope: SESSION
+    jdbcTypeForNull: OTHER
+    lazyLoadTriggerMethods: equals,clone,hashCode,toString
+
+logging:
+  file: /Users/yingchengpeng/Documents/log/blog/web/root.log
+
