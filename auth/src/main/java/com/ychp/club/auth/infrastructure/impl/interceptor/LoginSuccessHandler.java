@@ -20,13 +20,13 @@ import java.io.IOException;
 @Slf4j
 @Primary
 @Component
-public class LoginSuccessInterceptor extends SavedRequestAwareAuthenticationSuccessHandler {
+public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException, ServletException {
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
         //输出登录提示信息
-        log.info("管理员 " + userDetails.getUsername() + " 登录");
+        log.info("user " + userDetails.getUsername() + " login");
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

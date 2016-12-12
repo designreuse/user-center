@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 /**
@@ -26,14 +27,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private SavedRequestAwareAuthenticationSuccessHandler loginSuccessInterceptor;
+    private SavedRequestAwareAuthenticationSuccessHandler loginSuccessHandler;
+
+    @Autowired
+    private AuthenticationFailureHandler loginFailureHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/", "/index", "/404", "/401", "/500", "/error").permitAll()
+        http.csrf().disable()
+                .authorizeRequests().antMatchers("/", "/index", "/error/**", "/404", "/403", "/401", "/500", "/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").successHandler(loginSuccessInterceptor).permitAll()
+                .formLogin().loginPage("/login").successHandler(loginSuccessHandler).failureHandler(loginFailureHandler).permitAll()
                 .and()
                 .logout().permitAll();
     }
