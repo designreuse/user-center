@@ -14,12 +14,16 @@ import java.util.Map;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class PageInfo {
 
     private Integer pageNo = 1;
 
     private Integer pageSize = 20;
+
+    public PageInfo(Integer pageNo, Integer pageSize){
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
+    }
 
     public Integer getOffset(){
         Integer no = pageNo == null ? 1: pageNo;

@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Import;
 @MapperScan("com.ychp.club.auth.model.mysql")
 @ComponentScan("com.ychp.club.auth")
 @Import(UserConfiguration.class)
-@AutoConfigureAfter(UserConfiguration.class)
+@AutoConfigureAfter({UserConfiguration.class, CacheConfiguration.class})
 @Configuration
 public class AuthorityConfiguration {
 }

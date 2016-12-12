@@ -37,6 +37,8 @@
         <snakeyaml.version>1.13</snakeyaml.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
         <jackson.version>2.6.7</jackson.version>
+        <shiro.version>1.2.3</shiro.version>
+        <ehcache.version>2.10.3</ehcache.version>
     </properties>
 
     <dependencies>
@@ -241,11 +243,26 @@
                 <version>${spring-boot.version}</version>
             </dependency>
 
+            <!-- shiro -->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-security</artifactId>
-                <version>${spring-boot.version}</version>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+
+            <!-- cache -->
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>${ehcache.version}</version>
+            </dependency>
+
 
             <!-- aop -->
             <dependency>

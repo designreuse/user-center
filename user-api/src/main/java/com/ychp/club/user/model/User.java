@@ -3,10 +3,6 @@ package com.ychp.club.user.model;
 import com.ychp.club.common.model.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
 
 /**
  * Desc:
@@ -15,7 +11,7 @@ import java.util.Collection;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class User extends BaseModel implements UserDetails {
+public class User extends BaseModel {
 
     private static final long serialVersionUID = 4342165661897688664L;
 
@@ -36,15 +32,5 @@ public class User extends BaseModel implements UserDetails {
     private String qq;
 
     private Integer status;
-
-    private Collection<GrantedAuthority>  authorities;
-
-    private boolean enabled;
-
-    private boolean accountNonExpired;
-
-    private boolean accountNonLocked;
-
-    private boolean credentialsNonExpired;
 
 }
