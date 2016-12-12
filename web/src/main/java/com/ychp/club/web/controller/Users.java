@@ -31,4 +31,14 @@ public class Users {
         model.addAttribute("users", userList);
         return "users";
     }
+
+    @RequestMapping("view")
+    public String view(Model model, @RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
+                        @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize){
+
+        List<User> userList = userManager.paging(pageNo, pageSize, null);
+
+        model.addAttribute("users", userList);
+        return "users";
+    }
 }

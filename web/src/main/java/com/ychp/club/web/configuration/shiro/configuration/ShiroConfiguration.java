@@ -1,5 +1,6 @@
 package com.ychp.club.web.configuration.shiro.configuration;
 
+import com.google.common.collect.Sets;
 import com.ychp.club.auth.AuthorityConfiguration;
 import com.ychp.club.auth.infrastructure.impl.factory.CustomerShiroFactoryBeanImpl;
 import com.ychp.club.auth.infrastructure.impl.realm.CustomerShiroRealm;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Desc:
@@ -26,11 +28,10 @@ import java.util.Map;
  */
 @Configuration
 @AutoConfigureAfter({AuthorityConfiguration.class})
-@EnableConfigurationProperties({ShiroProperties.class})
+@EnableConfigurationProperties(ShiroProperties.class)
 public class ShiroConfiguration {
 
-    @Autowired
-    private ShiroProperties shiroProperties;
+    private Set<String> ignoreExt = Sets.newHashSet(".jpg", ".png", ".gif", ".bmp", ".js", ".css");
 
     @Bean(name = "customerShiroRealm")
     public CustomerShiroRealm customerShiroRealm(CacheManager cacheManager, UserManager userManager) {
@@ -78,7 +79,8 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/user", "authc");// 这里为了测试，只限制/user，实际开发中请修改为具体拦截的请求规则
         // anon：它对应的过滤器里面是空的,什么都没做
 
-        filterChainDefinitionMap.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取
+        filterChainDefinitionMap.put("/user/paging", "authc,perms[user:paging]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取
+        filterChainDefinitionMap.put("/user/view", "authc,perms[user:view]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取
 
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/**", "anon");
@@ -90,7 +92,7 @@ public class ShiroConfiguration {
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager securityManager) {
 
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new CustomerShiroFactoryBeanImpl(shiroProperties.getIgnoreExt());
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new CustomerShiroFactoryBeanImpl(ignoreExt);
         // 必须设置 SecurityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面

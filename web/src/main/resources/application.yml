@@ -54,3 +54,5 @@ logging:
   file: /Users/yingchengpeng/Documents/log/blog/web/root.log
   level: debug
 
+shiro:
+  ignoreExt: .jpg,.png,.gif,.bmp,.js,.css

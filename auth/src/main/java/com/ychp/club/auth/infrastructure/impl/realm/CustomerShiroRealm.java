@@ -38,7 +38,7 @@ public class CustomerShiroRealm extends AuthorizingRealm {
             SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
             simpleAuthorizationInfo.addRole(role.getName());
 
-            List<String> permissions = Lists.newArrayList();
+            List<String> permissions = Lists.newArrayList("user:paging");
 
             simpleAuthorizationInfo.addStringPermissions(permissions);
             return simpleAuthorizationInfo;
