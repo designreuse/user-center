@@ -16,6 +16,6 @@ public interface UserRepository extends MybatisRepository<User> {
 
     public void updateStatusById(Long id, Integer status);
 
-    public User findByLoginName(String loginName);
+    public User findByUsername(String username);
 
 }

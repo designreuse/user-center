@@ -1,5 +1,6 @@
 package com.ychp.club.web;
 
+import com.ychp.club.auth.AuthorityConfiguration;
 import com.ychp.club.user.UserConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @ComponentScan("com.ychp.club.web")
 @EnableScheduling
-@Import(UserConfiguration.class)
+@Import({UserConfiguration.class, AuthorityConfiguration.class})
 @Configuration
 public class WebAutoConfiguration {
 }

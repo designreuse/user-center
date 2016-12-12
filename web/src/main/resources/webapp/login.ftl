@@ -12,6 +12,8 @@
         <#elseif param.logout??>
             您已注销成功
         </#if>
+    <#else>
+        无错误
     </#if>
     </div>
     <form action="/login" method="post">

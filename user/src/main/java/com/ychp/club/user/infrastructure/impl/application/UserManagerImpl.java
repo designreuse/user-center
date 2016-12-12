@@ -25,7 +25,11 @@ public class UserManagerImpl implements UserManager {
 //    private UserService userService;
 
     public User findById(Long id) {
-        return null;
+        return userRepository.findById(id);
+    }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     public List<User> paging(Integer pageNo, Integer pageSize, Map<String, Object> params) {

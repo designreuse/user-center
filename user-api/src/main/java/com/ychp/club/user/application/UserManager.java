@@ -14,6 +14,8 @@ public interface UserManager {
 
     public User findById(Long id);
 
+    public User findByUsername(String username);
+
     public List<User> paging(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
 }

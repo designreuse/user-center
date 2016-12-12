@@ -30,8 +30,7 @@ spring:
     variables:
       title: Club
       domain: yingchengpeng.com
-  resources:
-    static-locations: classpath:/static
+
 
 mybatis:
   mapper-locations:  classpath*:com.ychp.club.user.model.mysql
@@ -53,4 +52,5 @@ mybatis:
 
 logging:
   file: /Users/yingchengpeng/Documents/log/blog/web/root.log
+  level: debug
 

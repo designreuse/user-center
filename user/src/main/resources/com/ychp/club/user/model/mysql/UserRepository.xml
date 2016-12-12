@@ -9,9 +9,9 @@
 
     <sql id="allColumns">`id`,<include refid="columns"/></sql>
 
-    <sql id="columns">`name`, `login_name`, `password`, `role_id`, `outer_id`, `email`, `mobile`, `stu_no`, `qq`, `status`, `created_at`, `updated_at`</sql>
+    <sql id="columns">`name`, `username`, `password`, `role_id`, `outer_id`, `email`, `mobile`, `stu_no`, `qq`, `status`, `created_at`, `updated_at`</sql>
 
-    <sql id="values">${name},${loginName},${password},${roleId},${outerId},${email},${mobile},${stuNo},${qq},${status}</sql>
+    <sql id="values">${name},${username},${password},${roleId},${outerId},${email},${mobile},${stuNo},${qq},${status}</sql>
 
     <insert id="create" parameterMap="paramMap" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO <include refid="tb"/>
@@ -30,7 +30,7 @@
         UPDATE <include refid="tb"/>
         SET
         <if test="name !=null">`name`=#{name},</if>
-        <if test="loginName !=null">`login_name`=#{loginName},</if>
+        <if test="username !=null">`username`=#{username},</if>
         <if test="password !=null">`password`=#{password},</if>
         <if test="roleId !=null">`role_id`=#{roleId},</if>
         <if test="outerId !=null">`outer_id`=#{outerId},</if>
@@ -46,7 +46,7 @@
         WHERE 1=1
         <if test="id != null">AND `id`=#{id}</if>
         <if test="name != null">AND `name`=#{name}</if>
-        <if test="loginName != null">AND `login_name`=#{loginName}</if>
+        <if test="username != null">AND `username`=#{username}</if>
         <if test="roleId !=null">AND `role_id`=#{roleId}</if>
         <if test="outerId !=null">AND `outer_id`=#{outerId}</if>
         <if test="email != null">AND `email`=#{email}</if>
@@ -67,9 +67,9 @@
         <include refid="criteria"/>
     </select>
 
-    <select id="findByLoginName" parameterType="string" resultMap="listMap">
+    <select id="findByUsername" parameterType="string" resultMap="listMap">
         SELECT * FROM <include refid="tb"/>
-        WHERE `login_name` = #{loginName}
+        WHERE `username` = #{username}
     </select>
 
     <select id="pagingBy" parameterType="map" resultMap="listMap">

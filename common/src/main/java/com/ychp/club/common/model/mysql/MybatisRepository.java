@@ -18,9 +18,9 @@ public interface MybatisRepository<T> {
 
     public void delete(Long id);
 
-    public void findById(Long id);
+    public T findById(Long id);
 
-    public void findByIds(List<Long> id);
+    public List<T> findByIds(List<Long> id);
 
     public List<T> findListBy(Map<String,Object> params);
 

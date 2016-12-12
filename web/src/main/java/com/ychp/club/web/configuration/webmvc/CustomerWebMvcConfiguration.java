@@ -1,4 +1,4 @@
-package com.ychp.club.web.view;
+package com.ychp.club.web.configuration.webmvc;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  * Date: 16/7/21
  */
 @Configuration
-public class Views extends WebMvcConfigurationSupport {
+public class CustomerWebMvcConfiguration extends WebMvcConfigurationSupport {
 
     @Override
     protected void addViewControllers(ViewControllerRegistry registry) {
