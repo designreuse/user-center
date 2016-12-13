@@ -68,6 +68,28 @@ public class Errors implements ErrorController {
     }
 
     /**
+     * 定义403的ModelAndView
+     */
+    @RequestMapping(produces = "text/html",value = "403")
+    public ModelAndView errorHtml403(HttpServletRequest request,
+                                     HttpServletResponse response) {
+        response.setStatus(getStatus(request).value());
+        Map<String, Object> model = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
+        return new ModelAndView("error/403", model);
+    }
+
+    /**
+     * 定义403的JSON数据
+     */
+    @RequestMapping(value = "403")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> error403(HttpServletRequest request) {
+        Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
+        HttpStatus status = getStatus(request);
+        return new ResponseEntity<>(body, status);
+    }
+
+    /**
      * 定义500的ModelAndView
      */
     @RequestMapping(produces = "text/html",value = "500")
@@ -150,18 +172,9 @@ public class Errors implements ErrorController {
         return "";
     }
 
-//    @RequestMapping("/404")
-//    public String error404(){
-//        return "404";
-//    }
-//
     @RequestMapping("/401")
     public String error401(){
-        return "401";
+        return "error/401";
     }
 
-    @RequestMapping("/403")
-    public String error403(){
-        return "403";
-    }
 }

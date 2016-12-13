@@ -12,10 +12,16 @@
     <artifactId>auth-api</artifactId>
 
     <dependencies>
+
         <dependency>
             <groupId>com.ychp.club</groupId>
-            <artifactId>user-api</artifactId>
+            <artifactId>common</artifactId>
             <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
         </dependency>
 
     </dependencies>

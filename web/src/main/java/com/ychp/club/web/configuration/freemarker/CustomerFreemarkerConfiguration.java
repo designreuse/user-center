@@ -74,7 +74,7 @@ public class CustomerFreemarkerConfiguration {
         @Bean
         @ConditionalOnMissingBean({FreeMarkerConfig.class})
         public FreeMarkerConfigurer freeMarkerConfigurer() {
-            FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+            FreeMarkerConfigurer configurer = new CustomerFreeMarkerConfigurer();
             this.applyProperties(configurer);
             return configurer;
         }

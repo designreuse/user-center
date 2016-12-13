@@ -1,4 +1,4 @@
-package com.ychp.club.user.model;
+package com.ychp.club.auth.model;
 
 import com.ychp.club.common.model.BaseModel;
 import lombok.Data;

@@ -39,6 +39,7 @@
         <jackson.version>2.6.7</jackson.version>
         <shiro.version>1.2.3</shiro.version>
         <ehcache.version>2.10.3</ehcache.version>
+        <shiro-freemarker-tags.version>0.1</shiro-freemarker-tags.version>
     </properties>
 
     <dependencies>
@@ -245,6 +246,12 @@
             <!-- shiro -->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-all</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-spring</artifactId>
                 <version>${shiro.version}</version>
             </dependency>
@@ -253,6 +260,18 @@
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-web</artifactId>
                 <version>${shiro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.mingsoft</groupId>
+                <artifactId>shiro-freemarker-tags</artifactId>
+                <version>${shiro-freemarker-tags.version}</version>
             </dependency>
 
             <!-- cache -->

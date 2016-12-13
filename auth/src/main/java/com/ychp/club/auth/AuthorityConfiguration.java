@@ -1,11 +1,8 @@
 package com.ychp.club.auth;
 
-import com.ychp.club.user.UserConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 /**
  * Desc:
@@ -14,8 +11,6 @@ import org.springframework.context.annotation.Import;
  */
 @MapperScan("com.ychp.club.auth.model.mysql")
 @ComponentScan("com.ychp.club.auth")
-@Import(UserConfiguration.class)
-@AutoConfigureAfter({UserConfiguration.class, CacheConfiguration.class})
 @Configuration
 public class AuthorityConfiguration {
 }

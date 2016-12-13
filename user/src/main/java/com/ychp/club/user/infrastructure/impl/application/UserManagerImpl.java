@@ -32,6 +32,12 @@ public class UserManagerImpl implements UserManager {
         return userRepository.findByUsername(username);
     }
 
+    @Override
+    public boolean updateStatus(Long userId, Integer status) {
+        userRepository.updateStatusById(userId, status);
+        return true;
+    }
+
     public List<User> paging(Integer pageNo, Integer pageSize, Map<String, Object> params) {
         PageInfo pageInfo = new PageInfo(pageNo, pageSize);
         return userRepository.pagingBy(pageInfo.putIntoMap(params));

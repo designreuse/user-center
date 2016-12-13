@@ -1,4 +1,4 @@
-package com.ychp.club.web.configuration.shiro.configuration;
+package com.ychp.club.web.configuration.shiro;
 
 import com.google.common.collect.Sets;
 import lombok.Data;

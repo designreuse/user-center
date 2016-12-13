@@ -1,17 +1,20 @@
 package com.ychp.club.auth.infrastructure.impl.realm;
 
 import com.google.common.collect.Lists;
-import com.ychp.club.user.application.UserManager;
-import com.ychp.club.user.model.Role;
-import com.ychp.club.user.model.User;
+import com.ychp.club.auth.model.Role;
+import com.ychp.club.auth.model.mysql.RoleRepository;
+import com.ychp.club.auth.model.shiro.CustomerUsernamePasswordToken;
+import com.ychp.club.common.util.CustomerStringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Desc:
@@ -20,20 +23,16 @@ import java.util.List;
  */
 public class CustomerShiroRealm extends AuthorizingRealm {
 
-    private final UserManager userManager;
-
     @Autowired
-    public CustomerShiroRealm(UserManager userManager) {
-        this.userManager = userManager;
-    }
+    private RoleRepository roleRepository;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) super.getAvailablePrincipal(principalCollection);
-        User user = userManager.findByUsername(username);
-        if(user != null){
-            Role role = new Role();
-            role.setName("admin");
+
+        if(!StringUtils.isEmpty(username) && username.contains(CustomerStringUtils.SPLIT_CHARACTER)){
+            Long roleId = Long.valueOf(username.split(CustomerStringUtils.SPLIT_CHARACTER)[1]);
+            Role role = roleRepository.findById(roleId);
 
             SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
             simpleAuthorizationInfo.addRole(role.getName());
@@ -49,14 +48,32 @@ public class CustomerShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        CustomerUsernamePasswordToken token = (CustomerUsernamePasswordToken) authenticationToken;
 
-        User user = userManager.findByUsername(token.getUsername());
-
-        if(user != null){
-            return new SimpleAuthenticationInfo(user.getName(), user.getPassword(), getName());
+        if(token == null){
+            throw new AuthenticationException("username.or.password.error");
         }
 
-        return null;
+        if(StringUtils.isEmpty(token.getUsername())){
+            throw new UnknownAccountException("username.error");
+        }
+
+        if(StringUtils.isEmpty(token.getPassword()) || StringUtils.isEmpty(token.getOriginPassword())){
+            throw new IncorrectCredentialsException("password.error");
+        }
+
+        if(token.getStatus() == null || Objects.equals(token.getStatus(), -1)){
+            throw new LockedAccountException("account.locked");
+        }
+
+        //多次登录失败控制
+        //ExcessiveAttemptsException
+
+        try {
+            return new SimpleAuthenticationInfo(token.getUsername(), token.getPassword(), getName());
+        } catch (Exception e) {
+            throw new AuthenticationException("unknown.error");
+        }
+
     }
 }

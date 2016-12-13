@@ -16,6 +16,8 @@ public interface UserManager {
 
     public User findByUsername(String username);
 
+    public boolean updateStatus(Long userId, Integer status);
+
     public List<User> paging(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
 }
