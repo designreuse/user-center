@@ -9,5 +9,5 @@ import java.util.Map;
  */
 public interface AuthorityManager {
 
-    public Map<String, String> loadAuthorities(Long appId);
+    Map<String, String> loadAuthorities(Long appId);
 }

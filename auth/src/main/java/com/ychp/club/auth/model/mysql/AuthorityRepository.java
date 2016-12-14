@@ -14,6 +14,6 @@ import java.util.List;
 @Repository
 public interface AuthorityRepository extends MybatisRepository<Authority> {
 
-    public List<Authority> findByAppId(Long appId);
+    List<Authority> findByAppId(Long appId);
 
 }

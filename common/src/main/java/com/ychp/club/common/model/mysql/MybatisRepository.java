@@ -18,7 +18,7 @@ public interface MybatisRepository<T> {
 
     public void delete(Long id);
 
-    public T findById(Long id);
+    T findById(Long id);
 
     public List<T> findByIds(List<Long> id);
 
@@ -26,6 +26,6 @@ public interface MybatisRepository<T> {
 
     public Long countBy(Map<String,Object> params);
 
-    public List<T> pagingBy(Map<String,Object> params);
+    List<T> pagingBy(Map<String, Object> params);
 
 }
