@@ -59,6 +59,7 @@ public class CustomerShiroRealm extends AuthorizingRealm {
         }
 
         if(StringUtils.isEmpty(token.getPassword()) || StringUtils.isEmpty(token.getOriginPassword())){
+            //todo
             throw new IncorrectCredentialsException("password.error");
         }
 

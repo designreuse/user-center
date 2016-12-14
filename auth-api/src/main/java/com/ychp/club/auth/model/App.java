@@ -17,6 +17,10 @@ public class App extends BaseModel {
 
     private String name;
 
+    private String key;
+
+    private String secret;
+
     private String domain;
 
 }

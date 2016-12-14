@@ -2,10 +2,12 @@ package com.ychp.club.web.configuration.shiro;
 
 import com.google.common.collect.Sets;
 import com.ychp.club.auth.AuthorityConfiguration;
+import com.ychp.club.auth.application.AuthorityManager;
 import com.ychp.club.auth.infrastructure.impl.factory.CustomerShiroFactoryBeanImpl;
 import com.ychp.club.auth.infrastructure.impl.realm.CustomerShiroRealm;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -40,8 +42,8 @@ public class ShiroConfiguration {
     }
 
     @Bean(name = "customerShiroRealm")
-    public CustomerShiroRealm customerShiroRealm(CacheManager cacheManager) {
-        CustomerShiroRealm realm = new CustomerShiroRealm();
+    public AuthorizingRealm customerShiroRealm(CacheManager cacheManager) {
+        AuthorizingRealm realm = new CustomerShiroRealm();
         realm.setCacheManager(cacheManager);
         return realm;
     }
@@ -60,9 +62,9 @@ public class ShiroConfiguration {
     }
 
     @Bean(name = "securityManager")
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(CustomerShiroRealm customerShiroRealm, CacheManager cacheManager) {
+    public DefaultWebSecurityManager getDefaultWebSecurityManager(AuthorizingRealm authorizingRealm, CacheManager cacheManager) {
         DefaultWebSecurityManager webSecurityManager = new DefaultWebSecurityManager();
-        webSecurityManager.setRealm(customerShiroRealm);
+        webSecurityManager.setRealm(authorizingRealm);
         webSecurityManager.setCacheManager(cacheManager);
         return webSecurityManager;
     }
@@ -78,25 +80,14 @@ public class ShiroConfiguration {
      * 加载shiroFilter权限控制规则（从数据库读取然后配置）
      *
      */
-    private void loadShiroFilterChain(ShiroFilterFactoryBean shiroFilterFactoryBean){
-        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        // authc：该过滤器下的页面必须验证后才能访问，它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter
-        // anon：它对应的过滤器里面是空的,什么都没做
-
-        filterChainDefinitionMap.put("/user", "authc");
-
-        filterChainDefinitionMap.put("/user/paging", "authc,perms[user:paging]");
-        filterChainDefinitionMap.put("/user/view", "authc,perms[user:view]");
-
-        filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/**", "anon");
-
+    private void loadShiroFilterChain(ShiroFilterFactoryBean shiroFilterFactoryBean, AuthorityManager authorityManager){
+        Map<String, String> filterChainDefinitionMap = authorityManager.loadAuthorities(1L);
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
     }
 
 
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager securityManager) {
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager securityManager, AuthorityManager authorityManager) {
 
         ShiroFilterFactoryBean shiroFilterFactoryBean = new CustomerShiroFactoryBeanImpl(ignoreExt);
         // 必须设置 SecurityManager
@@ -107,7 +98,7 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSuccessUrl("/");
         shiroFilterFactoryBean.setUnauthorizedUrl("/error/403");
 
-        loadShiroFilterChain(shiroFilterFactoryBean);
+        loadShiroFilterChain(shiroFilterFactoryBean, authorityManager);
         return shiroFilterFactoryBean;
     }
 }
