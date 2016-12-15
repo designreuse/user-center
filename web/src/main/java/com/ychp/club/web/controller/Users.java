@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -45,6 +46,16 @@ public class Users {
     @RequestMapping("view")
     public String view(Model model, @RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
                         @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize){
+
+        List<User> userList = userManager.paging(pageNo, pageSize, null);
+
+        model.addAttribute("users", userList);
+        return "users";
+    }
+
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public String update(Model model, @RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
+                       @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize){
 
         List<User> userList = userManager.paging(pageNo, pageSize, null);
 

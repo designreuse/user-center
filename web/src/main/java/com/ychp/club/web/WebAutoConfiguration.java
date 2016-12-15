@@ -2,6 +2,8 @@ package com.ychp.club.web;
 
 import com.ychp.club.auth.AuthorityConfiguration;
 import com.ychp.club.user.UserConfiguration;
+import com.ychp.club.web.configuration.shiro.ShiroConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ErrorPage;
@@ -19,6 +21,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @ComponentScan("com.ychp.club.web")
 @EnableScheduling
+@AutoConfigureAfter({ShiroConfiguration.class})
 @Import({UserConfiguration.class, AuthorityConfiguration.class})
 @Configuration
 public class WebAutoConfiguration {

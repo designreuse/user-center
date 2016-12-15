@@ -15,6 +15,10 @@
         </#list>
         </tbody>
     </table>
+
+    <form action="/user/update" method="post">
+        <button type="submit">提交</button>
+    </form>
 </div>
 </body>
 

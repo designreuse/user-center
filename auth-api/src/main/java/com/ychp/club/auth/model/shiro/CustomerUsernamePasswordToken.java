@@ -17,28 +17,31 @@ public class CustomerUsernamePasswordToken extends UsernamePasswordToken {
 
     private char[] originPassword;
 
+    private String salt;
+
     private Integer status;
 
     public CustomerUsernamePasswordToken() {
         super();
     }
 
-    public CustomerUsernamePasswordToken(String username, String password, String originPassword, Integer status) {
-        this(username, password, originPassword, status, false, null);
+    public CustomerUsernamePasswordToken(String username, String password, String salt, String originPassword, Integer status) {
+        this(username, password, salt, originPassword, status, false, null);
     }
 
 
-    public CustomerUsernamePasswordToken(String username, String password, String originPassword, Integer status, String host) {
-        this(username, password, originPassword, status, false, host);
+    public CustomerUsernamePasswordToken(String username, String password, String salt, String originPassword, Integer status, String host) {
+        this(username, password, salt, originPassword, status, false, host);
     }
 
-    public CustomerUsernamePasswordToken(String username, String password, String originPassword, Integer status, boolean rememberMe) {
-        this(username, password, originPassword, status, rememberMe, null);
+    public CustomerUsernamePasswordToken(String username, String password, String salt, String originPassword, Integer status, boolean rememberMe) {
+        this(username, password, salt, originPassword, status, rememberMe, null);
     }
 
-    public CustomerUsernamePasswordToken(String username, String password, String originPassword, Integer status, boolean rememberMe, String host) {
+    public CustomerUsernamePasswordToken(String username, String password, String salt, String originPassword, Integer status, boolean rememberMe, String host) {
         super(username, password, rememberMe, host);
-        this.originPassword = originPassword != null?originPassword.toCharArray():null;
+        this.originPassword = originPassword != null ? originPassword.toCharArray():null;
+        this.salt = salt;
         this.status = status;
     }
 

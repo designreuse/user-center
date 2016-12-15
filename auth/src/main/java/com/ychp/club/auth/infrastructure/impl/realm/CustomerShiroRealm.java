@@ -4,7 +4,9 @@ import com.google.common.collect.Lists;
 import com.ychp.club.auth.model.Role;
 import com.ychp.club.auth.model.mysql.RoleRepository;
 import com.ychp.club.auth.model.shiro.CustomerUsernamePasswordToken;
+import com.ychp.club.auth.service.RoleAuthorityService;
 import com.ychp.club.common.util.CustomerStringUtils;
+import com.ychp.club.common.util.Encryption;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -26,6 +28,9 @@ public class CustomerShiroRealm extends AuthorizingRealm {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private RoleAuthorityService roleAuthorityService;
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) super.getAvailablePrincipal(principalCollection);
@@ -37,7 +42,7 @@ public class CustomerShiroRealm extends AuthorizingRealm {
             SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
             simpleAuthorizationInfo.addRole(role.getName());
 
-            List<String> permissions = Lists.newArrayList("user:paging");
+            List<String> permissions = roleAuthorityService.loadRoleAuthorities(roleId, null);
 
             simpleAuthorizationInfo.addStringPermissions(permissions);
             return simpleAuthorizationInfo;
@@ -58,9 +63,12 @@ public class CustomerShiroRealm extends AuthorizingRealm {
             throw new UnknownAccountException("username.error");
         }
 
-        if(StringUtils.isEmpty(token.getPassword()) || StringUtils.isEmpty(token.getOriginPassword())){
-            //todo
-            throw new IncorrectCredentialsException("password.error");
+        if(token.getPassword() != null || StringUtils.isEmpty(token.getOriginPassword())){
+            String password = String.copyValueOf(token.getPassword());
+            String originPassword = String.copyValueOf(token.getOriginPassword());
+            if(!Encryption.checkPassword(password, token.getSalt(), originPassword)) {
+                throw new IncorrectCredentialsException("password.error");
+            }
         }
 
         if(token.getStatus() == null || Objects.equals(token.getStatus(), -1)){

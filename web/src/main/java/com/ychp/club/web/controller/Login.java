@@ -47,9 +47,9 @@ public class Login {
         if(user != null) {
             token = new CustomerUsernamePasswordToken(
                     user.getUsername() + CustomerStringUtils.SPLIT_CHARACTER + user.getRoleId(),
-                    password, user.getPassword(), user.getStatus(), remember);
+                    password, user.getSalt(), user.getPassword(), user.getStatus(), remember);
         } else {
-            token = new CustomerUsernamePasswordToken(null, null, null, null, false);
+            token = new CustomerUsernamePasswordToken(null, null, null, null, null, false);
         }
 
         Subject currentUser = SecurityUtils.getSubject();

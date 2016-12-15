@@ -11,13 +11,15 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AuthorityRole extends BaseModel {
+public class RoleAuthority extends BaseModel {
 
     private static final long serialVersionUID = -8805239526068871930L;
 
     private Long roleId;
 
     private Long authorityId;
+
+    private String authorityKey;
 
     private Long appId;
 
