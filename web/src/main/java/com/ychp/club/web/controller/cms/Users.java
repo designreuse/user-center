@@ -1,4 +1,4 @@
-package com.ychp.club.web.controller;
+package com.ychp.club.web.controller.cms;
 
 import com.ychp.club.user.application.UserManager;
 import com.ychp.club.user.model.User;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/cms/user")
 public class Users {
 
     @Autowired

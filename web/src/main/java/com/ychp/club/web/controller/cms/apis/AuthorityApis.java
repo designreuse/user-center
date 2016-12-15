@@ -1,4 +1,4 @@
-package com.ychp.club.web.controller.apis;
+package com.ychp.club.web.controller.cms.apis;
 
 import com.google.common.base.Throwables;
 import com.ychp.club.auth.application.AuthorityManager;
@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @Slf4j
 @Controller
-@RequestMapping("/api/authority")
+@RequestMapping("/api/cms/authority")
 public class AuthorityApis {
 
     @Autowired

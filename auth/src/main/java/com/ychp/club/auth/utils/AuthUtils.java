@@ -12,10 +12,16 @@ public class AuthUtils {
 
     private static final String PERM_TEMPLATE = "perms[{0}]";
 
-    public static String getAuth(String auth, String permKey){
+    private static final String ROLE_TEMPLATE = "roles[{0}]";
+
+    public static String getAuth(String auth, String permKey, String roleKey){
         String fullAuth = auth;
         if(!StringUtils.isEmpty(permKey)){
             fullAuth += "," + CustomerStringUtils.formatString(PERM_TEMPLATE, permKey);
+        }
+
+        if(!StringUtils.isEmpty(roleKey)){
+            fullAuth += "," + CustomerStringUtils.formatString(ROLE_TEMPLATE, roleKey);
         }
         return fullAuth;
     }

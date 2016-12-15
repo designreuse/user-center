@@ -27,10 +27,9 @@ public class AuthorityServiceImpl implements AuthorityService {
     @Override
     public Map<String, String> loadAuthorities(Long appId) {
         Map<String, String> filterChainDefinitionMap = Maps.newHashMap();
-        filterChainDefinitionMap.put("/**", "authc");
         List<Authority> authorities = authorityRepository.findByAppId(appId);
         for(Authority authority : authorities){
-            filterChainDefinitionMap.put(authority.getUrl(), AuthUtils.getAuth(authority.getAuth(), authority.getPermKey()));
+            filterChainDefinitionMap.put(authority.getUrl(), AuthUtils.getAuth(authority.getAuth(), authority.getPermKey(), authority.getRoleKey()));
         }
         return filterChainDefinitionMap;
     }

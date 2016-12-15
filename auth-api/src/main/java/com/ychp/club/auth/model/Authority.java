@@ -21,6 +21,8 @@ public class Authority extends BaseModel {
 
     private String permKey;
 
+    private String roleKey;
+
     private String url;
 
     private String appId;
