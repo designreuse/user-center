@@ -11,6 +11,7 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +39,7 @@ public class Login {
     public String login(@RequestParam(value = "username") String username,
                         @RequestParam(value = "password") String password,
                         @RequestParam(value = "remember") Boolean remember,
+                        @RequestParam(value = "target", required = false) String target,
                         @RequestParam(value = "checkCode", required = false) String checkCode,
                         RedirectAttributes redirectAttributes){
 
@@ -74,7 +76,11 @@ public class Login {
 
         //验证是否登录成功
         if(currentUser.isAuthenticated()){
-            return "redirect:/user/paging";
+            if(StringUtils.isEmpty(target)){
+                return "redirect:/";
+            } else {
+                return "redirect:" + target;
+            }
         }else{
             token.clear();
             return "redirect:/login";

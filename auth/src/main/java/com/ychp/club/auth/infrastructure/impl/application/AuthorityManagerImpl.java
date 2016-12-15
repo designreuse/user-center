@@ -1,7 +1,9 @@
 package com.ychp.club.auth.infrastructure.impl.application;
 
+import com.google.common.collect.Lists;
 import com.ychp.club.auth.application.AuthorityManager;
 import com.ychp.club.auth.model.App;
+import com.ychp.club.auth.model.Authority;
 import com.ychp.club.auth.model.mysql.AppRepository;
 import com.ychp.club.auth.model.mysql.AuthorityRepository;
 import com.ychp.club.auth.service.AuthorityService;
@@ -33,6 +35,15 @@ public class AuthorityManagerImpl implements AuthorityManager {
     public List<App> pagingApp(Integer pageNo, Integer pageSize, Map<String, Object> params) {
         PageInfo pageInfo = new PageInfo(pageNo, pageSize);
         return appRepository.pagingBy(pageInfo.putIntoMap(params));
+    }
+
+    @Override
+    public List<Authority> pagingAuthority(Integer pageNo, Integer pageSize, Map<String, Object> params) {
+        if(params == null || params.size() == 0){
+            return Lists.newArrayList();
+        }
+        PageInfo pageInfo = new PageInfo(pageNo, pageSize);
+        return authorityRepository.pagingBy(pageInfo.putIntoMap(params));
     }
 
     @Override

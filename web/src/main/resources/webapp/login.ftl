@@ -9,16 +9,10 @@
     <#if message??>
         ${message}
     </#if>
-    <#if param??>
-        <#if param.error??>
-            用户名或密码错
-        <#elseif param.logout??>
-            您已注销成功
-        </#if>
-    </#if>
     </div>
     <form action="/login" method="post">
         <input type="hidden" name="remember" value="true">
+        <input type="hidden" name="target" value="">
         登录名:<input type="text" name="username">
         密  码:<input type="password" name="password">
         <button type="submit" value="登录">登录</button>

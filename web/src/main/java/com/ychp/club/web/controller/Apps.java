@@ -35,7 +35,7 @@ public class Apps {
         List<App> appList = authorityManager.pagingApp(pageNo, pageSize, null);
 
         model.addAttribute("apps", appList);
-        return "apps";
+        return "auth/apps";
     }
 
 }

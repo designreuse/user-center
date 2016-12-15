@@ -1,6 +1,7 @@
 package com.ychp.club.auth.application;
 
 import com.ychp.club.auth.model.App;
+import com.ychp.club.auth.model.Authority;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,8 @@ import java.util.Map;
 public interface AuthorityManager {
 
     List<App> pagingApp(Integer pageNo, Integer pageSize, Map<String,Object> params);
+
+    List<Authority> pagingAuthority(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
     Map<String, String> loadAuthorities(Long appId);
 }

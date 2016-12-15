@@ -26,14 +26,14 @@ public class Users {
     @Autowired
     private UserManager userManager;
 
-    @RequestMapping("paging")
+    @RequestMapping("list")
     public String users(Model model, @RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
                         @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize){
 
         List<User> userList = userManager.paging(pageNo, pageSize, null);
 
         model.addAttribute("users", userList);
-        return "users";
+        return "auth/users";
     }
 
     @RequestMapping("updateStatus")
@@ -50,16 +50,12 @@ public class Users {
         List<User> userList = userManager.paging(pageNo, pageSize, null);
 
         model.addAttribute("users", userList);
-        return "users";
+        return "auth/users";
     }
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public String update(Model model, @RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
-                       @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize){
+    public String update(){
 
-        List<User> userList = userManager.paging(pageNo, pageSize, null);
-
-        model.addAttribute("users", userList);
-        return "users";
+        return "redirect:/user/list";
     }
 }

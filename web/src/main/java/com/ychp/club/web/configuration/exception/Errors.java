@@ -33,7 +33,6 @@ public class Errors implements ErrorController {
     @Autowired
     private ServerProperties serverProperties;
 
-
     /**
      * 初始化ExceptionController
      */
@@ -41,6 +40,30 @@ public class Errors implements ErrorController {
     public Errors(ErrorAttributes errorAttributes) {
         Assert.notNull(errorAttributes, "ErrorAttributes must not be null");
         this.errorAttributes = errorAttributes;
+    }
+
+    /**
+     * 定义ModelAndView
+     */
+    @RequestMapping(produces = "text/html",value = "")
+    public ModelAndView errorHtml(HttpServletRequest request,
+                                     HttpServletResponse response) {
+        response.setStatus(getStatus(request).value());
+        Map<String, Object> model = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
+        return new ModelAndView("error/500", model);
+    }
+
+
+    /**
+     * 定义错误JSON信息
+     */
+    @RequestMapping(value = "")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
+        Map<String, Object> body = getErrorAttributes(request,
+                isIncludeStackTrace(request, MediaType.TEXT_HTML));
+        HttpStatus status = getStatus(request);
+        return new ResponseEntity<>(body, status);
     }
 
     /**
