@@ -1,4 +1,4 @@
-<#import "../../common/pagination.ftl" as pagination/>
+<#import "../../common/pagination-tag.ftl" as pagination/>
 <@override name="body">
 <div class="container-fluid">
 

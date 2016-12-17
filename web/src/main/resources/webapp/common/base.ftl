@@ -75,7 +75,6 @@
             <p class="text-center">友情链接:
                 <a href="http://www.yingchengpeng.com" target="_blank">yingchengpeng</a>
                 <a href="http://www.bootcss.com" target="_blank">Bootstrap</a>
-                <a href="http://glyphicons.com" target="_blank">Glyphicons</a>
             </p>
             <p class="text-center">&copy;Ycp 2016.12.17</p>
         </div>

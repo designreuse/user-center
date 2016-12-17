@@ -8,6 +8,17 @@ body {
     border-color: #e7e7e7;
 }
 
+.navbar-blue .navbar-toggle:hover, .navbar-blue .navbar-toggle:focus {
+    background-color: #2b73ca;
+}
+.navbar-blue .navbar-toggle {
+    border-color: #e7e7e7;
+}
+
+.navbar-blue .navbar-toggle .icon-bar {
+    background-color: #e7e7e7;
+}
+
 .navbar-header>a,.nav>li>a{
     color: #e7e7e7;
     text-decoration: none;
