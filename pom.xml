@@ -415,12 +415,6 @@
             </dependency>
 
             <dependency>
-                <groupId>net.mingsoft</groupId>
-                <artifactId>shiro-freemarker-tags</artifactId>
-                <version>${shiro-freemarker-tags.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.googlecode.rapid-framework</groupId>
                 <artifactId>rapid-core</artifactId>
                 <version>${rapid-framework.version}</version>
