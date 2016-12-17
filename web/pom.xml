@@ -84,4 +84,8 @@
 
     </dependencies>
 
+    <build>
+        <finalName>book-club</finalName>
+    </build>
+
 </project>
