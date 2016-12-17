@@ -8,19 +8,19 @@ echo "mvn install"
 mvn clean package -Dmaven.test.skip -pl web -am -e -U
 
 echo "book-club module"
-if [ -f $rootPath/projects/club/book-club.jar ];
+if [ -f $rootPath/projects/book-club/book-club.jar ];
 then
-    if [ -f $rootPath/projects/club/book-club.jar.bak ];
+    if [ -f $rootPath/projects/book-club/book-club.jar.bak ];
     then
         echo "remove book-club bak"
-            rm -rf $rootPath/projects/club/book-club.jar.bak
+            rm -rf $rootPath/projects/book-club/book-club.jar.bak
     fi;
     echo "bak book-club.jar"
-    mv $rootPath/projects/club/book-club.jar $rootPath/projects/club/book-club.jar.bak
+    mv $rootPath/projects/book-club/book-club.jar $rootPath/projects/book-club/book-club.jar.bak
 fi;
 echo "cp book-club to project"
-cp ./web/target/book-club.jar $rootPath/projects/club
-if [ -f /etc/init.d/book-club ];
+cp ./web/target/book-club.jar $rootPath/projects/book-club/
+if [ -f /etc/init.d/club ];
 then
     echo "restart book-club "
     service club restart
