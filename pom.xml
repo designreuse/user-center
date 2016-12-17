@@ -299,8 +299,8 @@
 
             <!--  datasource pool -->
             <dependency>
-                <groupId>com.mchange.c3p0</groupId>
-                <artifactId>com.springsource.com.mchange.v2.c3p0</artifactId>
+                <groupId>com.mchange</groupId>
+                <artifactId>c3p0</artifactId>
                 <version>${c3p0.version}</version>
             </dependency>
 
