@@ -16,6 +16,7 @@ public class CustomerWebMvcConfiguration extends WebMvcConfigurationSupport {
     @Override
     protected void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
+        registry.addViewController("/cms").setViewName("auth/index");
         registry.addViewController("/login").setViewName("login");
 
         super.addViewControllers(registry);
@@ -23,7 +24,7 @@ public class CustomerWebMvcConfiguration extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:static/");
         super.addResourceHandlers(registry);
     }
 

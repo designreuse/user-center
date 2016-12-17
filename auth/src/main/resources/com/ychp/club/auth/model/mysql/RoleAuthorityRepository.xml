@@ -51,7 +51,11 @@
 
     <select id="findByAppAndRole" parameterType="map" resultMap="listMap">
         SELECT * FROM <include refid="tb"/> WHERE `role_id`=#{roleId}
-        <if test="appId != null">AND `app_id`=#{appId}</if>
+        <if test="appIds != null">AND `app_id` IN
+        <foreach collection="appIds" item="appId" open="(" separator="," close=")">
+            #{appId}
+        </foreach>
+        </if>
     </select>
 
     <delete id="delete" >

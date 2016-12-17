@@ -40,6 +40,8 @@
         <shiro.version>1.2.3</shiro.version>
         <ehcache.version>2.10.3</ehcache.version>
         <shiro-freemarker-tags.version>0.1</shiro-freemarker-tags.version>
+        <rapid-framework.version>4.0.5</rapid-framework.version>
+        <commons-lang.version>2.6</commons-lang.version>
     </properties>
 
     <dependencies>
@@ -411,6 +413,25 @@
                 <artifactId>simple-java-mail</artifactId>
                 <version>${simple.mail.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>net.mingsoft</groupId>
+                <artifactId>shiro-freemarker-tags</artifactId>
+                <version>${shiro-freemarker-tags.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.googlecode.rapid-framework</groupId>
+                <artifactId>rapid-core</artifactId>
+                <version>${rapid-framework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

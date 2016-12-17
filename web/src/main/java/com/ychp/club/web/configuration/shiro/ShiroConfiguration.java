@@ -32,7 +32,7 @@ import java.util.Set;
 @EnableConfigurationProperties(ShiroProperties.class)
 public class ShiroConfiguration {
 
-    private Set<String> ignoreExt = Sets.newHashSet(".jpg", ".png", ".gif", ".bmp", ".js", ".css");
+    private Set<String> ignoreExt = Sets.newHashSet(".jpg", ".png", ".gif", ".bmp", ".js", ".css", ".map", ".eot", ".svg", ".ttf", ".woff");
 
     @Bean
     public EhCacheManager cacheManager(){

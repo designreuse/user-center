@@ -1,5 +1,6 @@
 package com.ychp.club.web.controller.cms;
 
+import com.ychp.club.common.model.Paging;
 import com.ychp.club.user.application.UserManager;
 import com.ychp.club.user.model.User;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
-
 /**
  * Desc:
  * Author: <a href="ychp@terminus.io">应程鹏</a>
@@ -20,19 +19,19 @@ import java.util.List;
  */
 @Slf4j
 @Controller
-@RequestMapping("/cms/user")
+@RequestMapping("/cms")
 public class Users {
 
     @Autowired
     private UserManager userManager;
 
-    @RequestMapping("list")
+    @RequestMapping("users")
     public String users(Model model, @RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
                         @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize){
 
-        List<User> userList = userManager.paging(pageNo, pageSize, null);
+        Paging<User> userPaging = userManager.paging(pageNo, pageSize, null);
 
-        model.addAttribute("users", userList);
+        model.addAttribute("users", userPaging);
         return "auth/users";
     }
 
@@ -41,16 +40,6 @@ public class Users {
     public Boolean updateStatus(@RequestParam("id") Long id, @RequestParam("status") Integer status){
         boolean isSuccess = userManager.updateStatus(id, status);
         return isSuccess;
-    }
-
-    @RequestMapping("view")
-    public String view(Model model, @RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
-                        @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize){
-
-        List<User> userList = userManager.paging(pageNo, pageSize, null);
-
-        model.addAttribute("users", userList);
-        return "auth/users";
     }
 
     @RequestMapping(value = "update", method = RequestMethod.POST)

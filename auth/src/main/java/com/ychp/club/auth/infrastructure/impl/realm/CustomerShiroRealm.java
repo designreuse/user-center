@@ -1,7 +1,11 @@
 package com.ychp.club.auth.infrastructure.impl.realm;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.ychp.club.auth.model.App;
 import com.ychp.club.auth.model.Role;
+import com.ychp.club.auth.model.RoleApp;
+import com.ychp.club.auth.model.mysql.RoleAppRepository;
 import com.ychp.club.auth.model.mysql.RoleRepository;
 import com.ychp.club.auth.model.shiro.CustomerUsernamePasswordToken;
 import com.ychp.club.auth.service.RoleAuthorityService;
@@ -31,6 +35,9 @@ public class CustomerShiroRealm extends AuthorizingRealm {
     @Autowired
     private RoleAuthorityService roleAuthorityService;
 
+    @Autowired
+    private RoleAppRepository roleAppRepository;
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) super.getAvailablePrincipal(principalCollection);
@@ -42,7 +49,9 @@ public class CustomerShiroRealm extends AuthorizingRealm {
             SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
             simpleAuthorizationInfo.addRole(role.getName());
 
-            List<String> permissions = roleAuthorityService.loadRoleAuthorities(roleId, null);
+            List<RoleApp> roleApps =  roleAppRepository.findByRole(roleId);
+            List<Long> appIds = Lists.transform(roleApps, RoleApp::getAppId);
+            List<String> permissions = roleAuthorityService.loadRoleAuthorities(roleId, appIds);
 
             simpleAuthorizationInfo.addStringPermissions(permissions);
             return simpleAuthorizationInfo;

@@ -1,5 +1,6 @@
 package com.ychp.club.user.application;
 
+import com.ychp.club.common.model.Paging;
 import com.ychp.club.user.model.User;
 
 import java.util.List;
@@ -18,6 +19,6 @@ public interface UserManager {
 
     public boolean updateStatus(Long userId, Integer status);
 
-    public List<User> paging(Integer pageNo, Integer pageSize, Map<String,Object> params);
+    public Paging<User> paging(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
 }

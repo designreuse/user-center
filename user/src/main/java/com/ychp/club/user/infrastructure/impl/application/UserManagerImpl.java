@@ -1,6 +1,7 @@
 package com.ychp.club.user.infrastructure.impl.application;
 
 import com.ychp.club.common.model.PageInfo;
+import com.ychp.club.common.model.Paging;
 import com.ychp.club.user.application.UserManager;
 import com.ychp.club.user.model.User;
 import com.ychp.club.user.model.mysql.UserRepository;
@@ -38,8 +39,13 @@ public class UserManagerImpl implements UserManager {
         return true;
     }
 
-    public List<User> paging(Integer pageNo, Integer pageSize, Map<String, Object> params) {
+    public Paging<User> paging(Integer pageNo, Integer pageSize, Map<String, Object> params) {
         PageInfo pageInfo = new PageInfo(pageNo, pageSize);
-        return userRepository.pagingBy(pageInfo.putIntoMap(params));
+        Paging<User> userPaging= new Paging<>(pageNo, pageSize);
+        List<User> users = userRepository.pagingBy(pageInfo.putIntoMap(params));
+        Long total = userRepository.countBy(pageInfo.putIntoMap(params));
+        userPaging.setDatas(users);
+        userPaging.setTotal(total);
+        return userPaging;
     }
 }

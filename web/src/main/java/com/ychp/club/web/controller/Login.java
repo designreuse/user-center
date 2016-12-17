@@ -4,6 +4,7 @@ import com.google.common.base.Throwables;
 import com.ychp.club.auth.model.shiro.CustomerUsernamePasswordToken;
 import com.ychp.club.common.util.CustomerStringUtils;
 import com.ychp.club.user.application.UserManager;
+import com.ychp.club.user.model.LoginUser;
 import com.ychp.club.user.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Desc:
@@ -38,10 +41,10 @@ public class Login {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(@RequestParam(value = "username") String username,
                         @RequestParam(value = "password") String password,
-                        @RequestParam(value = "remember") Boolean remember,
+                        @RequestParam(value = "remember", defaultValue = "false") Boolean remember,
                         @RequestParam(value = "target", required = false) String target,
                         @RequestParam(value = "checkCode", required = false) String checkCode,
-                        RedirectAttributes redirectAttributes){
+                        RedirectAttributes redirectAttributes, HttpSession session){
 
         User user = userManager.findByUsername(username);
 
@@ -57,6 +60,7 @@ public class Login {
         Subject currentUser = SecurityUtils.getSubject();
         try {
             currentUser.login(token);
+            session.setAttribute("online", LoginUser.makeUser(user));
         } catch(UnknownAccountException uae){
             log.error("unknown account {}", username);
             redirectAttributes.addFlashAttribute("message", "用户名或密码不正确");

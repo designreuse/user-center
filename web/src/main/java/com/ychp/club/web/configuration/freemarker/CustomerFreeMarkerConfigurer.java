@@ -1,5 +1,8 @@
 package com.ychp.club.web.configuration.freemarker;
 
+import cn.org.rapid_framework.freemarker.directive.BlockDirective;
+import cn.org.rapid_framework.freemarker.directive.ExtendsDirective;
+import cn.org.rapid_framework.freemarker.directive.OverrideDirective;
 import com.jagregory.shiro.freemarker.ShiroTags;
 import freemarker.template.TemplateException;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
@@ -17,5 +20,8 @@ public class CustomerFreeMarkerConfigurer extends FreeMarkerConfigurer {
     public void afterPropertiesSet() throws IOException, TemplateException {
         super.afterPropertiesSet();
         this.getConfiguration().setSharedVariable("shiro", new ShiroTags());
+        this.getConfiguration().setSharedVariable("block", new BlockDirective());
+        this.getConfiguration().setSharedVariable("override", new OverrideDirective());
+        this.getConfiguration().setSharedVariable("extends", new ExtendsDirective());
     }
 }

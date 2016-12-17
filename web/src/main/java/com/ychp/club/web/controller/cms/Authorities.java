@@ -1,9 +1,11 @@
 package com.ychp.club.web.controller.cms;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ychp.club.auth.application.AuthorityManager;
 import com.ychp.club.auth.model.App;
 import com.ychp.club.auth.model.Authority;
+import com.ychp.club.common.model.Paging;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,24 +23,27 @@ import java.util.Map;
  */
 @Slf4j
 @Controller
-@RequestMapping("/cms/authority")
+@RequestMapping("/cms")
 public class Authorities {
 
     @Autowired
     private AuthorityManager authorityManager;
 
-    @RequestMapping("list")
+    @RequestMapping("/perms")
     public String users(Model model,
-                        @RequestParam("appId") Long appId,
+                        @RequestParam(value = "appId",required = false) Long appId,
                         @RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
                         @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize){
-        Map<String, Object> params = Maps.newHashMap();
-        params.put("appId", appId);
-
-        List<Authority> authorities = authorityManager.pagingAuthority(pageNo, pageSize, params);
+        Paging<Authority> authorities = new Paging<>(pageNo, pageSize);
+        if(appId != null){
+            Map<String, Object> params = Maps.newHashMap();
+            params.put("appId", appId);
+            authorities = authorityManager.pagingAuthority(pageNo, pageSize, params);
+        }
 
         model.addAttribute("authorities", authorities);
-        return "auth/authorities";
+        model.addAttribute("appId", appId);
+        return "auth/app/authorities";
     }
 
 }
