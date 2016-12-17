@@ -30,7 +30,7 @@ else
     sudo ln -s /root/projects/book-club/book-club.jar /etc/init.d/club
     chmod 751 /etc/init.d/club
     mkdir /var/log/book-club
-    echo "MODE=service\r\nJAVA_OPTS=\"-Xms512m -Xmx512m -XX:PermSize=256M -Dspring.profiles.active=test\"\r\nLOG_FOLDER=/var/log/book-club\r\nLOG_FILENAME=book-club.log" > /root/projects/book-club/book-club.conf
+    echo "MODE=service\\r\\nJAVA_OPTS=\"-Xms512m -Xmx512m -XX:PermSize=256M -Dspring.profiles.active=test\"\\r\\nLOG_FOLDER=/var/log/book-club\\r\\nLOG_FILENAME=book-club.log" > /root/projects/book-club/book-club.conf
     echo "start book-club "
     service club start
     tail -f /var/log/book-club/book-club.log
