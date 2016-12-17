@@ -33,8 +33,8 @@ function loadData(obj) {
                     + '<td>' + it.domain + '</td>'
                     + '<td>'
                     + '<a href="/cms/perms?appId=${app.id}">权限列表</a>'
-                    + '<a data-info="' + JSON.stringify(it) + '" href="#">编辑</a>'
-                    + '<a href="#">删除</a>'
+                    + '\r\n<a data-info="' + JSON.stringify(it) + '" href="#">编辑</a>'
+                    + '\r\n<a href="#">删除</a>'
                     + '</td>'
                     + '</tr>');
                 $(".js-app-info-content").append(child)
