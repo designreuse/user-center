@@ -1,5 +1,5 @@
 body {
-    padding-top: 70px;
+    padding-top: 60px;
     padding-bottom: 70px;
 }
 
@@ -59,6 +59,14 @@ body {
     margin-right: auto;
 }
 
+.mb-5{
+    margin-bottom: 5px;
+}
+
+.mt-5{
+    margin-top: 5px;
+}
+
 .mb-10{
     margin-bottom: 10px;
 }
@@ -70,3 +78,6 @@ body {
 .panel-heading .transparent{
     background-color: rgba(0,0,0,0);
 }
+
+
+

@@ -1,6 +1,7 @@
 package com.ychp.club.web.controller.cms;
 
 import com.ychp.club.common.model.Paging;
+import com.ychp.club.common.util.PageUtils;
 import com.ychp.club.user.application.UserManager;
 import com.ychp.club.user.model.User;
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +27,8 @@ public class Users {
     private UserManager userManager;
 
     @RequestMapping("users")
-    public String users(Model model, @RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
-                        @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize){
+    public String users(Model model, @RequestParam(value = "pageNo",defaultValue = PageUtils.DEFAULT_PAGE_NO) Integer pageNo,
+                        @RequestParam(value = "pageSize",defaultValue = PageUtils.DEFAULT_PAGE_SIZE) Integer pageSize){
 
         Paging<User> userPaging = userManager.paging(pageNo, pageSize, null);
 

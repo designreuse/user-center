@@ -14,19 +14,6 @@
             <tr><th>应用ID</th><th>应用名称</th><th>应用Key</th><th>应用域名</th><th>操作</th></tr>
             </thead>
             <tbody class="js-app-info-content">
-                <#--<#list apps.datas as app>-->
-                    <#--<tr>-->
-                        <#--<td>${app.id}</td>-->
-                        <#--<td>${app.name}</td>-->
-                        <#--<td>${app.key}</td>-->
-                        <#--<td>${app.domain}</td>-->
-                        <#--<td>-->
-                            <#--<a href="/cms/perms?appId=${app.id}">权限列表</a>-->
-                            <#--<a href="#">编辑</a>-->
-                            <#--<a href="#">删除</a>-->
-                        <#--</td>-->
-                    <#--</tr>-->
-                <#--</#list>-->
             </tbody>
         </table>
         <nav class="pagination-params"
@@ -36,7 +23,6 @@
              data-total="-1"
         >
             <ul class="pagination">
-
             </ul>
         </nav>
     </div>

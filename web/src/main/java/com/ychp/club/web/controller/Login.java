@@ -81,7 +81,7 @@ public class Login {
         //验证是否登录成功
         if(currentUser.isAuthenticated()){
             if(StringUtils.isEmpty(target)){
-                return "redirect:/";
+                return "redirect:/cms";
             } else {
                 return "redirect:" + target;
             }

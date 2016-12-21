@@ -1,5 +1,6 @@
 package com.ychp.club.web.controller.cms;
 
+import com.ychp.club.common.util.PageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +19,8 @@ public class Apps {
 
 
     @RequestMapping("/apps")
-    public String apps(Model model, @RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
-                        @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize){
+    public String apps(Model model, @RequestParam(value = "pageNo",defaultValue = PageUtils.DEFAULT_PAGE_NO) Integer pageNo,
+                        @RequestParam(value = "pageSize",defaultValue = PageUtils.DEFAULT_PAGE_SIZE) Integer pageSize){
 
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("pageSize", pageSize);

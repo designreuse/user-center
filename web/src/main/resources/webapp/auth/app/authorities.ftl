@@ -13,15 +13,24 @@
             <thead>
             <tr><th>ID</th><th>名称</th><th>是否需要权限</th><th>权限key</th><th>url</th><th>操作</th></tr>
             </thead>
-            <tbody>
-                <#list authorities.datas as authority>
-                <tr><td>${authority.id}</td><td>${authority.name}</td><td>${authority.auth}</td><td>${authority.permKey?if_exists}</td><td>${authority.url}</td></tr>
-                </#list>
+            <tbody class="js-app-info-content">
             </tbody>
         </table>
-        <@pagination.page pageNo=authorities.pageNo pageSize=authorities.pageSize total=authorities.total url="/cms/perms" params="?appId=${appId?if_exists}" />
+        <nav class="pagination-params"
+             data-pageno="${pageNo}"
+             data-pagesize="${pageSize}"
+             data-appid="${appId}"
+             data-url="/api/cms/perms"
+             data-total="-1"
+        >
+            <ul class="pagination">
+            </ul>
+        </nav>
     </div>
 </div>
+
+<script type="application/javascript" src="/static/js/auth/authority.js"></script>
+<script type="application/javascript" src="/static/js/common/pagination.js"></script>
 </@override>
 <@extends name="/common/base.ftl"/>
 
