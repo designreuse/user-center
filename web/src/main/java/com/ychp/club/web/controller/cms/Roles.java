@@ -27,9 +27,7 @@ public class Roles {
     @RequestMapping("roles")
     public String users(Model model, @RequestParam(value = "pageNo",defaultValue = PageUtils.DEFAULT_PAGE_NO) Integer pageNo,
                         @RequestParam(value = "pageSize",defaultValue = PageUtils.DEFAULT_PAGE_SIZE) Integer pageSize){
-
         Paging<Role> rolePaging = authorityManager.pagingRole(pageNo, pageSize, null);
-
         model.addAttribute("roles", rolePaging);
         return "auth/roles";
     }

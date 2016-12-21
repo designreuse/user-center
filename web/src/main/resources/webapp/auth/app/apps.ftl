@@ -4,10 +4,18 @@
 <div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <ol class="breadcrumb transparent">
-                <li><a href="/cms/apps">应用管理</a></li>
-                <li class="active">应用列表</li>
-            </ol>
+            <div class="row">
+                <div class="col-md-8">
+                    <ol class="breadcrumb transparent">
+                        <li><a href="/cms">后台首页</a></li>
+                        <li class="active">应用管理</li>
+                    </ol>
+                </div>
+                <div class="col-md-4 text-right">
+                    <button type="button" class="btn btn-primary btn-sm">添加</button>
+                </div>
+            </div>
+
         </div>
         <table class="table">
             <thead>

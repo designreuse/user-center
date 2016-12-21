@@ -5,8 +5,9 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <ol class="breadcrumb transparent">
+                <li><a href="/cms">后台首页</a></li>
                 <li><a href="/cms/apps">应用管理</a></li>
-                <li class="active">权限列表</li>
+                <li class="active">权限管理</li>
             </ol>
         </div>
         <table class="table">

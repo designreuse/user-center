@@ -38,7 +38,6 @@ public class AuthorityApis {
             params.put("appId", appId);
             authorities = authorityManager.pagingAuthority(pageNo, pageSize, params);
         }
-
         return authorities;
     }
 

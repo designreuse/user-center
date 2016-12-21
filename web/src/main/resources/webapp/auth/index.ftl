@@ -1,15 +1,37 @@
 <@override name="body">
-<div class="container">
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="margin-top: -10px;">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
 
-</div>
-<div class="jumbotron">
-    <div class="container">
-        ...
-    <h1>Hello, world!</h1>
-    <p>...</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img style="width: 100%;max-height: 498px;" src="" alt="">
+            <div class="carousel-caption">
+            </div>
+        </div>
+        <div class="item">
+            <img style="width: 100%;max-height: 498px;" src="" alt="">
+            <div class="carousel-caption">
+            </div>
+        </div>
+        <div class="item">
+            <img style="width: 100%;max-height: 498px;" src="" alt="">
+            <div class="carousel-caption">
+            </div>
+        </div>
     </div>
 </div>
+
+<script type="application/javascript">
+    $('.carousel').carousel({
+        interval: 5000
+    })
+</script>
 
 </@override>
 <@extends name="/common/base.ftl"/>

@@ -29,9 +29,7 @@ public class Users {
     @RequestMapping("users")
     public String users(Model model, @RequestParam(value = "pageNo",defaultValue = PageUtils.DEFAULT_PAGE_NO) Integer pageNo,
                         @RequestParam(value = "pageSize",defaultValue = PageUtils.DEFAULT_PAGE_SIZE) Integer pageSize){
-
         Paging<User> userPaging = userManager.paging(pageNo, pageSize, null);
-
         model.addAttribute("users", userPaging);
         return "auth/users";
     }

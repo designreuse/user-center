@@ -21,7 +21,6 @@ public class Apps {
     @RequestMapping("/apps")
     public String apps(Model model, @RequestParam(value = "pageNo",defaultValue = PageUtils.DEFAULT_PAGE_NO) Integer pageNo,
                         @RequestParam(value = "pageSize",defaultValue = PageUtils.DEFAULT_PAGE_SIZE) Integer pageSize){
-
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("pageSize", pageSize);
         return "auth/app/apps";
