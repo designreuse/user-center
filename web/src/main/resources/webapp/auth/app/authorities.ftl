@@ -1,4 +1,4 @@
-<#import "../../common/pagination-tag.ftl" as pagination/>
+<#import "../../common/pagination-js.ftl" as pagination/>
 <@override name="body">
 <div class="container-fluid">
 
@@ -16,21 +16,15 @@
             <tbody class="js-app-info-content">
             </tbody>
         </table>
-        <nav class="pagination-params"
-             data-pageno="${pageNo}"
-             data-pagesize="${pageSize}"
-             data-appid="${appId}"
-             data-url="/api/cms/perms"
-             data-total="-1"
-        >
-            <ul class="pagination">
-            </ul>
-        </nav>
+        <@pagination.pagination_js
+        pageNo=pageNo
+        pageSize=pageSize
+        url="/api/cms/perms"
+        param_map=params?if_exists
+        page_js="/static/js/auth/authority.js" />
     </div>
 </div>
 
-<script type="application/javascript" src="/static/js/auth/authority.js"></script>
-<script type="application/javascript" src="/static/js/common/pagination.js"></script>
 </@override>
 <@extends name="/common/base.ftl"/>
 

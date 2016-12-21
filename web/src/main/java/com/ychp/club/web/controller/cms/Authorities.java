@@ -1,11 +1,14 @@
 package com.ychp.club.web.controller.cms;
 
+import com.google.common.collect.Maps;
 import com.ychp.club.common.util.PageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 /**
  * Desc:
@@ -24,7 +27,9 @@ public class Authorities {
                         @RequestParam(value = "pageSize",defaultValue = PageUtils.DEFAULT_PAGE_SIZE) Integer pageSize){
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("pageSize", pageSize);
-        model.addAttribute("appId", appId);
+        Map<String,Object> params = Maps.newHashMap();
+        params.put("appId", appId);
+        model.addAttribute("params", params);
         return "auth/app/authorities";
     }
 

@@ -14,8 +14,8 @@ function loadData(obj) {
     }
     params["pageNo"] = dataset.pageno;
     params["pageSize"] = dataset.pagesize;
-    params["appId"] = dataset.appid;
     url=dataset.url;
+    params["appId"] = $(".pagination-params")[0].dataset.appid;
     $.get(
         url,
         params,
