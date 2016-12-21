@@ -10,6 +10,8 @@ import org.springframework.util.StringUtils;
  */
 public class AuthUtils {
 
+    private static final String BASE_PERM = "anon";
+    private static final Long ROOT_ID = 1L;
     private static final String PERM_TEMPLATE = "perms[{0}]";
 
     private static final String ROLE_TEMPLATE = "roles[{0}]";
@@ -23,8 +25,12 @@ public class AuthUtils {
         if(!StringUtils.isEmpty(roleKey)){
             fullAuth += "," + CustomerStringUtils.formatString(ROLE_TEMPLATE, roleKey);
         }
+
         return fullAuth;
     }
 
+    public static Boolean isRoot(Long roleId){
+        return roleId != null && roleId==ROOT_ID;
+    }
 
 }

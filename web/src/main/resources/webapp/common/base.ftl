@@ -27,14 +27,18 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <@shiro.hasRole name="admin">
-                            <#if springMacroRequestContext.requestUri?matches("/cms[/]*\\w*")>
+                        <#if springMacroRequestContext.requestUri?matches("/cms[/]*\\w*")>
+                            <@shiro.hasRole name="admin">
                                 <li <#if springMacroRequestContext.requestUri == "/cms/apps">class="active"</#if>><a href="/cms/apps">应用管理</a></li>
-                                <#--<li <#if springMacroRequestContext.requestUri == "/cms/perms">class="active"</#if>><a href="/cms/perms">权限管理</a></li>-->
+                            </@shiro.hasRole>
+                        <#--<li <#if springMacroRequestContext.requestUri == "/cms/perms">class="active"</#if>><a href="/cms/perms">权限管理</a></li>-->
+                            <@shiro.hasPermission name="authSystem:role:list">
                                 <li <#if springMacroRequestContext.requestUri == "/cms/roles">class="active"</#if>><a href="/cms/roles">角色管理</a></li>
+                            </@shiro.hasPermission>
+                            <@shiro.hasPermission name="authSystem:user:list">
                                 <li <#if springMacroRequestContext.requestUri == "/cms/users">class="active"</#if>><a href="/cms/users">用户管理</a></li>
-                            </#if>
-                        </@shiro.hasRole>
+                            </@shiro.hasPermission>
+                        </#if>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <#if online??>

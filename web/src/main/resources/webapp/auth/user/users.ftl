@@ -1,4 +1,4 @@
-<#import "../common/pagination-tag.ftl" as pagination/>
+<#import "../../common/pagination-tag.ftl" as pagination/>
 <@override name="body">
 <div class="container-fluid">
 
@@ -11,7 +11,7 @@
         </div>
         <table class="table">
             <thead>
-            <tr><th>ID</th><th>用户名</th><th>登录名</th><th>操作</th></tr>
+            <tr><th>ID</th><th>用户名</th><th>登录名</th><th class="operation">操作</th></tr>
             </thead>
             <tbody>
                 <#list users.datas as user>

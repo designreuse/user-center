@@ -54,6 +54,11 @@
         DELETE FROM <include refid="tb"/> WHERE id=#{id}
     </delete>
 
+    <select id="findListBy" parameterType="map" resultMap="listMap">
+        SELECT * FROM <include refid="tb"/>
+        <include refid="criteria"/>
+    </select>
+
     <select id="countBy" parameterType="map" resultType="long">
         SELECT count(*) FROM <include refid="tb"/>
         <include refid="criteria"/>

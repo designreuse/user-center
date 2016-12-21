@@ -58,6 +58,13 @@
         SELECT * FROM <include refid="tb"/> WHERE app_id = #{id}
     </select>
 
+    <select id="findByAppIds" parameterType="list" resultMap="listMap">
+        SELECT * FROM <include refid="tb"/> WHERE app_id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach> AND (`perm_key` IS NOT NULL AND `perm_key`!='')
+    </select>
+
     <delete id="delete" >
         DELETE FROM <include refid="tb"/> WHERE id=#{id}
     </delete>

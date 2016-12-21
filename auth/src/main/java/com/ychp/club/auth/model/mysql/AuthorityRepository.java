@@ -16,4 +16,6 @@ public interface AuthorityRepository extends MybatisRepository<Authority> {
 
     List<Authority> findByAppId(Long appId);
 
+    List<Authority> findByAppIds(List<Long> appIds);
+
 }

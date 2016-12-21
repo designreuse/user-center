@@ -4,15 +4,22 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <ol class="breadcrumb transparent">
-                <li><a href="/cms">后台首页</a></li>
-                <li><a href="/cms/apps">应用管理</a></li>
-                <li class="active">权限管理</li>
-            </ol>
+            <div class="row">
+                <div class="col-md-8">
+                    <ol class="breadcrumb transparent">
+                        <li><a href="/cms">后台首页</a></li>
+                        <li><a href="/cms/apps">应用管理</a></li>
+                        <li class="active">权限管理</li>
+                    </ol>
+                </div>
+                <div class="col-md-4 text-right">
+                    <button type="button" class="btn btn-primary btn-sm">添加</button>
+                </div>
+            </div>
         </div>
         <table class="table">
             <thead>
-            <tr><th>ID</th><th>名称</th><th>是否需要权限</th><th>权限key</th><th>url</th><th>操作</th></tr>
+            <tr><th>ID</th><th>名称</th><th>是否需要权限</th><th>权限key</th><th>url</th><th class="operation">操作</th></tr>
             </thead>
             <tbody class="js-app-info-content">
             </tbody>

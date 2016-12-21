@@ -10,17 +10,17 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img style="width: 100%;max-height: 498px;" src="" alt="">
+            <img src="" alt="">
             <div class="carousel-caption">
             </div>
         </div>
         <div class="item">
-            <img style="width: 100%;max-height: 498px;" src="" alt="">
+            <img src="" alt="">
             <div class="carousel-caption">
             </div>
         </div>
         <div class="item">
-            <img style="width: 100%;max-height: 498px;" src="" alt="">
+            <img src="" alt="">
             <div class="carousel-caption">
             </div>
         </div>

@@ -2,14 +2,16 @@ package com.ychp.club.auth.infrastructure.impl.service;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.ychp.club.auth.model.Authority;
 import com.ychp.club.auth.model.RoleAuthority;
+import com.ychp.club.auth.model.mysql.AuthorityRepository;
 import com.ychp.club.auth.model.mysql.RoleAuthorityRepository;
 import com.ychp.club.auth.service.RoleAuthorityService;
+import com.ychp.club.auth.utils.AuthUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,6 +26,9 @@ public class RoleAuthorityServiceImpl implements RoleAuthorityService {
     @Autowired
     private RoleAuthorityRepository roleAuthorityRepository;
 
+    @Autowired
+    private AuthorityRepository authorityRepository;
+
     @Override
     public List<String> loadRoleAuthorities(Long roleId, List<Long> appIds) {
         List<String> perms = Lists.newArrayList();
@@ -31,12 +36,24 @@ public class RoleAuthorityServiceImpl implements RoleAuthorityService {
         if(appIds == null || appIds.size() == 0){
             return perms;
         }
-        List<RoleAuthority> roleAuthorities = roleAuthorityRepository.findByAppAndRole(roleId, appIds);
 
-        if(roleAuthorities != null){
-            perms = Lists.transform(roleAuthorities, RoleAuthority::getAuthorityKey);
+        if(AuthUtils.isRoot(roleId)) {
+            List<Authority> authorities = authorityRepository.findByAppIds(appIds);
+            if(authorities != null && !authorities.isEmpty()) {
+                perms = Lists.transform(authorities, new Function<Authority, String>() {
+                    @Override
+                    public String apply(Authority input) {
+                        return input.getPermKey();
+                    }
+                });
+            }
+        } else {
+            List<RoleAuthority> roleAuthorities = roleAuthorityRepository.findByAppAndRole(roleId, appIds);
+
+            if(roleAuthorities != null){
+                perms = Lists.transform(roleAuthorities, RoleAuthority::getAuthorityKey);
+            }
         }
-
         return perms;
     }
 }

@@ -1,14 +1,16 @@
 package com.ychp.club.auth.infrastructure.impl.realm;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.ychp.club.auth.model.App;
 import com.ychp.club.auth.model.Role;
 import com.ychp.club.auth.model.RoleApp;
+import com.ychp.club.auth.model.mysql.AppRepository;
 import com.ychp.club.auth.model.mysql.RoleAppRepository;
 import com.ychp.club.auth.model.mysql.RoleRepository;
 import com.ychp.club.auth.model.shiro.CustomerUsernamePasswordToken;
 import com.ychp.club.auth.service.RoleAuthorityService;
+import com.ychp.club.auth.utils.AuthUtils;
 import com.ychp.club.common.util.CustomerStringUtils;
 import com.ychp.club.common.util.Encryption;
 import org.apache.shiro.authc.*;
@@ -38,6 +40,9 @@ public class CustomerShiroRealm extends AuthorizingRealm {
     @Autowired
     private RoleAppRepository roleAppRepository;
 
+    @Autowired
+    private AppRepository appRepository;
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) super.getAvailablePrincipal(principalCollection);
@@ -49,8 +54,14 @@ public class CustomerShiroRealm extends AuthorizingRealm {
             SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
             simpleAuthorizationInfo.addRole(role.getName());
 
-            List<RoleApp> roleApps =  roleAppRepository.findByRole(roleId);
-            List<Long> appIds = Lists.transform(roleApps, RoleApp::getAppId);
+            List<Long> appIds;
+            if(AuthUtils.isRoot(roleId)){
+                List<App> apps = appRepository.findListBy(Maps.newHashMap());
+                appIds = Lists.transform(apps, App::getId);
+            } else {
+                List<RoleApp> roleApps = roleAppRepository.findByRole(roleId);
+                appIds = Lists.transform(roleApps, RoleApp::getAppId);
+            }
             List<String> permissions = roleAuthorityService.loadRoleAuthorities(roleId, appIds);
 
             simpleAuthorizationInfo.addStringPermissions(permissions);

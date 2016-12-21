@@ -31,7 +31,7 @@ public class Users {
                         @RequestParam(value = "pageSize",defaultValue = PageUtils.DEFAULT_PAGE_SIZE) Integer pageSize){
         Paging<User> userPaging = userManager.paging(pageNo, pageSize, null);
         model.addAttribute("users", userPaging);
-        return "auth/users";
+        return "auth/user/users";
     }
 
     @RequestMapping("updateStatus")
