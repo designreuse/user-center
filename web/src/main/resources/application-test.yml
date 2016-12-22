@@ -23,6 +23,8 @@ spring:
     maxOpenPreparedStatements: 20
     auto-commit: false
     connection-init-sqls: SET time_zone = '+8:00'
+    testConnectionOnCheckin: false
+    testConnectionOnCheckout: true
   freemarker:
     cache: false
     suffix: .ftl
