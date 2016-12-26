@@ -75,6 +75,10 @@ body {
     margin-bottom: 50px;
 }
 
+.ml-10{
+    margin-left: 10px;
+}
+
 .panel-heading .transparent{
     background-color: rgba(0,0,0,0);
 }

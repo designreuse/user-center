@@ -13,6 +13,7 @@
 >
     <ul class="pagination">
     </ul>
+
 </nav>
 
 <script type="application/javascript" src="${page_js}"></script>

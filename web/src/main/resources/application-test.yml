@@ -35,8 +35,6 @@ spring:
   resources:
     static-locations: classpath:/static
 
-
-
 mybatis:
   mapper-locations:  classpath*:com.ychp.club.user.model.mysql
   type-aliases-package: com.ychp.club.user.model

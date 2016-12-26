@@ -50,7 +50,7 @@
                                     <li><a href="#">消息 <span class="badge">4</span></a></li>
                                     <li class="divider"></li>
                                     <@shiro.hasRole name="admin">
-                                        <li><a href="/cms">权限管理</a></li>
+                                        <li><a href="/cms/index">权限管理</a></li>
                                         <li class="divider"></li>
                                     </@shiro.hasRole>
                                     <li><a href="/logout">登出</a></li>
