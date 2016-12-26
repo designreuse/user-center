@@ -1,4 +1,5 @@
-<#import "../../common/pagination-js.ftl" as pagination/>
+<#import "/common/pagination-js.ftl" as pagination/>
+<#import "/auth/app/template/app-template.ftl" as appForm/>
 
 <@override name="body">
 <div class="container-fluid">
@@ -12,17 +13,19 @@
                     </ol>
                 </div>
                 <div class="col-md-4 text-right">
-                    <button type="button" class="btn btn-primary btn-sm">添加</button>
+                    <button type="button" class="btn btn-primary btn-sm js-add-form" data-toggle="modal" data-target="#addModal">添加</button>
                 </div>
             </div>
         </div>
         <table class="table">
             <thead>
-            <tr><th>应用ID</th><th>应用名称</th><th>应用Key</th><th>应用域名</th><th class="operation">操作</th></tr>
+            <tr><th>应用ID</th><th>应用名称</th><th>应用Key</th><th>应用密钥</th><th>应用域名</th><th class="operation">操作</th></tr>
             </thead>
             <tbody class="js-app-info-content">
             </tbody>
         </table>
+        <@appForm.app_from/>
+
         <@pagination.pagination_js
         pageNo=pageNo
         pageSize=pageSize

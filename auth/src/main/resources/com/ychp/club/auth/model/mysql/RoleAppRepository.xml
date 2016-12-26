@@ -11,7 +11,7 @@
 
     <sql id="columns">`role_id`, `app_id`, `created_at`, `updated_at`</sql>
 
-    <sql id="values">${roleId}, ${appId}</sql>
+    <sql id="values">#{roleId}, #{appId}</sql>
 
     <insert id="create" parameterMap="paramMap" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO <include refid="tb"/>

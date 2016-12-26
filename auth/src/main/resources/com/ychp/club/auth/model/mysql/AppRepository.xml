@@ -11,7 +11,7 @@
 
     <sql id="columns">`name`, `key`, `secret`, `domain`, `created_at`, `updated_at`</sql>
 
-    <sql id="values">${name}, ${key}, ${secret}, ${domain}</sql>
+    <sql id="values">#{name}, #{key}, #{secret}, #{domain}</sql>
 
     <insert id="create" parameterMap="paramMap" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO <include refid="tb"/>
@@ -67,6 +67,7 @@
     <select id="pagingBy" parameterType="map" resultMap="listMap">
         SELECT * FROM <include refid="tb"/>
         <include refid="criteria"/>
+        ORDER BY `id` DESC
         LIMIT #{offset},#{limit}
     </select>
 </mapper>

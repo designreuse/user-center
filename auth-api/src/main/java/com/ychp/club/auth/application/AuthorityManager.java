@@ -17,12 +17,17 @@ public interface AuthorityManager {
 
     Paging<App> pagingApp(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
+    Boolean delApp(Long appId);
+
+    Boolean addApp(App app);
+
+    Boolean updateApp(App app);
+
     Paging<Authority> pagingAuthority(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
     Paging<Role> pagingRole(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
     Map<String, String> loadAuthorities(Long appId);
 
-    Boolean delApp(Long appId);
 
 }

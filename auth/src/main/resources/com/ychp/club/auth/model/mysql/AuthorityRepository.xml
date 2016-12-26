@@ -11,7 +11,7 @@
 
     <sql id="columns">`name`, `auth`, `perm_key`, `role_key`, `url`, `app_id`, `created_at`, `updated_at`</sql>
 
-    <sql id="values">${name}, ${auth}, ${permKey}, ${roleKey}, ${url}, ${appId}</sql>
+    <sql id="values">#{name}, #{auth}, #{permKey}, #{roleKey}, #{url}, #{appId}</sql>
 
     <insert id="create" parameterMap="paramMap" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO <include refid="tb"/>

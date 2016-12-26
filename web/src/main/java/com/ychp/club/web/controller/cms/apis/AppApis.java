@@ -7,10 +7,7 @@ import com.ychp.club.common.util.PageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Desc:
@@ -29,6 +26,16 @@ public class AppApis {
     public Paging<App> apps(@RequestParam(value = "pageNo",defaultValue = PageUtils.DEFAULT_PAGE_NO) Integer pageNo,
                         @RequestParam(value = "pageSize",defaultValue = PageUtils.DEFAULT_PAGE_SIZE) Integer pageSize){
         return authorityManager.pagingApp(pageNo, pageSize, null);
+    }
+
+    @RequestMapping(value = "/app/add",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Boolean add(@RequestBody App app){
+        return authorityManager.addApp(app);
+    }
+
+    @RequestMapping(value = "/app/update",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Boolean update(@RequestBody App app){
+        return authorityManager.updateApp(app);
     }
 
     @RequestMapping(value = "/app/del",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

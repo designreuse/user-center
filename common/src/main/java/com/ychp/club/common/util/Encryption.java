@@ -10,6 +10,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * Desc:
@@ -186,6 +187,14 @@ public class Encryption {
             hexValue.append(Integer.toHexString(val));
         }
         return hexValue;
+    }
+
+    public static String factoryAppCode(){
+        return UUID.randomUUID().toString().replace("-","");
+    }
+
+    public static String factoryAppSecret(String appCode, String appName){
+        return md5Encode(appName + System.currentTimeMillis() + appCode);
     }
 
     public static void main(String[] args) throws Exception {

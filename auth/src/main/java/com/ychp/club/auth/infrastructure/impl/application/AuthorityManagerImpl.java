@@ -10,6 +10,7 @@ import com.ychp.club.auth.model.mysql.RoleRepository;
 import com.ychp.club.auth.service.AuthorityService;
 import com.ychp.club.common.model.PageInfo;
 import com.ychp.club.common.model.Paging;
+import com.ychp.club.common.util.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -48,6 +49,26 @@ public class AuthorityManagerImpl implements AuthorityManager {
     }
 
     @Override
+    public Boolean delApp(Long appId) {
+        return appRepository.delete(appId) == 1;
+    }
+
+    @Override
+    public Boolean addApp(App app) {
+        String appCode = Encryption.factoryAppCode();
+        String secret = Encryption.factoryAppSecret(appCode, app.getName());
+        app.setKey(appCode);
+        app.setSecret(secret);
+        return appRepository.create(app) == 1;
+    }
+
+    @Override
+    public Boolean updateApp(App app) {
+        appRepository.update(app);
+        return true;
+    }
+
+    @Override
     public Paging<Authority> pagingAuthority(Integer pageNo, Integer pageSize, Map<String, Object> params) {
         if(params == null || params.size() == 0){
             return new Paging<>();
@@ -75,10 +96,5 @@ public class AuthorityManagerImpl implements AuthorityManager {
     @Override
     public Map<String, String> loadAuthorities(Long appId) {
         return authorityService.loadAuthorities(appId);
-    }
-
-    @Override
-    public Boolean delApp(Long appId) {
-        return appRepository.delete(appId) == 1;
     }
 }
