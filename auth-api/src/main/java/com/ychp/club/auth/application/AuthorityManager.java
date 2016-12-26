@@ -22,4 +22,7 @@ public interface AuthorityManager {
     Paging<Role> pagingRole(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
     Map<String, String> loadAuthorities(Long appId);
+
+    Boolean delApp(Long appId);
+
 }

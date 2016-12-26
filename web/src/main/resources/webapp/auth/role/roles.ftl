@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <ol class="breadcrumb transparent">
-                        <li><a href="/cms">后台首页</a></li>
+                        <li><a href="/cms/index">后台首页</a></li>
                         <li class="active">角色管理</li>
                     </ol>
                 </div>
@@ -33,5 +33,3 @@
 </div>
 </@override>
 <@extends name="/common/base.ftl"/>
-
-</html>

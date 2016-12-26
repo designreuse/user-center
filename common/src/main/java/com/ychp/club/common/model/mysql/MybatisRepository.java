@@ -10,13 +10,13 @@ import java.util.Map;
  */
 public interface MybatisRepository<T> {
 
-    public void create(T t);
+    public int create(T t);
 
     public void creates(List<T> t);
 
     public void update(T t);
 
-    public void delete(Long id);
+    public int delete(Long id);
 
     T findById(Long id);
 

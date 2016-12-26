@@ -76,4 +76,9 @@ public class AuthorityManagerImpl implements AuthorityManager {
     public Map<String, String> loadAuthorities(Long appId) {
         return authorityService.loadAuthorities(appId);
     }
+
+    @Override
+    public Boolean delApp(Long appId) {
+        return appRepository.delete(appId) == 1;
+    }
 }

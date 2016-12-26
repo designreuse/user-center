@@ -17,6 +17,7 @@
 </nav>
 
 <script type="application/javascript" src="${page_js}"></script>
+<script type="application/javascript" src="/static/js/common/loadData.js"></script>
 <script type="application/javascript" src="/static/js/common/pagination.js"></script>
 
 </#macro>

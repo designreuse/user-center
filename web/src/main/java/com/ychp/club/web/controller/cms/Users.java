@@ -23,27 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/cms")
 public class Users {
 
-    @Autowired
-    private UserManager userManager;
-
     @RequestMapping("users")
     public String users(Model model, @RequestParam(value = "pageNo",defaultValue = PageUtils.DEFAULT_PAGE_NO) Integer pageNo,
                         @RequestParam(value = "pageSize",defaultValue = PageUtils.DEFAULT_PAGE_SIZE) Integer pageSize){
-        Paging<User> userPaging = userManager.paging(pageNo, pageSize, null);
-        model.addAttribute("users", userPaging);
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("pageSize", pageSize);
         return "auth/user/users";
-    }
-
-    @RequestMapping("updateStatus")
-    @ResponseBody
-    public Boolean updateStatus(@RequestParam("id") Long id, @RequestParam("status") Integer status){
-        boolean isSuccess = userManager.updateStatus(id, status);
-        return isSuccess;
-    }
-
-    @RequestMapping(value = "update", method = RequestMethod.POST)
-    public String update(){
-
-        return "redirect:/user/list";
     }
 }

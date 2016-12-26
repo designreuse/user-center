@@ -1,48 +1,43 @@
-$(function () {
-    loadData();
-});
-
-
-function loadData(obj) {
-    var params = {};
-    var url;
-    var dataset;
-    var tempDataset=$(".pagination-params")[0].dataset;
-    if (obj == undefined) {
-        dataset = tempDataset;
-    } else {
-        dataset = obj.dataset;
-    }
-    params["pageNo"] = dataset.pageno;
-    params["pageSize"] = dataset.pagesize;
-    url=dataset.url;
-    $.get(
-        url,
-        params,
-        function(data){
-            tempDataset["pageno"] = data.pageNo;
-            tempDataset["pagesize"] = data.pageSize;
-            tempDataset["total"] = data.total;
-            var apps = data['datas'];
-            var content = $(".js-app-info-content");
-            content.empty();
-            var children = [];
-            apps.forEach(function(it){
-                var child = $('<tr>'
-                    + '<td>' + it['id'] + '</td>'
-                    + '<td>' + it['name'] + '</td>'
-                    + '<td>' + (it['key'] == undefined ? '': it['key']) + '</td>'
-                    + '<td>' + it['domain'] + '</td>'
-                    + '<td>'
-                    + '<a href="/cms/perms?appId=' + it['id'] + '">权限列表</a>'
-                    + '\r\n<a data-info="' + JSON.stringify(it) + '" href="#">编辑</a>'
-                    + '\r\n<a href="#">删除</a>'
-                    + '</td>'
-                    + '</tr>');
-                children.push(child);
-            });
-            content.html(children);
-            rePaintPagination();
-        }
-    );
+function putOtherParams(params, dataset) {
+    return;
 }
+
+function factoryChild(it) {
+    return $('<tr>'
+        + '<td>' + it['id'] + '</td>'
+        + '<td>' + it['name'] + '</td>'
+        + '<td>' + (it['key'] == undefined ? '': it['key']) + '</td>'
+        + '<td>' + it['domain'] + '</td>'
+        + '<td>'
+        + '<a href="/cms/perms?appId=' + it['id'] + '">权限列表</a>'
+        + '\r\n<a data-info="' + JSON.stringify(it) + '" href="#">编辑</a>'
+        + '\r\n<a class="js-app-del" href="javascript:void(0)" data-id="' + it['id'] + '">删除</a>'
+        + '</td>'
+        + '</tr>');
+}
+
+$(".js-app-info-content").on("click",'.js-app-del', function(){del(this)});
+
+function del(obj) {
+    if(obj == undefined){
+        return;
+    }
+
+    var id = obj.dataset['id'];
+
+    $.ajax({
+        url:'/api/cms/app/del',
+        method: 'put',
+        data: {'appId': id},
+        async: false,
+        dataType: 'json',
+        success: function () {
+            alert('success')
+        },
+        error: function () {
+            alert('error')
+        }
+    });
+}
+
+
