@@ -2,16 +2,16 @@ package com.ychp.club.web.controller.cms.apis;
 
 import com.google.common.collect.Maps;
 import com.ychp.club.auth.application.AuthorityManager;
+import com.ychp.club.auth.model.App;
 import com.ychp.club.auth.model.Authority;
 import com.ychp.club.common.model.Paging;
 import com.ychp.club.common.util.PageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -40,5 +40,21 @@ public class AuthorityApis {
         }
         return authorities;
     }
+
+    @RequestMapping(value = "/perm/add",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Boolean add(@RequestBody Authority authority){
+        return false;
+    }
+
+    @RequestMapping(value = "/perm/update",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Boolean update(@RequestBody Authority authority){
+        return false;
+    }
+
+    @RequestMapping(value = "/perm/del",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Boolean del(@RequestParam(value = "id") Long id){
+        return false;
+    }
+
 
 }

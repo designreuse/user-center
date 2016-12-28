@@ -1,5 +1,5 @@
-<#import "/common/pagination-js.ftl" as pagination/>
-<#import "/auth/app/template/app-template.ftl" as appForm/>
+<#import "../../common/pagination-js.ftl" as pagination/>
+<#import "./template/app-template.ftl" as appForm/>
 
 <@override name="body">
 <div class="container-fluid">
@@ -8,12 +8,12 @@
             <div class="row">
                 <div class="col-md-8">
                     <ol class="breadcrumb transparent">
-                        <li><a href="/cms">后台首页</a></li>
+                        <li><a href="/cms/index">后台首页</a></li>
                         <li class="active">应用管理</li>
                     </ol>
                 </div>
                 <div class="col-md-4 text-right">
-                    <button type="button" class="btn btn-primary btn-sm js-add-form" data-toggle="modal" data-target="#addModal">添加</button>
+                    <button type="button" class="btn btn-primary btn-sm js-add-form" data-toggle="modal" data-target="#appModal">添加</button>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
             <thead>
             <tr><th>应用ID</th><th>应用名称</th><th>应用Key</th><th>应用密钥</th><th>应用域名</th><th class="operation">操作</th></tr>
             </thead>
-            <tbody class="js-app-info-content">
+            <tbody class="js-info-content">
             </tbody>
         </table>
         <@appForm.app_from/>

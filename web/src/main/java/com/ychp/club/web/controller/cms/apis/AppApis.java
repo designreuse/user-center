@@ -39,8 +39,8 @@ public class AppApis {
     }
 
     @RequestMapping(value = "/app/del",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Boolean del(@RequestParam(value = "appId") Long appId){
-        return authorityManager.delApp(appId);
+    public Boolean del(@RequestParam(value = "id") Long id){
+        return authorityManager.delApp(id);
     }
 
 }

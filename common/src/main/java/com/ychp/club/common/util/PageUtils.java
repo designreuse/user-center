@@ -9,5 +9,5 @@ public class PageUtils {
 
     public final static String DEFAULT_PAGE_NO = "1";
 
-    public final static String DEFAULT_PAGE_SIZE = "8";
+    public final static String DEFAULT_PAGE_SIZE = "10";
 }

@@ -1,5 +1,4 @@
 function putOtherParams(params, dataset) {
-    return;
 }
 
 function factoryChild(it) {
@@ -11,13 +10,15 @@ function factoryChild(it) {
         + '<td>' + it['domain'] + '</td>'
         + '<td>'
         + '<a href="/cms/perms?appId=' + it['id'] + '">权限列表</a>'
-        + '\r\n<a data-info="' + JSON.stringify(it) + '" class="js-update-form" href="javascript:void(0)" data-toggle="modal" data-target="#updateModal">编辑</a>'
-        + '\r\n<a class="js-app-del" href="javascript:void(0)" data-id="' + it['id'] + '">删除</a>'
+        + '\r\n<a data-info=\'' + JSON.stringify(it) + '\' class="js-update-form" href="#" data-toggle="modal" data-target="#appModal">编辑</a>'
+        + '\r\n<a class="js-del" href="#" data-id="' + it['id'] + '">删除</a>'
         + '</td>'
         + '</tr>');
 }
 
-$(".js-app-info-content").on("click",'.js-app-del', function(){del(this)});
+var app_infos = $(".js-info-content");
+
+app_infos.on("click",'.js-del', function(){del(this)});
 
 function del(obj) {
     if(obj == undefined){
@@ -29,11 +30,12 @@ function del(obj) {
     $.ajax({
         url:'/api/cms/app/del',
         method: 'put',
-        data: {'appId': id},
+        data: {'id': id},
         async: false,
         dataType: 'json',
         success: function () {
-            alert('success')
+            alert('success');
+            location.reload();
         },
         error: function () {
             alert('error')
@@ -41,16 +43,23 @@ function del(obj) {
     });
 }
 
-$(".panel-heading").on("click",'.js-add-form', function(){
-    $("#addName").val('');
-    $("#addDomain").val('');
+var panel_head = $(".panel-heading");
+
+panel_head.on("click",'.js-add-form', function(){
+    $("input[name='id']").val('');
+    $("input[name='name']").val('');
+    $("input[name='domain']").val('');
+    $(".js-add").show();
+    $(".js-update").hide();
 });
 
-$(".add-footer").on("click",'.js-app-add', function(){add()});
+var footer = $(".add-footer");
+
+footer.on("click",'.js-add', function(){add()});
 
 function add() {
 
-    var data = JSON.stringify($(".app-add").serializeObject());
+    var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
         url:'/api/cms/app/add',
@@ -69,24 +78,35 @@ function add() {
     });
 }
 
+app_infos.on("click",'.js-update-form', function(){
+    var dataset = this.dataset;
+    var appInfo = JSON.parse(dataset.info);
+    $("input[name='id']").val(appInfo['id']);
+    $("input[name='name']").val(appInfo['name']);
+    $("input[name='domain']").val(appInfo['domain']);
+    $(".js-add").hide();
+    $(".js-update").show();
+});
+
+footer.on("click",'.js-update', function(){update()});
+
 function update() {
 
-    var data = $(".app-update").serializeArray();
+    var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
         url:'/api/cms/app/update',
         method: 'put',
         data: data,
-        context:'application/json',
+        contentType:'application/json',
         async: false,
         dataType: 'json',
         success: function () {
-            alert('success')
+            alert('success');
+            location.reload();
         },
-        error: function () {
-            alert('error')
+        error: function (error) {
+            alert(error['responseJSON']['error'])
         }
     });
 }
-
-

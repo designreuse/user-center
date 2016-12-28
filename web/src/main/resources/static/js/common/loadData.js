@@ -21,7 +21,7 @@ function loadData(obj) {
         params,
         function(data){
             var datas = data['datas'];
-            var content = $(".js-app-info-content");
+            var content = $(".js-info-content");
             content.empty();
             var children = [];
             tempDataset["pageno"] = data.pageNo;

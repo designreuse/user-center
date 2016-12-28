@@ -19,7 +19,7 @@
             <thead>
                 <tr><th>ID</th><th>用户名</th><th>登录名</th><th class="operation">操作</th></tr>
             </thead>
-            <tbody class="js-app-info-content">
+            <tbody class="js-info-content">
             </tbody>
         </table>
         <@pagination.pagination_js
