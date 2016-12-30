@@ -1,6 +1,7 @@
 package com.ychp.club.auth.infrastructure.impl.application;
 
 import com.ychp.club.auth.application.AuthorityManager;
+import com.ychp.club.auth.enums.AuthType;
 import com.ychp.club.auth.model.App;
 import com.ychp.club.auth.model.Authority;
 import com.ychp.club.auth.model.Role;
@@ -13,6 +14,7 @@ import com.ychp.club.common.model.Paging;
 import com.ychp.club.common.util.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -80,6 +82,34 @@ public class AuthorityManagerImpl implements AuthorityManager {
         authorityPaging.setDatas(authorities);
         authorityPaging.setTotal(total);
         return authorityPaging;
+    }
+
+    @Override
+    public Boolean delAuthority(Long authorityId) {
+        return authorityRepository.delete(authorityId) == 1;
+    }
+
+    @Override
+    public Boolean addAuthority(Authority authority) {
+        if(AuthType.ANON.getValue().equals(authority.getAuth())){
+            authority.setPermKey(null);
+            authority.setRoleKey(null);
+        } else if(StringUtils.isEmpty(authority.getPermKey()) && StringUtils.isEmpty(authority.getRoleKey())){
+            throw new IllegalArgumentException("perm key not empty");
+        }
+        return authorityRepository.create(authority) == 1;
+    }
+
+    @Override
+    public Boolean updateAuthority(Authority authority) {
+        if(AuthType.ANON.getValue().equals(authority.getAuth())){
+            authority.setPermKey(authority.getPermKey() != null ? "" : null);
+            authority.setRoleKey(authority.getRoleKey() != null ? "" : null);
+        } else if(StringUtils.isEmpty(authority.getPermKey()) && StringUtils.isEmpty(authority.getRoleKey())){
+            throw new IllegalArgumentException("perm key not empty");
+        }
+        authorityRepository.update(authority);
+        return true;
     }
 
     @Override

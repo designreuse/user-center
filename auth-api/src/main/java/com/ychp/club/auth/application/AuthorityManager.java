@@ -25,6 +25,12 @@ public interface AuthorityManager {
 
     Paging<Authority> pagingAuthority(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
+    Boolean delAuthority(Long authorityId);
+
+    Boolean addAuthority(Authority authority);
+
+    Boolean updateAuthority(Authority authority);
+
     Paging<Role> pagingRole(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
     Map<String, String> loadAuthorities(Long appId);

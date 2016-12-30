@@ -19,7 +19,7 @@ function factoryChild(it) {
 
 var app_infos = $(".js-info-content");
 
-app_infos.on("click",'.js-app-del', function(){del(this)});
+app_infos.on("click",'.js-del', function(){del(this)});
 
 function del(obj) {
     if(obj == undefined){
@@ -29,9 +29,9 @@ function del(obj) {
     var id = obj.dataset['id'];
 
     $.ajax({
-        url:'/api/perm/app/del',
+        url:'/api/cms/perm/del',
         method: 'put',
-        data: {'appId': id},
+        data: {'id': id},
         async: false,
         dataType: 'json',
         success: function () {
@@ -39,7 +39,7 @@ function del(obj) {
             location.reload();
         },
         error: function () {
-            alert('error')
+            alert(error['responseJSON']['message'])
         }
     });
 }
@@ -50,6 +50,7 @@ panel_head.on("click",'.js-add-form', function(){
     $("input[name='id']").val('');
     $("input[name='name']").val('');
     $("input:radio[name='auth']").eq(0).attr("checked",'checked');
+    changeAuthType('anon');
     $("input[name='permKey']").val('');
     $("input[name='roleKey']").val('');
     $("input[name='url']").val('');
@@ -59,11 +60,11 @@ panel_head.on("click",'.js-add-form', function(){
 
 var footer = $(".add-footer");
 
-footer.on("click",'.js-app-add', function(){add()});
+footer.on("click",'.js-add', function(){add()});
 
 function add() {
 
-    var data = JSON.stringify($(".app-info").serializeObject());
+    var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
         url:'/api/cms/perm/add',
@@ -77,7 +78,7 @@ function add() {
             location.reload();
         },
         error: function (error) {
-            alert(error['responseJSON']['error'])
+            alert(error['responseJSON']['message'])
         }
     });
 }
@@ -92,6 +93,7 @@ app_infos.on("click",'.js-update-form', function(){
     } else {
         $("input:radio[name='auth']").eq(1).attr("checked",'checked');
     }
+    changeAuthType(info['auth']);
     $("input[name='permKey']").val(info['permKey']);
     $("input[name='roleKey']").val(info['roleKey']);
     $("input[name='url']").val(info['url']);
@@ -99,11 +101,11 @@ app_infos.on("click",'.js-update-form', function(){
     $(".js-update").show();
 });
 
-footer.on("click",'.js-app-update', function(){update()});
+footer.on("click",'.js-update', function(){update()});
 
 function update() {
 
-    var data = JSON.stringify($(".app-info").serializeObject());
+    var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
         url:'/api/cms/perm/update',
@@ -117,9 +119,23 @@ function update() {
             location.reload();
         },
         error: function (error) {
-            alert(error['responseJSON']['error'])
+            alert(error['responseJSON']['message'])
         }
     });
 }
 
+$(".modal-body").on("change","input:radio[name='auth']", function(){
+    $("input:radio[name='auth'][checked]").removeAttr("checked");
+    $("input:radio[name='auth'][value='" + this.value + "']").attr("checked",'checked');
+    changeAuthType(this.value);
+});
 
+function changeAuthType(authVal) {
+    if(authVal == 'anon'){
+        $($("input[name='permKey']")[0].parentNode.parentNode).hide();
+        $($("input[name='roleKey']")[0].parentNode.parentNode).hide();
+    } else {
+        $($("input[name='permKey']")[0].parentNode.parentNode).show();
+        $($("input[name='roleKey']")[0].parentNode.parentNode).show();
+    }
+}

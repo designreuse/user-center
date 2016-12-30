@@ -38,7 +38,7 @@ function del(obj) {
             location.reload();
         },
         error: function () {
-            alert('error')
+            alert(error['responseJSON']['message'])
         }
     });
 }
@@ -73,7 +73,7 @@ function add() {
             location.reload();
         },
         error: function (error) {
-            alert(error['responseJSON']['error'])
+            alert(error['responseJSON']['message'])
         }
     });
 }
@@ -106,7 +106,7 @@ function update() {
             location.reload();
         },
         error: function (error) {
-            alert(error['responseJSON']['error'])
+            alert(error['responseJSON']['message'])
         }
     });
 }
