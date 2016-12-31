@@ -42,7 +42,7 @@ public class JedisCache<K, V> implements Cache<K, V> {
 
     @Override
     public void clear() throws CacheException {
-        sessionRepository.clear();
+        sessionRepository.clear(name);
     }
 
     @Override

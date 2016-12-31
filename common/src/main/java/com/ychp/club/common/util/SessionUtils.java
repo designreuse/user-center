@@ -14,11 +14,15 @@ public class SessionUtils {
     }
 
     public static String getSessionKey(String space, Object token){
-        return "session:" + space + token.toString();
+        return "session:" + space + ":" + token.toString();
     }
 
     public static String getSessionMatchKey(){
         return "session:*";
+    }
+
+    public static String getSessionMatchKey(String space){
+        return "session:" + space + ":*";
     }
 
 }

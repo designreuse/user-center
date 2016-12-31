@@ -52,9 +52,9 @@ public class SessionRepository {
         });
     }
 
-    void clear() throws CacheException {
+    void clear(String space) throws CacheException {
         jedisTemplate.excute(jedis -> {
-            Set<String> keys = jedis.keys(SessionUtils.getSessionMatchKey());
+            Set<String> keys = jedis.keys(SessionUtils.getSessionMatchKey(space));
             for(String key : keys){
                 jedis.del(key.getBytes());
             }
