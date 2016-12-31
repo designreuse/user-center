@@ -10,7 +10,7 @@ function factoryChild(it) {
         + '<td>' + (it['permKey'] == undefined ? '': it['permKey']) + '</td>'
         + '<td>' + it['url'] + '</td>'
         + '<td>'
-        + '<a data-info=\'' + JSON.stringify(it) + '\' href="#">详情</a>'
+        + '<a data-info=\'' + JSON.stringify(it) + '\' class="js-detail-form" href="#" data-toggle="modal" data-target="#authorityModal">详情</a>'
         + '\r\n<a data-info=\'' + JSON.stringify(it) + '\' class="js-update-form" href="#" data-toggle="modal" data-target="#authorityModal">编辑</a>'
         + '\r\n<a class="js-del" href="#" data-id="' + it['id'] + '">删除</a>'
         + '</td>'
@@ -55,6 +55,7 @@ panel_head.on("click",'.js-add-form', function(){
     $("input[name='roleKey']").val('');
     $("input[name='url']").val('');
     $(".js-add").show();
+    $(".js-cancel").show();
     $(".js-update").hide();
 });
 
@@ -85,19 +86,12 @@ function add() {
 
 app_infos.on("click",'.js-update-form', function(){
     var dataset = this.dataset;
+    setValueOnForm(dataset);
+    enableForm();
     var info = JSON.parse(dataset.info);
-    $("input[name='id']").val(info['id']);
-    $("input[name='name']").val(info['name']);
-    if(info['auth']=='anon'){
-        $("input:radio[name='auth']").eq(0).attr("checked",'checked');
-    } else {
-        $("input:radio[name='auth']").eq(1).attr("checked",'checked');
-    }
     changeAuthType(info['auth']);
-    $("input[name='permKey']").val(info['permKey']);
-    $("input[name='roleKey']").val(info['roleKey']);
-    $("input[name='url']").val(info['url']);
     $(".js-add").hide();
+    $(".js-cancel").show();
     $(".js-update").show();
 });
 
@@ -138,4 +132,49 @@ function changeAuthType(authVal) {
         $($("input[name='permKey']")[0].parentNode.parentNode).show();
         $($("input[name='roleKey']")[0].parentNode.parentNode).show();
     }
+}
+
+app_infos.on("click",'.js-detail-form', function(){
+    var dataset = this.dataset;
+    setValueOnForm(dataset);
+    disableForm();
+    $(".js-add").hide();
+    $(".js-cancel").hide();
+    $(".js-update").hide();
+});
+
+
+function setValueOnForm(dataset) {
+    var info = JSON.parse(dataset.info);
+    $("input[name='id']").val(info['id']);
+    $("input[name='name']").val(info['name']);
+    if(info['auth']=='anon'){
+        $("input:radio[name='auth']").eq(0).attr("checked",'checked');
+    } else {
+        $("input:radio[name='auth']").eq(1).attr("checked",'checked');
+    }
+    changeAuthType(info['auth']);
+    $("input[name='permKey']").val(info['permKey']);
+    $("input[name='roleKey']").val(info['roleKey']);
+    $("input[name='url']").val(info['url']);
+}
+
+function enableForm() {
+    $("input[name='id']").attr("disabled",false);
+    $("input[name='name']").attr("disabled",false);
+    $("input:radio[name='auth']").eq(0).attr("disabled",false);
+    $("input:radio[name='auth']").eq(1).attr("disabled",false);
+    $("input[name='permKey']").attr("disabled",false);
+    $("input[name='roleKey']").attr("disabled",false);
+    $("input[name='url']").attr("disabled",false);
+}
+
+function disableForm() {
+    $("input[name='id']").attr("disabled",true);
+    $("input[name='name']").attr("disabled",true);
+    $("input:radio[name='auth']").eq(0).attr("disabled",true);
+    $("input:radio[name='auth']").eq(1).attr("disabled",true);
+    $("input[name='permKey']").attr("disabled",true);
+    $("input[name='roleKey']").attr("disabled",true);
+    $("input[name='url']").attr("disabled",true);
 }

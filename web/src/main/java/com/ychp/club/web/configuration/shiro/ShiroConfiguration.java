@@ -86,7 +86,7 @@ public class ShiroConfiguration {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new CustomerShiroFactoryBeanImpl(ignoreExt);
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/cms");
+        shiroFilterFactoryBean.setSuccessUrl("/cms/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/error/403");
 
         loadShiroFilterChain(shiroFilterFactoryBean, authorityManager);

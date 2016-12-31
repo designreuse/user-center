@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">应用</h4>
+                <h4 class="modal-title">权限</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal data-info" role="form">
@@ -49,7 +49,7 @@
                 </form>
             </div>
             <div class="modal-footer add-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default js-cancel" data-dismiss="modal">取消</button>
                 <button type="button" class="btn btn-primary js-add">添加</button>
                 <button type="button" class="btn btn-primary js-update">保存</button>
             </div>
