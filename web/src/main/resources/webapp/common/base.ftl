@@ -78,7 +78,7 @@
                 <a href="http://www.yingchengpeng.com" target="_blank">yingchengpeng</a>
                 <a href="http://www.bootcss.com" target="_blank">Bootstrap</a>
             </p>
-            <p class="text-center">&copy;Ycp 2016.12.17</p>
+            <p class="text-center">&copy;Ycp 2016~${.now?string('yyyy')}</p>
         </div>
     </@block>
 </body>
