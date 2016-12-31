@@ -34,6 +34,9 @@ public class SerializableUtils<T> {
     public static Object toObject (byte[] bytes) {
         Object obj ;
         try {
+            if(bytes == null){
+                return null;
+            }
             ByteArrayInputStream bis = new ByteArrayInputStream (bytes);
             ObjectInputStream ois = new ObjectInputStream (bis);
             obj = ois.readObject();

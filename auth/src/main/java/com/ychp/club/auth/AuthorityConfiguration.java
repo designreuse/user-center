@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Import;
  * Date: 16/12/12
  */
 @MapperScan("com.ychp.club.auth.model.mysql")
-@ComponentScan("com.ychp.club.auth")
+@ComponentScan({"com.ychp.club.common.redis", "com.ychp.club.auth"})
 @AutoConfigureAfter(RedisConfiguration.class)
 @Import(RedisConfiguration.class)
 @Configuration
