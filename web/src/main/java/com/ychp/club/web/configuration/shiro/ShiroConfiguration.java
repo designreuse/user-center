@@ -34,17 +34,11 @@ public class ShiroConfiguration {
 
     private Set<String> ignoreExt = Sets.newHashSet(".jpg", ".png", ".gif", ".bmp", ".js", ".css", ".map", ".eot", ".svg", ".ttf", ".woff");
 
-    @Bean
-    public EhCacheManager cacheManager(){
-        EhCacheManager cacheManager = new EhCacheManager();
-        cacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
-        return cacheManager;
-    }
 
     @Bean(name = "customerShiroRealm")
-    public AuthorizingRealm customerShiroRealm(CacheManager cacheManager) {
+    public AuthorizingRealm customerShiroRealm(AuthorityManager authorityManager) {
         AuthorizingRealm realm = new CustomerShiroRealm();
-        realm.setCacheManager(cacheManager);
+        realm.setCacheManager(authorityManager.getCache());
         return realm;
     }
 

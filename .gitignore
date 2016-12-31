@@ -21,8 +21,8 @@
 .mine/
 logs/
 dev.properties
-application.yaml
-*/application.yaml
+application.yml
+*/application.yml
 dev-admin.properties
 dependency-reduced-pom.xml
 *.rdb

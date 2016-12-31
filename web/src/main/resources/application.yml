@@ -5,7 +5,13 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+    pool:
+      max-active: 300
+      max-idle: 100
+      min-idle: 10
+      max-wait: 1000
     database: 4
+    timeout: 5000
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/club?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root

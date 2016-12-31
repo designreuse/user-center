@@ -4,6 +4,7 @@ import com.ychp.club.auth.model.App;
 import com.ychp.club.auth.model.Authority;
 import com.ychp.club.auth.model.Role;
 import com.ychp.club.common.model.Paging;
+import org.apache.shiro.cache.CacheManager;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,8 @@ import java.util.Map;
  * Date: 16/12/12
  */
 public interface AuthorityManager {
+
+    CacheManager getCache();
 
     Paging<App> pagingApp(Integer pageNo, Integer pageSize, Map<String,Object> params);
 

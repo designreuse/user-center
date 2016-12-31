@@ -2,6 +2,8 @@ package com.ychp.club.auth.infrastructure.impl.application;
 
 import com.ychp.club.auth.application.AuthorityManager;
 import com.ychp.club.auth.enums.AuthType;
+import com.ychp.club.auth.infrastructure.impl.cache.CustomerShiroCacheManager;
+import com.ychp.club.auth.infrastructure.impl.cache.redis.JedisCache;
 import com.ychp.club.auth.model.App;
 import com.ychp.club.auth.model.Authority;
 import com.ychp.club.auth.model.Role;
@@ -12,6 +14,7 @@ import com.ychp.club.auth.service.AuthorityService;
 import com.ychp.club.common.model.PageInfo;
 import com.ychp.club.common.model.Paging;
 import com.ychp.club.common.util.Encryption;
+import org.apache.shiro.cache.CacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -28,6 +31,9 @@ import java.util.Map;
 public class AuthorityManagerImpl implements AuthorityManager {
 
     @Autowired
+    private CacheManager customerShiroCacheManager;
+
+    @Autowired
     private AuthorityRepository authorityRepository;
 
     @Autowired
@@ -38,6 +44,11 @@ public class AuthorityManagerImpl implements AuthorityManager {
 
     @Autowired
     private AuthorityService authorityService;
+
+    @Override
+    public CacheManager getCache() {
+        return customerShiroCacheManager;
+    }
 
     @Override
     public Paging<App> pagingApp(Integer pageNo, Integer pageSize, Map<String, Object> params) {
