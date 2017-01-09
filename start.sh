@@ -1,4 +1,5 @@
 # !/bin/sh
+set -e
 rootPath=/root
 cd $rootPath/works/book-club
 
