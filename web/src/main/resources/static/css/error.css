@@ -1,0 +1,60 @@
+body{
+    font-size: 13px;
+    background-color: #f0f2f4;
+    font-family: Raleway,sans-serif;
+    color: #666;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.42857143;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+.wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-top: 54px;
+    min-height: 100%;
+    padding-bottom: 45px;
+}
+.wrapper.no-navigation {
+    padding-top: 0;
+}
+.preload * {
+    animation: none !important;
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -ms-animation: none !important;
+    -o-animation: none !important;
+}
+.error-wrapper .error-inner {
+    width: 400px;
+    margin: 50px auto;
+    text-align: center;
+}
+@media (max-width: 481px) {
+    .error-wrapper .error-inner {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-top: 30px;
+    }
+}
+.error-wrapper .error-inner .error-type {
+    position: relative;
+    font-size: 15em;
+    visibility: hidden;
+}
+@media (max-width: 481px) {
+    .error-wrapper .error-inner .error-type {
+        font-size: 10em;
+    }
+}
+.error-wrapper .error-inner .error-type.animated {
+    visibility: visible;
+    animation: fadeInDown 1s ease;
+    -webkit-animation: fadeInDown 1s ease;
+    -moz-animation: fadeInDown 1s ease;
+    -ms-animation: fadeInDown 1s ease;
+    -o-animation: fadeInDown 1s ease;
+}
