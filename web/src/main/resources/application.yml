@@ -63,3 +63,5 @@ logging:
   file: /Users/yingchengpeng/Documents/log/blog/web/root.log
   level: INFO
 
+shiro:
+  ignoreExt: .jpg,.png,.gif,.bmp,.js,.css,.eot,.svg,.ttf,.woff,.map

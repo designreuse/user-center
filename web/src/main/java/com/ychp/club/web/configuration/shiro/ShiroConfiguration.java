@@ -1,12 +1,11 @@
 package com.ychp.club.web.configuration.shiro;
 
-import com.google.common.collect.Sets;
 import com.ychp.club.auth.AuthorityConfiguration;
 import com.ychp.club.auth.application.AuthorityManager;
 import com.ychp.club.auth.infrastructure.impl.factory.CustomerShiroFactoryBeanImpl;
 import com.ychp.club.auth.infrastructure.impl.realm.CustomerShiroRealm;
+import com.ychp.club.web.properties.shiro.ShiroProperties;
 import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -14,13 +13,10 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Desc:
@@ -29,11 +25,7 @@ import java.util.Set;
  */
 @Configuration
 @AutoConfigureAfter({AuthorityConfiguration.class})
-@EnableConfigurationProperties(ShiroProperties.class)
 public class ShiroConfiguration {
-
-    private Set<String> ignoreExt = Sets.newHashSet(".jpg", ".png", ".gif", ".bmp", ".js", ".css", ".map", ".eot", ".svg", ".ttf", ".woff");
-
 
     @Bean(name = "customerShiroRealm")
     public AuthorizingRealm customerShiroRealm(AuthorityManager authorityManager) {
@@ -41,7 +33,6 @@ public class ShiroConfiguration {
         realm.setCacheManager(authorityManager.getCache());
         return realm;
     }
-
 
     @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
@@ -56,10 +47,10 @@ public class ShiroConfiguration {
     }
 
     @Bean(name = "securityManager")
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(AuthorizingRealm authorizingRealm, CacheManager cacheManager) {
+    public DefaultWebSecurityManager getDefaultWebSecurityManager(AuthorizingRealm authorizingRealm, AuthorityManager authorityManager) {
         DefaultWebSecurityManager webSecurityManager = new DefaultWebSecurityManager();
         webSecurityManager.setRealm(authorizingRealm);
-        webSecurityManager.setCacheManager(cacheManager);
+        webSecurityManager.setCacheManager(authorityManager.getCache());
         return webSecurityManager;
     }
 
@@ -79,16 +70,13 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
     }
 
-
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager securityManager, AuthorityManager authorityManager) {
-
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new CustomerShiroFactoryBeanImpl(ignoreExt);
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager securityManager, AuthorityManager authorityManager, ShiroProperties shiroProperties) {
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new CustomerShiroFactoryBeanImpl(shiroProperties.getIgnoreExt());
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/cms/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/error/403");
-
         loadShiroFilterChain(shiroFilterFactoryBean, authorityManager);
         return shiroFilterFactoryBean;
     }

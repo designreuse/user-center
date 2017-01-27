@@ -1,7 +1,5 @@
-package com.ychp.club.web.configuration.freemarker;
+package com.ychp.club.web.properties.freemarker;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.autoconfigure.freemarker.FreeMarkerProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Primary;

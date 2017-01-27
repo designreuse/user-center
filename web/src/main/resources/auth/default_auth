@@ -1,0 +1,3 @@
+/favicon.ico :get
+/error   :get
+/error/\d*   :get

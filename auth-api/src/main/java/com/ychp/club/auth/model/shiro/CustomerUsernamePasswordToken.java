@@ -21,28 +21,34 @@ public class CustomerUsernamePasswordToken extends UsernamePasswordToken {
 
     private Integer status;
 
+    private Boolean auto = false;
+
     public CustomerUsernamePasswordToken() {
         super();
     }
 
     public CustomerUsernamePasswordToken(String username, String password, String salt, String originPassword, Integer status) {
-        this(username, password, salt, originPassword, status, false, null);
+        this(username, password, salt, originPassword, status, false, null, false);
     }
 
+    public CustomerUsernamePasswordToken(String username,  String password, Integer status, boolean rememberMe) {
+        this(username, null, null, password, status, rememberMe, null, true);
+    }
 
     public CustomerUsernamePasswordToken(String username, String password, String salt, String originPassword, Integer status, String host) {
-        this(username, password, salt, originPassword, status, false, host);
+        this(username, password, salt, originPassword, status, false, host, false);
     }
 
     public CustomerUsernamePasswordToken(String username, String password, String salt, String originPassword, Integer status, boolean rememberMe) {
-        this(username, password, salt, originPassword, status, rememberMe, null);
+        this(username, password, salt, originPassword, status, rememberMe, null, false);
     }
 
-    public CustomerUsernamePasswordToken(String username, String password, String salt, String originPassword, Integer status, boolean rememberMe, String host) {
+    public CustomerUsernamePasswordToken(String username, String password, String salt, String originPassword, Integer status, boolean rememberMe, String host, boolean auto) {
         super(username, password, rememberMe, host);
         this.originPassword = originPassword != null ? originPassword.toCharArray():null;
         this.salt = salt;
         this.status = status;
+        this.auto = auto;
     }
 
     public void clear() {
@@ -56,6 +62,5 @@ public class CustomerUsernamePasswordToken extends UsernamePasswordToken {
         }
 
     }
-
 
 }

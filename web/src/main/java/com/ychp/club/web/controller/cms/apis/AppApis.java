@@ -28,17 +28,17 @@ public class AppApis {
         return authorityManager.pagingApp(pageNo, pageSize, null);
     }
 
-    @RequestMapping(value = "/app/add",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/app",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Boolean add(@RequestBody App app){
         return authorityManager.addApp(app);
     }
 
-    @RequestMapping(value = "/app/update",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/app",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Boolean update(@RequestBody App app){
         return authorityManager.updateApp(app);
     }
 
-    @RequestMapping(value = "/app/del",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/app",method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Boolean del(@RequestParam(value = "id") Long id){
         return authorityManager.delApp(id);
     }

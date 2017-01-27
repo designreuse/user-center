@@ -41,17 +41,17 @@ public class AuthorityApis {
         return authorities;
     }
 
-    @RequestMapping(value = "/perm/add",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/perm",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Boolean add(@RequestBody Authority authority){
         return authorityManager.addAuthority(authority);
     }
 
-    @RequestMapping(value = "/perm/update",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/perm",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Boolean update(@RequestBody Authority authority){
         return authorityManager.updateAuthority(authority);
     }
 
-    @RequestMapping(value = "/perm/del",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/perm",method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Boolean del(@RequestParam(value = "id") Long id){
         return authorityManager.delAuthority(id);
     }

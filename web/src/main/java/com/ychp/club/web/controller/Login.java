@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.HttpCookie;
 
 /**
  * Desc:
@@ -46,7 +48,7 @@ public class Login {
                         @RequestParam(value = "remember", defaultValue = "false") Boolean remember,
                         HttpServletRequest request,
                         @RequestParam(value = "checkCode", required = false) String checkCode,
-                        RedirectAttributes redirectAttributes, HttpSession session){
+                        RedirectAttributes redirectAttributes){
 
         User user = userManager.findByUsername(username);
 
@@ -62,7 +64,7 @@ public class Login {
         Subject currentUser = SecurityUtils.getSubject();
         try {
             currentUser.login(token);
-            session.setAttribute("online", LoginUser.makeUser(user));
+            currentUser.getSession().setAttribute("online", LoginUser.makeUser(user));
         } catch(UnknownAccountException uae){
             log.error("unknown account {}", username);
             redirectAttributes.addFlashAttribute("message", "用户名或密码不正确");

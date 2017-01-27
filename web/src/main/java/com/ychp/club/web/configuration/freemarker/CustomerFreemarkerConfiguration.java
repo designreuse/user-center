@@ -1,5 +1,6 @@
 package com.ychp.club.web.configuration.freemarker;
 
+import com.ychp.club.web.properties.freemarker.CustomerFreemarkerProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

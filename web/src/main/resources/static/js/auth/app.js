@@ -28,16 +28,13 @@ function del(obj) {
     var id = obj.dataset['id'];
 
     $.ajax({
-        url:'/api/cms/app/del',
-        method: 'put',
-        data: {'id': id},
-        async: false,
-        dataType: 'json',
-        success: function () {
+        url:'/api/cms/app?id=' + id,
+        method: 'DELETE',
+        success: function (data) {
             alert('success');
             location.reload();
         },
-        error: function () {
+        error: function (error) {
             alert(error['responseJSON']['message'])
         }
     });
@@ -62,13 +59,13 @@ function add() {
     var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
-        url:'/api/cms/app/add',
-        method: 'put',
+        url:'/api/cms/app',
+        method: 'post',
         data: data,
         contentType:'application/json',
         async: false,
         dataType: 'json',
-        success: function () {
+        success: function (data) {
             alert('success');
             location.reload();
         },
@@ -95,13 +92,13 @@ function update() {
     var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
-        url:'/api/cms/app/update',
+        url:'/api/cms/app',
         method: 'put',
         data: data,
         contentType:'application/json',
         async: false,
         dataType: 'json',
-        success: function () {
+        success: function (data) {
             alert('success');
             location.reload();
         },

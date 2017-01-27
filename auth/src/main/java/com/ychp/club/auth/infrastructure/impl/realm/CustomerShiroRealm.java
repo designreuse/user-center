@@ -83,11 +83,13 @@ public class CustomerShiroRealm extends AuthorizingRealm {
             throw new UnknownAccountException("username.error");
         }
 
-        if(token.getPassword() != null || StringUtils.isEmpty(token.getOriginPassword())){
-            String password = String.copyValueOf(token.getPassword());
-            String originPassword = String.copyValueOf(token.getOriginPassword());
-            if(!Encryption.checkPassword(password, token.getSalt(), originPassword)) {
-                throw new IncorrectCredentialsException("password.error");
+        if(!token.getAuto()) {
+            if (token.getPassword() != null || StringUtils.isEmpty(token.getOriginPassword())) {
+                String password = String.copyValueOf(token.getPassword());
+                String originPassword = String.copyValueOf(token.getOriginPassword());
+                if (!Encryption.checkPassword(password, token.getSalt(), originPassword)) {
+                    throw new IncorrectCredentialsException("password.error");
+                }
             }
         }
 
