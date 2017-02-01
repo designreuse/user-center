@@ -34,6 +34,12 @@ public interface AuthorityManager {
 
     Boolean updateAuthority(Authority authority);
 
+    Boolean delRole(Long roleId);
+
+    Boolean addRole(Role role);
+
+    Boolean updateRole(Role role);
+
     Paging<Role> pagingRole(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
     Map<String, String> loadAuthorities(Long appId);

@@ -124,6 +124,28 @@ public class AuthorityManagerImpl implements AuthorityManager {
     }
 
     @Override
+    public Boolean delRole(Long roleId) {
+        return roleRepository.delete(roleId) == 1;
+    }
+
+    @Override
+    public Boolean addRole(Role role) {
+        if(role == null || StringUtils.isEmpty(role.getName())){
+            throw new IllegalArgumentException("role not empty");
+        }
+        return roleRepository.create(role) == 1;
+    }
+
+    @Override
+    public Boolean updateRole(Role role) {
+        if(role == null || StringUtils.isEmpty(role.getName())){
+            throw new IllegalArgumentException("role not empty");
+        }
+        roleRepository.update(role);
+        return true;
+    }
+
+    @Override
     public Paging<Role> pagingRole(Integer pageNo, Integer pageSize, Map<String, Object> params) {
         PageInfo pageInfo = new PageInfo(pageNo, pageSize);
         Paging<Role> rolePaging= new Paging<>(pageNo, pageSize);
