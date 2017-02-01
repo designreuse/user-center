@@ -1,5 +1,6 @@
 <#import "../../common/pagination-js.ftl" as pagination/>
 <#import "./template/role-template.ftl" as roleForm/>
+<#import "./template/authority-template.ftl" as authorityForm/>
 <@override name="body">
 <div class="container-fluid">
 
@@ -26,6 +27,7 @@
         </table>
 
         <@roleForm.role_from/>
+        <@authorityForm.role_authority_from/>
 
         <@pagination.pagination_js
         pageNo=pageNo

@@ -6,7 +6,7 @@ function factoryChild(it) {
         + '<td>' + it['id'] + '</td>'
         + '<td>' + it['name'] + '</td>'
         + '<td>'
-        + '\r\n<a href="#">应用授权</a>'
+        + '\r\n<a class="js-authority-form" href="#" data-toggle="modal" data-target="#roleAuthorityModal">应用授权</a>'
         + '\r\n<a data-info=\'' + JSON.stringify(it) + '\' class="js-update-form" href="#" data-toggle="modal" data-target="#roleModal">编辑</a>'
         + '\r\n<a class="js-del" href="#" data-id="' + it['id'] + '">删除</a>'
         + '</td>'
