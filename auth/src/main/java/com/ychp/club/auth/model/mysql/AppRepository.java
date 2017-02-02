@@ -4,6 +4,9 @@ import com.ychp.club.auth.model.App;
 import com.ychp.club.common.model.mysql.MybatisRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Desc:
  * Author: <a href="ychp@terminus.io">应程鹏</a>
@@ -11,4 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface AppRepository extends MybatisRepository<App> {
+
+    public List<App> findAppList();
+
 }

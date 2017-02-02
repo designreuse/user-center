@@ -1,5 +1,6 @@
 <#import "../../common/pagination-js.ftl" as pagination/>
 <#import "./template/role-template.ftl" as roleForm/>
+<#import "./template/app-template.ftl" as appForm/>
 <#import "./template/authority-template.ftl" as authorityForm/>
 <@override name="body">
 <div class="container-fluid">
@@ -26,7 +27,10 @@
             </tbody>
         </table>
 
+        <script src="/static/js/serialize.js"></script>
+
         <@roleForm.role_from/>
+        <@appForm.role_app_from/>
         <@authorityForm.role_authority_from/>
 
         <@pagination.pagination_js

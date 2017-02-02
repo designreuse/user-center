@@ -3,6 +3,7 @@ package com.ychp.club.auth.application;
 import com.ychp.club.auth.model.App;
 import com.ychp.club.auth.model.Authority;
 import com.ychp.club.auth.model.Role;
+import com.ychp.club.auth.model.dto.RoleAppDto;
 import com.ychp.club.common.model.Paging;
 import org.apache.shiro.cache.CacheManager;
 
@@ -41,6 +42,8 @@ public interface AuthorityManager {
     Boolean updateRole(Role role);
 
     Paging<Role> pagingRole(Integer pageNo, Integer pageSize, Map<String,Object> params);
+
+    List<RoleAppDto> findApps(Long roleId);
 
     Map<String, String> loadAuthorities(Long appId);
 

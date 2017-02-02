@@ -3,12 +3,15 @@ package com.ychp.club.web.controller.cms.apis;
 import com.ychp.club.auth.application.AuthorityManager;
 import com.ychp.club.auth.model.App;
 import com.ychp.club.auth.model.Role;
+import com.ychp.club.auth.model.dto.RoleAppDto;
 import com.ychp.club.common.model.Paging;
 import com.ychp.club.common.util.PageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Desc:
@@ -44,5 +47,9 @@ public class RoleApis {
         return authorityManager.delRole(id);
     }
 
+    @RequestMapping("/role/appList")
+    public List<RoleAppDto> appList(@RequestParam("roleId") Long roleId){
+        return authorityManager.findApps(roleId);
+    }
 
 }

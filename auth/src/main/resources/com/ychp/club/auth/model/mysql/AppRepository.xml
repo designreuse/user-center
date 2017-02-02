@@ -70,4 +70,8 @@
         ORDER BY `id` DESC
         LIMIT #{offset},#{limit}
     </select>
+
+    <select id="findAppList" resultMap="listMap">
+        SELECT * FROM <include refid="tb"/>
+    </select>
 </mapper>

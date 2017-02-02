@@ -1,5 +1,4 @@
 <#macro role_from >
-<script src="/static/js/serialize.js"></script>
 <div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

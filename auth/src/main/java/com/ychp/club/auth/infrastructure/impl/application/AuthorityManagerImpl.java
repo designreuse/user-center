@@ -1,5 +1,7 @@
 package com.ychp.club.auth.infrastructure.impl.application;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.ychp.club.auth.application.AuthorityManager;
 import com.ychp.club.auth.enums.AuthType;
 import com.ychp.club.auth.infrastructure.impl.cache.CustomerShiroCacheManager;
@@ -7,8 +9,11 @@ import com.ychp.club.auth.infrastructure.impl.cache.redis.JedisCache;
 import com.ychp.club.auth.model.App;
 import com.ychp.club.auth.model.Authority;
 import com.ychp.club.auth.model.Role;
+import com.ychp.club.auth.model.RoleApp;
+import com.ychp.club.auth.model.dto.RoleAppDto;
 import com.ychp.club.auth.model.mysql.AppRepository;
 import com.ychp.club.auth.model.mysql.AuthorityRepository;
+import com.ychp.club.auth.model.mysql.RoleAppRepository;
 import com.ychp.club.auth.model.mysql.RoleRepository;
 import com.ychp.club.auth.service.AuthorityService;
 import com.ychp.club.common.model.PageInfo;
@@ -21,6 +26,8 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Desc:
@@ -41,6 +48,9 @@ public class AuthorityManagerImpl implements AuthorityManager {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private RoleAppRepository roleAppRepository;
 
     @Autowired
     private AuthorityService authorityService;
@@ -154,6 +164,29 @@ public class AuthorityManagerImpl implements AuthorityManager {
         rolePaging.setDatas(roles);
         rolePaging.setTotal(total);
         return rolePaging;
+    }
+
+    @Override
+    public List<RoleAppDto> findApps(Long roleId) {
+        List<App> apps = appRepository.findAppList();
+        List<RoleApp> roleApps = roleAppRepository.findByRole(roleId);
+        Map<Long, RoleApp> roleAppMap = roleApps.stream().filter(Objects::nonNull).collect(Collectors.toMap(RoleApp::getAppId, it -> it));
+        if(roleAppMap == null){
+            roleAppMap = Maps.newHashMap();
+        }
+
+        RoleAppDto roleAppDto;
+        List<RoleAppDto> roleAppDtos = Lists.newArrayList();
+        for (App app : apps){
+            roleAppDto = new RoleAppDto();
+            roleAppDto.setAppId(app.getId());
+            roleAppDto.setName(app.getName());
+            if(roleAppMap.get(app.getId()) == null){
+                roleAppDto.setIsGrant(true);
+            }
+            roleAppDtos.add(roleAppDto);
+        }
+        return roleAppDtos;
     }
 
     @Override
