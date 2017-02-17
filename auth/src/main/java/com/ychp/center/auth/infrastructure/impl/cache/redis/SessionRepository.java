@@ -1,9 +1,9 @@
 package com.ychp.center.auth.infrastructure.impl.cache.redis;
 
 import com.google.common.collect.Lists;
-import com.ychp.center.common.redis.dao.JedisTemplate;
 import com.ychp.center.common.util.SerializableUtils;
 import com.ychp.center.common.util.SessionUtils;
+import com.ychp.coding.redis.dao.JedisTemplate;
 import org.apache.shiro.cache.CacheException;
 
 import java.util.Collection;

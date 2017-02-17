@@ -12,6 +12,7 @@
     <artifactId>user-api</artifactId>
 
     <dependencies>
+
         <dependency>
             <groupId>com.ychp</groupId>
             <artifactId>common</artifactId>
