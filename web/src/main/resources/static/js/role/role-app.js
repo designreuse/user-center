@@ -12,7 +12,7 @@ function loadAppData(obj) {
     params.roleId = dataset.id;
     var app_info = $(".app-info");
     $.get(
-        '/api/cms/role/appList',
+        '/api/role/appList',
         params,
         function(data){
             app_info.empty();

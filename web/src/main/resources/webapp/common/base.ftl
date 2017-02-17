@@ -21,22 +21,20 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Club</a>
+                    <a class="navbar-brand" href="/">${title}</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <#if springMacroRequestContext.requestUri?matches("/cms[/]*\\w*")>
-                            <@shiro.hasRole name="admin">
-                                <li <#if springMacroRequestContext.requestUri == "/cms/apps">class="active"</#if>><a href="/cms/apps">应用管理</a></li>
-                            </@shiro.hasRole>
-                        <#--<li <#if springMacroRequestContext.requestUri == "/cms/perms">class="active"</#if>><a href="/cms/perms">权限管理</a></li>-->
-                            <@shiro.hasAnyRoles name="admin,manager">
-                                <li <#if springMacroRequestContext.requestUri == "/cms/roles">class="active"</#if>><a href="/cms/roles">角色管理</a></li>
-                                <li <#if springMacroRequestContext.requestUri == "/cms/users">class="active"</#if>><a href="/cms/users">用户管理</a></li>
-                            </@shiro.hasAnyRoles>
-                        </#if>
+                        <@shiro.hasRole name="admin">
+                            <li <#if springMacroRequestContext.requestUri == "/apps">class="active"</#if>><a href="/apps">应用管理</a></li>
+                        </@shiro.hasRole>
+                    <#--<li <#if springMacroRequestContext.requestUri == "/perms">class="active"</#if>><a href="/perms">权限管理</a></li>-->
+                        <@shiro.hasAnyRoles name="admin,manager">
+                            <li <#if springMacroRequestContext.requestUri == "/roles">class="active"</#if>><a href="/roles">角色管理</a></li>
+                            <li <#if springMacroRequestContext.requestUri == "/users">class="active"</#if>><a href="/users">用户管理</a></li>
+                        </@shiro.hasAnyRoles>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <#if online??>
@@ -47,10 +45,6 @@
                                     <li><a href="#">修改密码</a></li>
                                     <li><a href="#">消息 <span class="badge">4</span></a></li>
                                     <li class="divider"></li>
-                                    <@shiro.hasAnyRoles name="admin,manager">
-                                        <li><a href="/cms/index">权限管理</a></li>
-                                        <li class="divider"></li>
-                                    </@shiro.hasAnyRoles>
                                     <li><a href="/logout">登出</a></li>
                                 </ul>
                             </li>

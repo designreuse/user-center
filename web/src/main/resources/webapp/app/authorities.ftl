@@ -1,4 +1,4 @@
-<#import "../../common/pagination-js.ftl" as pagination/>
+<#import "../common/pagination-js.ftl" as pagination/>
 <#import "./template/authority-template.ftl" as authority/>
 <@override name="body">
 <div class="container-fluid">
@@ -8,8 +8,8 @@
             <div class="row">
                 <div class="col-md-8">
                     <ol class="breadcrumb transparent">
-                        <li><a href="/cms/index">后台首页</a></li>
-                        <li><a href="/cms/apps">应用管理</a></li>
+                        <li><a href="/index">首页</a></li>
+                        <li><a href="/apps">应用管理</a></li>
                         <li class="active">权限管理</li>
                     </ol>
                 </div>
@@ -31,7 +31,7 @@
         <@pagination.pagination_js
         pageNo=pageNo
         pageSize=pageSize
-        url="/api/cms/perms"
+        url="/api/perms"
         param_map=params?if_exists
         page_js="/static/js/auth/authority.js" />
     </div>

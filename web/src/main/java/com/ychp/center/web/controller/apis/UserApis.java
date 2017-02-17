@@ -1,4 +1,4 @@
-package com.ychp.center.web.controller.cms.apis;
+package com.ychp.center.web.controller.apis;
 
 import com.ychp.center.common.model.Paging;
 import com.ychp.center.common.util.PageUtils;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/cms")
+@RequestMapping("/api")
 public class UserApis {
 
     @Autowired

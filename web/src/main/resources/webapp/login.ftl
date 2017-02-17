@@ -11,7 +11,7 @@
 <body class="login-body">
     <div class="container">
         <div class="sign-in-inner">
-            <p class="h3 mb-50 text-center">社团系统-登录</p>
+            <p class="h3 mb-50 text-center">用户中心-登录</p>
             <form class="form-horizontal" role="form" action="/login" method="post">
                 <div class="form-group">
                     <div class="col-sm-offset-1 col-sm-10">

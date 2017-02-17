@@ -1,4 +1,4 @@
-package com.ychp.center.web.controller.cms.apis;
+package com.ychp.center.web.controller.apis;
 
 import com.ychp.center.auth.application.AuthorityManager;
 import com.ychp.center.auth.model.App;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/cms")
+@RequestMapping("/api")
 public class AppApis {
 
     @Autowired

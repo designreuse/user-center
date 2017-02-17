@@ -1,4 +1,4 @@
-package com.ychp.center.web.controller.cms.apis;
+package com.ychp.center.web.controller.apis;
 
 import com.ychp.center.auth.application.AuthorityManager;
 import com.ychp.center.auth.model.Role;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/cms")
+@RequestMapping("/api")
 public class RoleApis {
 
     @Autowired

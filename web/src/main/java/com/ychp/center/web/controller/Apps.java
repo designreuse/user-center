@@ -1,4 +1,4 @@
-package com.ychp.center.web.controller.cms;
+package com.ychp.center.web.controller;
 
 import com.ychp.center.common.util.PageUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -14,15 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Slf4j
 @Controller
-@RequestMapping("/cms")
-public class Roles {
+@RequestMapping("")
+public class Apps {
 
-    @RequestMapping("roles")
-    public String users(Model model, @RequestParam(value = "pageNo",defaultValue = PageUtils.DEFAULT_PAGE_NO) Integer pageNo,
+
+    @RequestMapping("/apps")
+    public String apps(Model model, @RequestParam(value = "pageNo",defaultValue = PageUtils.DEFAULT_PAGE_NO) Integer pageNo,
                         @RequestParam(value = "pageSize",defaultValue = PageUtils.DEFAULT_PAGE_SIZE) Integer pageSize){
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("pageSize", pageSize);
-        return "auth/role/roles";
+        return "app/apps";
     }
 
 }

@@ -1,4 +1,4 @@
-<#import "../../common/pagination-js.ftl" as pagination/>
+<#import "../common/pagination-js.ftl" as pagination/>
 <@override name="body">
 <div class="container-fluid">
     <div class="panel panel-default">
@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <ol class="breadcrumb transparent">
-                        <li><a href="/cms/index">后台首页</a></li>
+                        <li><a href="/index">后台首页</a></li>
                         <li class="active">用户管理</li>
                     </ol>
                 </div>
@@ -25,7 +25,7 @@
         <@pagination.pagination_js
         pageNo=pageNo
         pageSize=pageSize
-        url="/api/cms/users"
+        url="/api/users"
         param_map=params?if_exists
         page_js="/static/js/user/user.js" />
     </div>

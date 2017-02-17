@@ -9,7 +9,7 @@ function factoryChild(it) {
         + '<td>' + (it['secret'] == undefined ? '': it['secret']) + '</td>'
         + '<td>' + it['domain'] + '</td>'
         + '<td>'
-        + '<a href="/cms/perms?appId=' + it['id'] + '">权限列表</a>'
+        + '<a href="/perms?appId=' + it['id'] + '">权限列表</a>'
         + '\r\n<a data-info=\'' + JSON.stringify(it) + '\' class="js-update-form" href="#" data-toggle="modal" data-target="#appModal">编辑</a>'
         + '\r\n<a class="js-del" href="#" data-id="' + it['id'] + '">删除</a>'
         + '</td>'
@@ -28,7 +28,7 @@ function del(obj) {
     var id = obj.dataset['id'];
 
     $.ajax({
-        url:'/api/cms/app?id=' + id,
+        url:'/api/app?id=' + id,
         method: 'DELETE',
         success: function (data) {
             alert('success');
@@ -59,7 +59,7 @@ function add() {
     var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
-        url:'/api/cms/app',
+        url:'/api/app',
         method: 'post',
         data: data,
         contentType:'application/json',
@@ -92,7 +92,7 @@ function update() {
     var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
-        url:'/api/cms/app',
+        url:'/api/app',
         method: 'put',
         data: data,
         contentType:'application/json',

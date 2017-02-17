@@ -1,4 +1,4 @@
-package com.ychp.center.web.controller.cms;
+package com.ychp.center.web.controller;
 
 import com.ychp.center.common.util.PageUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Slf4j
 @Controller
-@RequestMapping("/cms")
+@RequestMapping("")
 public class Users {
 
     @RequestMapping("users")
@@ -22,6 +22,6 @@ public class Users {
                         @RequestParam(value = "pageSize",defaultValue = PageUtils.DEFAULT_PAGE_SIZE) Integer pageSize){
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("pageSize", pageSize);
-        return "auth/user/users";
+        return "user/users";
     }
 }

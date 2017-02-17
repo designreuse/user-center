@@ -26,7 +26,7 @@ function del(obj) {
     var id = obj.dataset['id'];
 
     $.ajax({
-        url:'/api/cms/role?id=' + id,
+        url:'/api/role?id=' + id,
         method: 'DELETE',
         success: function (data) {
             alert('success');
@@ -56,7 +56,7 @@ function add() {
     var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
-        url:'/api/cms/role',
+        url:'/api/role',
         method: 'post',
         data: data,
         contentType:'application/json',
@@ -88,7 +88,7 @@ function update() {
     var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
-        url:'/api/cms/role',
+        url:'/api/role',
         method: 'put',
         data: data,
         contentType:'application/json',

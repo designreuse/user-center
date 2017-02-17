@@ -29,7 +29,7 @@ function del(obj) {
     var id = obj.dataset['id'];
 
     $.ajax({
-        url:'/api/cms/perm?id=' + id,
+        url:'/api/perm?id=' + id,
         method: 'delete',
         success: function (data) {
             alert('success');
@@ -65,7 +65,7 @@ function add() {
     var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
-        url:'/api/cms/perm',
+        url:'/api/perm',
         method: 'post',
         data: data,
         contentType:'application/json',
@@ -99,7 +99,7 @@ function update() {
     var data = JSON.stringify($(".data-info").serializeObject());
 
     $.ajax({
-        url:'/api/cms/perm',
+        url:'/api/perm',
         method: 'put',
         data: data,
         contentType:'application/json',

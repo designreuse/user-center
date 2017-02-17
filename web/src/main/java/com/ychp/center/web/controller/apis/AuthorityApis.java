@@ -1,4 +1,4 @@
-package com.ychp.center.web.controller.cms.apis;
+package com.ychp.center.web.controller.apis;
 
 import com.google.common.collect.Maps;
 import com.ychp.center.auth.application.AuthorityManager;
@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/cms")
+@RequestMapping("/api")
 public class AuthorityApis {
 
     @Autowired
