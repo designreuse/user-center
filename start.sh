@@ -21,7 +21,7 @@ then
 fi;
 echo "cp user-center to project"
 cp ./web/target/user-center.jar $rootPath/projects/user-center/
-if [ -f /etc/init.d/club ];
+if [ -f /etc/init.d/user-center ];
 then
     echo "restart user-center "
     service user-center restart
