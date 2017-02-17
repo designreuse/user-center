@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `auth_apps`;
+DROP TABLE IF EXISTS `center_apps`;
 
-CREATE TABLE `auth_apps` (
+CREATE TABLE `center_apps` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL COMMENT '应用名称',
   `key` varchar(128) DEFAULT NULL COMMENT '应用编号',
@@ -11,10 +11,9 @@ CREATE TABLE `auth_apps` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='应用表';
 
+DROP TABLE IF EXISTS `center_authorities`;
 
-DROP TABLE IF EXISTS `auth_authorities`;
-
-CREATE TABLE `auth_authorities` (
+CREATE TABLE `center_authorities` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL COMMENT '权限名称',
   `auth` varchar(128) DEFAULT NULL COMMENT '权限类型',
@@ -27,10 +26,20 @@ CREATE TABLE `auth_authorities` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限表';
 
+DROP TABLE IF EXISTS `center_role_apps`;
 
-DROP TABLE IF EXISTS `auth_role_authorities`;
+CREATE TABLE `center_role_apps` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
+  `app_id` bigint(20) DEFAULT NULL COMMENT '应用ID',
+  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
+  `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色应用表';
 
-CREATE TABLE `auth_role_authorities` (
+DROP TABLE IF EXISTS `center_role_authorities`;
+
+CREATE TABLE `center_role_authorities` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `authority_id` bigint(20) DEFAULT NULL COMMENT '权限ID',
@@ -41,10 +50,9 @@ CREATE TABLE `auth_role_authorities` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色权限表';
 
+DROP TABLE IF EXISTS `center_roles`;
 
-DROP TABLE IF EXISTS `auth_roles`;
-
-CREATE TABLE `auth_roles` (
+CREATE TABLE `center_roles` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL COMMENT '角色名称',
   `created_at` datetime DEFAULT NULL COMMENT '创建时间',
@@ -52,10 +60,9 @@ CREATE TABLE `auth_roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
 
+DROP TABLE IF EXISTS `center_users`;
 
-DROP TABLE IF EXISTS `club_users`;
-
-CREATE TABLE `club_users` (
+CREATE TABLE `center_users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL COMMENT '姓名',
   `username` varchar(128) DEFAULT NULL COMMENT '登录名',
@@ -72,4 +79,3 @@ CREATE TABLE `club_users` (
   `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
-

@@ -16,11 +16,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @SpringBootApplication
 @EnableConfigurationProperties(ShiroProperties.class)
-public class ClubApp {
+public class UserCenterApp {
 
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(ClubApp.class);
-        application.setBanner(new ClubBanner());
+        SpringApplication application = new SpringApplication(UserCenterApp.class);
+        application.setBanner(new UserCenterBanner());
         application.run(args);
     }
 }

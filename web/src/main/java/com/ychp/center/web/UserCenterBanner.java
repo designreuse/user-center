@@ -13,7 +13,7 @@ import java.io.PrintStream;
  * Author: <a href="ychp@terminus.io">应程鹏</a>
  * Date: 16/9/16
  */
-public class ClubBanner implements Banner {
+public class UserCenterBanner implements Banner {
     private static final String[] BANNER = new String[]{"",
             "                     __       ______ \n" +
             "   __  __   _____   / /_     / __   |\n" +
@@ -24,7 +24,7 @@ public class ClubBanner implements Banner {
     private static final String SPRING_BOOT = " :: Powered by Ychp.inc :: ";
     private static final int STRAP_LINE_SIZE = 42;
 
-    public ClubBanner() {
+    public UserCenterBanner() {
     }
 
     public void printBanner(Environment environment, Class<?> sourceClass, PrintStream printStream) {

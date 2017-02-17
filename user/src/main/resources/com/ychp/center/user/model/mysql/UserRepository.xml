@@ -5,7 +5,7 @@
     </resultMap>
     <parameterMap id="paramMap" type="com.ychp.center.user.model.User"></parameterMap>
 
-    <sql id="tb">`auth_users`</sql>
+    <sql id="tb">`center_users`</sql>
 
     <sql id="allColumns">`id`,<include refid="columns"/></sql>
 
