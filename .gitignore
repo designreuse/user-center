@@ -20,10 +20,8 @@
 .idea/
 .mine/
 logs/
-dev.properties
 application.yml
 */application.yml
-dev-admin.properties
 dependency-reduced-pom.xml
 *.rdb
 *.log

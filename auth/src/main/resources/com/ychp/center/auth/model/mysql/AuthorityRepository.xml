@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ychp.center.auth.model.mysql.AuthorityRepository">
+    <resultMap id="listMap" type="com.ychp.center.auth.model.Authority" >
+    </resultMap>
+    <parameterMap id="paramMap" type="com.ychp.center.auth.model.Authority"></parameterMap>
+
+    <sql id="tb">`auth_authorities`</sql>
+
+    <sql id="allColumns">`id`,<include refid="columns"/></sql>
+
+    <sql id="columns">`name`, `auth`, `perm_key`, `role_key`, `url`, `app_id`, `created_at`, `updated_at`</sql>
+
+    <sql id="values">#{name}, #{auth}, #{permKey}, #{roleKey}, #{url}, #{appId}</sql>
+
+    <insert id="create" parameterMap="paramMap" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO <include refid="tb"/>
+        (<include refid="columns"/>)VALUES (<include refid="values"/>,now(),now())
+    </insert>
+
+    <insert id="creates" parameterMap="paramMap" useGeneratedKeys="true">
+        INSERT INTO <include refid="tb"/>
+        (<include refid="columns"/>) VALUES
+        <foreach collection="list" item="user" separator=",">
+            (<include refid="values"/>,now(),now())
+        </foreach>
+    </insert>
+
+    <update id="update" parameterMap="paramMap" >
+        UPDATE <include refid="tb"/>
+        SET
+        <if test="name !=null">`name`=#{name},</if>
+        <if test="auth !=null">`auth`=#{auth},</if>
+        <if test="permKey !=null">`perm_key`=#{permKey},</if>
+        <if test="roleKey !=null">`role_key`=#{roleKey},</if>
+        <if test="url !=null">`url`=#{url},</if>
+        <if test="appId !=null">`app_id`=#{appId},</if>
+        `updated_at`= now()
+        WHERE id = #{id}
+    </update>
+
+    <sql id="criteria">
+        WHERE 1=1
+        <if test="id != null">AND `id`=#{id}</if>
+        <if test="name != null">AND `name`=#{name}</if>
+        <if test="auth !=null">AND `auth`=#{auth}</if>
+        <if test="permKey !=null">AND `perm_key`=#{permKey}</if>
+        <if test="roleKey !=null">AND `role_key`=#{roleKey}</if>
+        <if test="url !=null">AND `url`=#{url}</if>
+        <if test="appId !=null">AND `app_id`=#{appId}</if>
+    </sql>
+
+    <select id="findById" parameterType="long" resultMap="listMap">
+        SELECT * FROM <include refid="tb"/> WHERE id = #{id}
+    </select>
+
+    <select id="findByAppId" parameterType="long" resultMap="listMap">
+        SELECT * FROM <include refid="tb"/> WHERE app_id = #{id}
+    </select>
+
+    <select id="findByAppIds" parameterType="list" resultMap="listMap">
+        SELECT * FROM <include refid="tb"/> WHERE app_id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach> AND (`perm_key` IS NOT NULL AND `perm_key`!='')
+    </select>
+
+    <delete id="delete" >
+        DELETE FROM <include refid="tb"/> WHERE id=#{id}
+    </delete>
+
+    <select id="countBy" parameterType="map" resultType="long">
+        SELECT count(*) FROM <include refid="tb"/>
+        <include refid="criteria"/>
+    </select>
+
+    <select id="pagingBy" parameterType="map" resultMap="listMap">
+        SELECT * FROM <include refid="tb"/>
+        <include refid="criteria"/>
+        ORDER BY `id` DESC
+        LIMIT #{offset},#{limit}
+    </select>
+</mapper>

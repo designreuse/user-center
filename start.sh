@@ -1,40 +1,40 @@
 # !/bin/sh
 set -e
 rootPath=/root
-cd $rootPath/works/book-club
+cd $rootPath/works/user-center
 
 git pull
 
 echo "mvn install"
 mvn clean package -Dmaven.test.skip -pl web -am -e -U
 
-echo "book-club module"
-if [ -f $rootPath/projects/book-club/book-club.jar ];
+echo "user-center module"
+if [ -f $rootPath/projects/user-center/user-center.jar ];
 then
-    if [ -f $rootPath/projects/book-club/book-club.jar.bak ];
+    if [ -f $rootPath/projects/user-center/user-center.jar.bak ];
     then
-        echo "remove book-club bak"
-            rm -rf $rootPath/projects/book-club/book-club.jar.bak
+        echo "remove user-center bak"
+            rm -rf $rootPath/projects/user-center/user-center.jar.bak
     fi;
-    echo "bak book-club.jar"
-    mv $rootPath/projects/book-club/book-club.jar $rootPath/projects/book-club/book-club.jar.bak
+    echo "bak user-center.jar"
+    mv $rootPath/projects/user-center/user-center.jar $rootPath/projects/user-center/user-center.jar.bak
 fi;
-echo "cp book-club to project"
-cp ./web/target/book-club.jar $rootPath/projects/book-club/
+echo "cp user-center to project"
+cp ./web/target/user-center.jar $rootPath/projects/user-center/
 if [ -f /etc/init.d/club ];
 then
-    echo "restart book-club "
-    service club restart
-    tail -f /var/log/book-club/book-club.log
+    echo "restart user-center "
+    service user-center restart
+    tail -f /var/log/user-center/user-center.log
 
 else
-    sudo ln -s /root/projects/book-club/book-club.jar /etc/init.d/club
+    sudo ln -s /root/projects/user-center/user-center.jar /etc/init.d/club
     chmod 751 /etc/init.d/club
-    mkdir /var/log/book-club
-    echo "MODE=service\\r\\nJAVA_OPTS=\"-Xms512m -Xmx512m -XX:PermSize=256M -Dspring.profiles.active=test\"\\r\\nLOG_FOLDER=/var/log/book-club\\r\\nLOG_FILENAME=book-club.log" > /root/projects/book-club/book-club.conf
-    echo "start book-club "
-    service club start
-    tail -f /var/log/book-club/book-club.log
+    mkdir /var/log/user-center
+    echo "MODE=service\\r\\nJAVA_OPTS=\"-Xms512m -Xmx512m -XX:PermSize=256M -Dspring.profiles.active=test\"\\r\\nLOG_FOLDER=/var/log/user-center\\r\\nLOG_FILENAME=user-center.log" > /root/projects/user-center/user-center.conf
+    echo "start user-center "
+    service user-center start
+    tail -f /var/log/user-center/user-center.log
 fi;
 
 #end

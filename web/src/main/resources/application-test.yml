@@ -13,7 +13,7 @@ spring:
     database: 4
     timeout: 5000
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/club?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/center?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: PZfCqTk6EUhTEUYF9qp2
     type: com.mchange.v2.c3p0.ComboPooledDataSource
@@ -36,14 +36,14 @@ spring:
     suffix: .ftl
     template-loader-path: classpath:/webapp
     variables:
-      title: Club
-      domain: http://club.yingchengpeng.com
+      title: User-Center
+      domain: http://center.yingchengpeng.com
   resources:
     static-locations: classpath:/static
 
 mybatis:
-  mapper-locations:  classpath*:com.ychp.club.user.model.mysql
-  type-aliases-package: com.ychp.club.user.model
+  mapper-locations:  classpath*:com.ychp.center.user.model.mysql
+  type-aliases-package: com.ychp.center.user.model
   configuration:
     cacheEnabled: false
     lazyLoadingEnabled: false
@@ -60,6 +60,6 @@ mybatis:
     lazyLoadTriggerMethods: equals,clone,hashCode,toString
 
 logging:
-  file: /var/log/club/root.log
+  file: /var/log/user-center/root.log
   level: INFO
 
