@@ -28,11 +28,14 @@ then
     tail -f /var/log/user-center/user-center.log
 
 else
+    mkdir /var/log/user-center
+    echo "MODE=service" >> /root/projects/user-center/user-center.conf
+    echo "JAVA_OPTS=\"-Xms512m -Xmx512m -XX:PermSize=256M -Dspring.profiles.active=test\"" >> /root/projects/user-center/user-center.conf
+    echo "LOG_FOLDER=/var/log/user-center" >> /root/projects/user-center/user-center.conf
+    echo "LOG_FILENAME=user-center.log" >> /root/projects/user-center/user-center.conf
+    echo "start user-center "
     sudo ln -s /root/projects/user-center/user-center.jar /etc/init.d/user-center
     chmod 751 /etc/init.d/user-center
-    mkdir /var/log/user-center
-    echo "MODE=service\\r\\nJAVA_OPTS=\"-Xms512m -Xmx512m -XX:PermSize=256M -Dspring.profiles.active=test\"\\r\\nLOG_FOLDER=/var/log/user-center\\r\\nLOG_FILENAME=user-center.log" > /root/projects/user-center/user-center.conf
-    echo "start user-center "
     service user-center start
     tail -f /var/log/user-center/user-center.log
 fi;
