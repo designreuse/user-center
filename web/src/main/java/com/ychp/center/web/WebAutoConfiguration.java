@@ -3,6 +3,7 @@ package com.ychp.center.web;
 import com.ychp.center.auth.AuthorityConfiguration;
 import com.ychp.center.user.UserConfiguration;
 import com.ychp.center.web.configuration.shiro.ShiroConfiguration;
+import com.ychp.coding.freemarker.configuration.CustomerFreemarkerConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ErrorPage;
