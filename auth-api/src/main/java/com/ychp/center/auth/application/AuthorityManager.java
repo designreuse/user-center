@@ -4,7 +4,7 @@ import com.ychp.center.auth.model.App;
 import com.ychp.center.auth.model.Authority;
 import com.ychp.center.auth.model.Role;
 import com.ychp.center.auth.model.dto.RoleAppDto;
-import com.ychp.center.common.model.Paging;
+import com.ychp.coding.common.model.Paging;
 import org.apache.shiro.cache.CacheManager;
 
 import java.util.List;

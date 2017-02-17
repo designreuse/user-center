@@ -1,6 +1,7 @@
 package com.ychp.center.web;
 
 import com.ychp.center.web.properties.shiro.ShiroProperties;
+import com.ychp.coding.common.YchpBanner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +21,7 @@ public class UserCenterApp {
 
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(UserCenterApp.class);
-        application.setBanner(new UserCenterBanner());
+        application.setBanner(new YchpBanner());
         application.run(args);
     }
 }

@@ -16,7 +16,6 @@
         <dependency>
             <groupId>com.ychp</groupId>
             <artifactId>common</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
     </dependencies>

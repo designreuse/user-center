@@ -1,7 +1,7 @@
 package com.ychp.center.web.controller.apis;
 
-import com.ychp.center.common.model.Paging;
-import com.ychp.center.common.util.PageUtils;
+import com.ychp.coding.common.model.Paging;
+import com.ychp.coding.common.util.PageUtils;
 import com.ychp.center.user.application.UserManager;
 import com.ychp.center.user.model.User;
 import lombok.extern.slf4j.Slf4j;

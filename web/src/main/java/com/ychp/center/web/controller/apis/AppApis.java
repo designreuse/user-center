@@ -2,8 +2,8 @@ package com.ychp.center.web.controller.apis;
 
 import com.ychp.center.auth.application.AuthorityManager;
 import com.ychp.center.auth.model.App;
-import com.ychp.center.common.model.Paging;
-import com.ychp.center.common.util.PageUtils;
+import com.ychp.coding.common.model.Paging;
+import com.ychp.coding.common.util.PageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

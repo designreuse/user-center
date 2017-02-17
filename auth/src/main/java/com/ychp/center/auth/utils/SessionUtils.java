@@ -1,4 +1,4 @@
-package com.ychp.center.common.util;
+package com.ychp.center.auth.utils;
 
 /**
  * Desc:

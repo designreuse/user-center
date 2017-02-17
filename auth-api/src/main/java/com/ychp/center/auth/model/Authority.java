@@ -1,6 +1,6 @@
 package com.ychp.center.auth.model;
 
-import com.ychp.center.common.model.BaseModel;
+import com.ychp.coding.common.model.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

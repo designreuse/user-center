@@ -1,6 +1,6 @@
 package com.ychp.center.auth.infrastructure.impl.cache.redis;
 
-import com.ychp.center.common.util.SessionUtils;
+import com.ychp.center.auth.utils.SessionUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

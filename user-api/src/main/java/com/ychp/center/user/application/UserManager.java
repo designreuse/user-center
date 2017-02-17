@@ -1,6 +1,6 @@
 package com.ychp.center.user.application;
 
-import com.ychp.center.common.model.Paging;
+import com.ychp.coding.common.model.Paging;
 import com.ychp.center.user.model.User;
 
 import java.util.Map;

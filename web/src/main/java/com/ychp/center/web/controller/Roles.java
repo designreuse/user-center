@@ -1,6 +1,6 @@
 package com.ychp.center.web.controller;
 
-import com.ychp.center.common.util.PageUtils;
+import com.ychp.coding.common.util.PageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

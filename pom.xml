@@ -13,7 +13,6 @@
         <module>auth</module>
         <module>user-api</module>
         <module>user</module>
-        <module>common</module>
         <module>web</module>
     </modules>
 
@@ -427,6 +426,12 @@
             <dependency>
                 <groupId>com.ychp</groupId>
                 <artifactId>freemarker</artifactId>
+                <version>${coding.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ychp</groupId>
+                <artifactId>common</artifactId>
                 <version>${coding.version}</version>
             </dependency>
 

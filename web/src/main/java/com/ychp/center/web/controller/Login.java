@@ -2,7 +2,7 @@ package com.ychp.center.web.controller;
 
 import com.google.common.base.Throwables;
 import com.ychp.center.auth.model.shiro.CustomerUsernamePasswordToken;
-import com.ychp.center.common.util.CustomerStringUtils;
+import com.ychp.coding.common.util.CustomerStringUtils;
 import com.ychp.center.user.application.UserManager;
 import com.ychp.center.user.model.LoginUser;
 import com.ychp.center.user.model.User;

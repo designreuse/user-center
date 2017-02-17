@@ -1,7 +1,7 @@
 package com.ychp.center.user.infrastructure.impl.application;
 
-import com.ychp.center.common.model.PageInfo;
-import com.ychp.center.common.model.Paging;
+import com.ychp.coding.common.model.PageInfo;
+import com.ychp.coding.common.model.Paging;
 import com.ychp.center.user.application.UserManager;
 import com.ychp.center.user.model.User;
 import com.ychp.center.user.model.mysql.UserRepository;

@@ -1,7 +1,7 @@
 package com.ychp.center.auth.model.mysql;
 
 import com.ychp.center.auth.model.Role;
-import com.ychp.center.common.model.mysql.MybatisRepository;
+import com.ychp.coding.common.mysql.MybatisRepository;
 import org.springframework.stereotype.Repository;
 
 /**

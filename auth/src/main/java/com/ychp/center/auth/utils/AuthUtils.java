@@ -1,6 +1,6 @@
 package com.ychp.center.auth.utils;
 
-import com.ychp.center.common.util.CustomerStringUtils;
+import com.ychp.coding.common.util.CustomerStringUtils;
 import org.springframework.util.StringUtils;
 
 /**

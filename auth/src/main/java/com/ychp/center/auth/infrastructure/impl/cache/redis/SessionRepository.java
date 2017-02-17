@@ -1,8 +1,8 @@
 package com.ychp.center.auth.infrastructure.impl.cache.redis;
 
 import com.google.common.collect.Lists;
-import com.ychp.center.common.util.SerializableUtils;
-import com.ychp.center.common.util.SessionUtils;
+import com.ychp.coding.common.util.SerializableUtils;
+import com.ychp.center.auth.utils.SessionUtils;
 import com.ychp.coding.redis.dao.JedisTemplate;
 import org.apache.shiro.cache.CacheException;
 
@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import static com.ychp.center.common.util.SessionUtils.EXPIRE_SECONDS;
+import static com.ychp.center.auth.utils.SessionUtils.EXPIRE_SECONDS;
 
 /**
  * Desc:
