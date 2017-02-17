@@ -37,7 +37,7 @@ else
     sudo ln -s /root/projects/user-center/user-center.jar /etc/init.d/user-center
     chmod 751 /etc/init.d/user-center
     service user-center start
-#    tail -f /var/log/user-center/user-center.log
+    tail -f /var/log/user-center/user-center.log
 fi;
 
 #end
