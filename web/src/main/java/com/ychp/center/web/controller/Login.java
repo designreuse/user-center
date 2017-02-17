@@ -81,7 +81,7 @@ public class Login {
 
         //验证是否登录成功
         if(currentUser.isAuthenticated()){
-            if(StringUtils.isEmpty(WebUtils.getSavedRequest(request))){
+            if(StringUtils.isEmpty(WebUtils.getSavedRequest(request)) || "login".equals(WebUtils.getSavedRequest(request)) || "/login".equals(WebUtils.getSavedRequest(request))){
                 return "redirect:/";
             } else {
                 return "redirect:" + WebUtils.getSavedRequest(request).getRequestUrl();
