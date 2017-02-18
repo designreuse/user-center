@@ -51,4 +51,9 @@ public class RoleApis {
         return authorityManager.findApps(roleId);
     }
 
+    @RequestMapping(value = "/role/app", method = RequestMethod.PUT)
+    public Boolean grantApp(@RequestParam("roleId") Long roleId, @RequestParam("appIds")Long[] appIds){
+        return authorityManager.grantApp(roleId, appIds);
+    }
+
 }

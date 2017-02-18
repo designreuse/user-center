@@ -1,5 +1,4 @@
 <#macro role_app_from >
-<script src="/static/js/role/role-app.js"></script>
 <div class="modal fade" id="roleAppModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -16,4 +15,5 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<script src="/static/js/role/role-app.js"></script>
 </#macro>

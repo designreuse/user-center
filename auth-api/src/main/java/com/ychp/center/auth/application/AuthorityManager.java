@@ -41,6 +41,8 @@ public interface AuthorityManager {
 
     Boolean updateRole(Role role);
 
+    Boolean grantApp(Long roleId, Long[] appIds);
+
     Paging<Role> pagingRole(Integer pageNo, Integer pageSize, Map<String,Object> params);
 
     List<RoleAppDto> findApps(Long roleId);

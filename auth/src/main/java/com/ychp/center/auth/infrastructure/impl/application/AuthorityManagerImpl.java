@@ -154,6 +154,47 @@ public class AuthorityManagerImpl implements AuthorityManager {
     }
 
     @Override
+    public Boolean grantApp(Long roleId, Long[] appIds) {
+        if(appIds.length == 0){
+            throw new IllegalArgumentException("appIds not empty");
+        }
+
+        List<RoleApp> roleApps = roleAppRepository.findByRole(roleId);
+
+        List<Long> deleteIds = Lists.newArrayList();
+
+        List<Long> createIds = Lists.newArrayList(appIds);
+
+        Long appId;
+        for(RoleApp roleApp : roleApps){
+            appId = roleApp.getAppId();
+            deleteIds.add(roleApp.getId());
+            if(createIds.contains(appId)) {
+                //已存在
+                deleteIds.remove(roleApp.getId());
+                createIds.remove(appId);
+            }
+        }
+
+        if(!deleteIds.isEmpty()){
+            for(Long id : deleteIds) {
+                roleAppRepository.delete(id);
+            }
+        }
+
+        if(!createIds.isEmpty()){
+            RoleApp roleApp;
+            for(Long createId : createIds){
+                roleApp = new RoleApp();
+                roleApp.setRoleId(roleId);
+                roleApp.setAppId(createId);
+                roleAppRepository.create(roleApp);
+            }
+        }
+        return true;
+    }
+
+    @Override
     public Paging<Role> pagingRole(Integer pageNo, Integer pageSize, Map<String, Object> params) {
         PageInfo pageInfo = new PageInfo(pageNo, pageSize);
         Paging<Role> rolePaging= new Paging<>(pageNo, pageSize);
