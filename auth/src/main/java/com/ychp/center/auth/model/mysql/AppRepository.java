@@ -14,6 +14,6 @@ import java.util.List;
 @Repository
 public interface AppRepository extends MybatisRepository<App> {
 
-    public List<App> findAppList();
+    List<App> findAppList();
 
 }

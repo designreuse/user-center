@@ -30,7 +30,7 @@ public class AuthUtils {
     }
 
     public static Boolean isRoot(Long roleId){
-        return roleId != null && roleId==ROOT_ID;
+        return roleId != null && roleId == ROOT_ID;
     }
 
 }

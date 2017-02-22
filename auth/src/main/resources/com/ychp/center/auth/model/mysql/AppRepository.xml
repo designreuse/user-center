@@ -50,6 +50,13 @@
         SELECT * FROM <include refid="tb"/> WHERE id = #{id}
     </select>
 
+    <select id="findByIds" parameterType="list" resultMap="listMap">
+        SELECT * FROM <include refid="tb"/> WHERE id IN
+        <foreach collection="list" item="id_" open="(" separator="," close=")">
+            #{id_}
+        </foreach>
+    </select>
+
     <delete id="delete" >
         DELETE FROM <include refid="tb"/> WHERE id=#{id}
     </delete>

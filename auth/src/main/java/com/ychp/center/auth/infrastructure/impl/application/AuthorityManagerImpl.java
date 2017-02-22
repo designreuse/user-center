@@ -3,17 +3,13 @@ package com.ychp.center.auth.infrastructure.impl.application;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ychp.center.auth.application.AuthorityManager;
-import com.ychp.center.auth.model.App;
-import com.ychp.center.auth.model.Authority;
-import com.ychp.center.auth.model.Role;
-import com.ychp.center.auth.model.RoleApp;
-import com.ychp.center.auth.model.dto.RoleAppDto;
-import com.ychp.center.auth.model.mysql.AuthorityRepository;
-import com.ychp.center.auth.model.mysql.RoleRepository;
-import com.ychp.center.auth.service.AuthorityService;
 import com.ychp.center.auth.enums.AuthType;
-import com.ychp.center.auth.model.mysql.AppRepository;
-import com.ychp.center.auth.model.mysql.RoleAppRepository;
+import com.ychp.center.auth.model.*;
+import com.ychp.center.auth.model.dto.RoleAppDto;
+import com.ychp.center.auth.model.dto.RoleAuthByAppDto;
+import com.ychp.center.auth.model.dto.RoleAuthDto;
+import com.ychp.center.auth.model.mysql.*;
+import com.ychp.center.auth.service.AuthorityService;
 import com.ychp.coding.common.model.PageInfo;
 import com.ychp.coding.common.model.Paging;
 import com.ychp.coding.common.util.Encryption;
@@ -52,6 +48,9 @@ public class AuthorityManagerImpl implements AuthorityManager {
 
     @Autowired
     private AuthorityService authorityService;
+
+    @Autowired
+    private RoleAuthorityRepository roleAuthorityRepository;
 
     @Override
     public CacheManager getCache() {
@@ -231,5 +230,98 @@ public class AuthorityManagerImpl implements AuthorityManager {
     @Override
     public Map<String, String> loadAuthorities(Long appId) {
         return authorityService.loadAuthorities(appId);
+    }
+
+    @Override
+    public List<RoleAuthByAppDto> loadRolePerms(Long roleId) {
+        List<RoleApp> roleApps = roleAppRepository.findByRole(roleId);
+        if(roleApps == null || roleApps.size() == 0){
+            return Lists.newArrayList();
+        }
+        List<Long> appIds = Lists.transform(roleApps, RoleApp::getAppId);
+        List<App> apps = appRepository.findByIds(appIds);
+
+        List<Authority> authorities = authorityRepository.findByAppIds(appIds);
+
+        List<RoleAuthority> roleAuthorities = roleAuthorityRepository.findByRoleIdAndAppIds(roleId, appIds);
+        Map<Long, RoleAuthority> roleAuthorityMap = Maps.uniqueIndex(roleAuthorities, RoleAuthority::getAuthorityId);
+
+        Map<Long, List<RoleAuthDto>> roleAuthMap = Maps.newHashMap();
+
+        if(authorities != null){
+            List<RoleAuthDto> tmpAuthorities;
+            RoleAuthDto roleAuthDto;
+            for(Authority authority : authorities){
+                roleAuthDto = new RoleAuthDto();
+                roleAuthDto.setPermId(authority.getId());
+                roleAuthDto.setName(authority.getName());
+                if(roleAuthorityMap.get(roleAuthDto.getPermId()) != null){
+                    roleAuthDto.setIsGrant(true);
+                }
+                tmpAuthorities = roleAuthMap.get(authority.getAppId());
+                if(tmpAuthorities == null){
+                    tmpAuthorities = Lists.newArrayList();
+                }
+                tmpAuthorities.add(roleAuthDto);
+                roleAuthMap.put(authority.getAppId(), tmpAuthorities);
+            }
+        }
+
+        RoleAuthByAppDto roleAuthByAppDto;
+        List<RoleAuthByAppDto> roleAuthByAppDtos = Lists.newArrayList();
+        for (App app : apps){
+            roleAuthByAppDto = new RoleAuthByAppDto();
+            roleAuthByAppDto.setAppName(app.getName());
+            roleAuthByAppDto.setRoleAuthDtos(roleAuthMap.get(app.getId()));
+            roleAuthByAppDtos.add(roleAuthByAppDto);
+        }
+        return roleAuthByAppDtos;
+    }
+
+    @Override
+    public Boolean grantAuthorities(Long roleId, Long[] permIds) {
+        if(permIds.length == 0){
+            throw new IllegalArgumentException("permIds not empty");
+        }
+
+        List<RoleAuthority> roleAuthorities = roleAuthorityRepository.findByRoleId(roleId);
+
+        List<Long> deleteIds = Lists.newArrayList();
+
+        List<Long> createIds = Lists.newArrayList(permIds);
+
+        Long authorityId;
+        for(RoleAuthority roleAuthority : roleAuthorities){
+            authorityId = roleAuthority.getAuthorityId();
+            deleteIds.add(roleAuthority.getId());
+            if(createIds.contains(authorityId)) {
+                //已存在
+                deleteIds.remove(roleAuthority.getId());
+                createIds.remove(authorityId);
+            }
+        }
+
+        if(!deleteIds.isEmpty()){
+            for(Long id : deleteIds) {
+                roleAuthorityRepository.delete(id);
+            }
+        }
+
+        if(!createIds.isEmpty()){
+            RoleAuthority roleAuthority;
+            List<Authority> authorities = authorityRepository.findByIds(createIds);
+            Map<Long, Authority> authorityMap = Maps.uniqueIndex(authorities, Authority::getId);
+            Authority authority;
+            for(Long createId : createIds){
+                authority = authorityMap.get(createId);
+                roleAuthority = new RoleAuthority();
+                roleAuthority.setRoleId(roleId);
+                roleAuthority.setAppId(createId);
+                roleAuthority.setAuthorityKey(authority.getPermKey());
+                roleAuthority.setAppId(authority.getAppId());
+                roleAuthorityRepository.create(roleAuthority);
+            }
+        }
+        return true;
     }
 }

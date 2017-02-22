@@ -1,6 +1,5 @@
 package com.ychp.center.auth.infrastructure.impl.service;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.ychp.center.auth.model.Authority;
 import com.ychp.center.auth.model.RoleAuthority;
@@ -40,15 +39,10 @@ public class RoleAuthorityServiceImpl implements RoleAuthorityService {
         if(AuthUtils.isRoot(roleId)) {
             List<Authority> authorities = authorityRepository.findByAppIds(appIds);
             if(authorities != null && !authorities.isEmpty()) {
-                perms = Lists.transform(authorities, new Function<Authority, String>() {
-                    @Override
-                    public String apply(Authority input) {
-                        return input.getPermKey();
-                    }
-                });
+                perms = Lists.transform(authorities, Authority::getPermKey);
             }
         } else {
-            List<RoleAuthority> roleAuthorities = roleAuthorityRepository.findByAppAndRole(roleId, appIds);
+            List<RoleAuthority> roleAuthorities = roleAuthorityRepository.findByRoleIdAndAppIds(roleId, appIds);
 
             if(roleAuthorities != null){
                 perms = Lists.transform(roleAuthorities, RoleAuthority::getAuthorityKey);

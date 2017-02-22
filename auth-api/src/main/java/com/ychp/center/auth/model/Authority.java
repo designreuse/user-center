@@ -25,6 +25,6 @@ public class Authority extends BaseModel {
 
     private String url;
 
-    private String appId;
+    private Long appId;
 
 }

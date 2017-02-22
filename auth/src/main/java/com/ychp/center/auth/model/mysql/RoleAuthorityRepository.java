@@ -15,5 +15,7 @@ import java.util.List;
 @Repository
 public interface RoleAuthorityRepository extends MybatisRepository<RoleAuthority> {
 
-    List<RoleAuthority> findByAppAndRole( @Param("roleId") Long roleId, @Param("appIds") List<Long> appIds);
+    List<RoleAuthority> findByRoleIdAndAppIds( @Param("roleId") Long roleId, @Param("appIds") List<Long> appIds);
+
+    List<RoleAuthority> findByRoleId( @Param("roleId") Long roleId);
 }

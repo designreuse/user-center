@@ -3,6 +3,7 @@ package com.ychp.center.web.controller.apis;
 import com.ychp.center.auth.application.AuthorityManager;
 import com.ychp.center.auth.model.Role;
 import com.ychp.center.auth.model.dto.RoleAppDto;
+import com.ychp.center.auth.model.dto.RoleAuthByAppDto;
 import com.ychp.coding.common.model.Paging;
 import com.ychp.coding.common.util.PageUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -41,13 +42,13 @@ public class RoleApis {
         return authorityManager.updateRole(role);
     }
 
-    @RequestMapping(value = "/role",method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/role", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Boolean del(@RequestParam(value = "id") Long id){
         return authorityManager.delRole(id);
     }
 
-    @RequestMapping("/role/appList")
-    public List<RoleAppDto> appList(@RequestParam("roleId") Long roleId){
+    @RequestMapping("/role/apps")
+    public List<RoleAppDto> roleApps(@RequestParam("roleId") Long roleId){
         return authorityManager.findApps(roleId);
     }
 
@@ -55,5 +56,16 @@ public class RoleApis {
     public Boolean grantApp(@RequestParam("roleId") Long roleId, @RequestParam("appIds")Long[] appIds){
         return authorityManager.grantApp(roleId, appIds);
     }
+
+    @RequestMapping(value = "/role/perms", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<RoleAuthByAppDto> RolePerms(@RequestParam("roleId") Long roleId){
+        return authorityManager.loadRolePerms(roleId);
+    }
+
+    @RequestMapping(value = "/role/perms", method = RequestMethod.PUT)
+    public Boolean grantAuthorities(@RequestParam("roleId") Long roleId, @RequestParam("permIds")Long[] permIds){
+        return authorityManager.grantAuthorities(roleId, permIds);
+    }
+
 
 }

@@ -12,12 +12,12 @@ import java.util.Map;
  */
 public interface UserManager {
 
-    public User findById(Long id);
+    User findById(Long id);
 
-    public User findByUsername(String username);
+    User findByUsername(String username);
 
-    public boolean updateStatus(Long userId, Integer status);
+    boolean updateStatus(Long userId, Integer status);
 
-    public Paging<User> paging(Integer pageNo, Integer pageSize, Map<String,Object> params);
+    Paging<User> paging(Integer pageNo, Integer pageSize, Map<String, Object> params);
 
 }
