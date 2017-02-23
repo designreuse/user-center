@@ -62,7 +62,7 @@ public class RoleApis {
         return authorityManager.loadRolePerms(roleId);
     }
 
-    @RequestMapping(value = "/role/perms", method = RequestMethod.PUT)
+    @RequestMapping(value = "/role/perm", method = RequestMethod.PUT)
     public Boolean grantAuthorities(@RequestParam("roleId") Long roleId, @RequestParam("permIds")Long[] permIds){
         return authorityManager.grantAuthorities(roleId, permIds);
     }

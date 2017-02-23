@@ -317,6 +317,7 @@ public class AuthorityManagerImpl implements AuthorityManager {
                 roleAuthority = new RoleAuthority();
                 roleAuthority.setRoleId(roleId);
                 roleAuthority.setAppId(createId);
+                roleAuthority.setAuthorityId(authority.getId());
                 roleAuthority.setAuthorityKey(authority.getPermKey());
                 roleAuthority.setAppId(authority.getAppId());
                 roleAuthorityRepository.create(roleAuthority);
