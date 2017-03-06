@@ -95,3 +95,9 @@ body {
 .lp-50{
     padding-left: 50px;
 }
+
+.auth-info{
+    max-height: 400px;
+    overflow: scroll;
+}
+

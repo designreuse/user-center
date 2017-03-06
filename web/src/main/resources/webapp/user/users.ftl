@@ -1,4 +1,5 @@
 <#import "../common/pagination-js.ftl" as pagination/>
+<#import "./template/user-template.ftl" as userForm/>
 <@override name="body">
 <div class="container-fluid">
     <div class="panel panel-default">
@@ -22,6 +23,10 @@
             <tbody class="js-info-content">
             </tbody>
         </table>
+
+        <@userForm.user_from/>
+
+
         <@pagination.pagination_js
         pageNo=pageNo
         pageSize=pageSize

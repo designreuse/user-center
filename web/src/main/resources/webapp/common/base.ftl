@@ -27,14 +27,15 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <@shiro.hasRole name="admin">
+                        <@shiro.hasPermission name="auth:app:list">
                             <li <#if springMacroRequestContext.requestUri == "/apps">class="active"</#if>><a href="/apps">应用管理</a></li>
-                        </@shiro.hasRole>
-                    <#--<li <#if springMacroRequestContext.requestUri == "/perms">class="active"</#if>><a href="/perms">权限管理</a></li>-->
-                        <@shiro.hasAnyRoles name="admin,manager">
+                        </@shiro.hasPermission>
+                        <@shiro.hasPermission name="auth:role:list">
                             <li <#if springMacroRequestContext.requestUri == "/roles">class="active"</#if>><a href="/roles">角色管理</a></li>
+                        </@shiro.hasPermission>
+                        <@shiro.hasPermission name="auth:user:list">
                             <li <#if springMacroRequestContext.requestUri == "/users">class="active"</#if>><a href="/users">用户管理</a></li>
-                        </@shiro.hasAnyRoles>
+                        </@shiro.hasPermission>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <#if online??>
