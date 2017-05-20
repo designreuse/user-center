@@ -9,9 +9,9 @@
 
     <sql id="allColumns">`id`,<include refid="columns"/></sql>
 
-    <sql id="columns">`name`, `auth`, `perm_key`, `role_key`, `url`, `app_id`, `created_at`, `updated_at`</sql>
+    <sql id="columns">`pid`, ``name`, `auth`, `perm_key`, `role_key`, `url`, `app_id`, `created_at`, `updated_at`</sql>
 
-    <sql id="values">#{name}, #{auth}, #{permKey}, #{roleKey}, #{url}, #{appId}</sql>
+    <sql id="values">#{pid}, #{name}, #{auth}, #{permKey}, #{roleKey}, #{url}, #{appId}</sql>
 
     <insert id="create" parameterMap="paramMap" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO <include refid="tb"/>
@@ -29,6 +29,7 @@
     <update id="update" parameterMap="paramMap" >
         UPDATE <include refid="tb"/>
         SET
+        <if test="pid !=null">`pid`=#{pid},</if>
         <if test="name !=null">`name`=#{name},</if>
         <if test="auth !=null">`auth`=#{auth},</if>
         <if test="permKey !=null">`perm_key`=#{permKey},</if>
@@ -42,6 +43,7 @@
     <sql id="criteria">
         WHERE 1=1
         <if test="id != null">AND `id`=#{id}</if>
+        <if test="pid != null">AND `pid`=#{pid}</if>
         <if test="name != null">AND `name`=#{name}</if>
         <if test="auth !=null">AND `auth`=#{auth}</if>
         <if test="permKey !=null">AND `perm_key`=#{permKey}</if>

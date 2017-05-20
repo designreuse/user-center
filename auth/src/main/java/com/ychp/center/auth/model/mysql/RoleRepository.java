@@ -4,6 +4,8 @@ import com.ychp.center.auth.model.Role;
 import com.ychp.coding.common.mysql.MybatisRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Desc:
  * Author: <a href="ychp@terminus.io">应程鹏</a>
@@ -11,5 +13,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RoleRepository extends MybatisRepository<Role> {
+
+    List<Role> findRoleList();
+
+    List<Role> findByCodes(List<String> codes);
 
 }

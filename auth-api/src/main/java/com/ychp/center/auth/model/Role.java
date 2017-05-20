@@ -17,4 +17,6 @@ public class Role extends BaseModel {
 
     private String name;
 
+    private String code;
+
 }

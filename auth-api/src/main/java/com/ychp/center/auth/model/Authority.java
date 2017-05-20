@@ -15,6 +15,8 @@ public class Authority extends BaseModel {
 
     private static final long serialVersionUID = -8458766060275449272L;
 
+    private Long pid;
+
     private String name;
 
     private String auth;

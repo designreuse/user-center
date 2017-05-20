@@ -3,6 +3,9 @@ package com.ychp.center.auth.utils;
 import com.ychp.coding.common.util.CustomerStringUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * Desc:
  * Author: <a href="ychp@terminus.io">应程鹏</a>
@@ -11,7 +14,7 @@ import org.springframework.util.StringUtils;
 public class AuthUtils {
 
     private static final String BASE_PERM = "anon";
-    private static final Long ROOT_ID = 1L;
+    private static final String ROOT_CODE = "root";
     private static final String PERM_TEMPLATE = "perms[{0}]";
 
     private static final String ROLE_TEMPLATE = "roles[{0}]";
@@ -29,8 +32,8 @@ public class AuthUtils {
         return fullAuth;
     }
 
-    public static Boolean isRoot(Long roleId){
-        return roleId != null && roleId == ROOT_ID;
+    public static Boolean isRoot(List<String> roles){
+        return roles != null && !roles.isEmpty() && roles.contains(ROOT_CODE);
     }
 
 }

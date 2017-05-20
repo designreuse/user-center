@@ -20,4 +20,12 @@ public interface UserManager {
 
     Paging<User> paging(Integer pageNo, Integer pageSize, Map<String, Object> params);
 
+    Boolean addUser(User user);
+
+    Boolean addDefaultUser(User user);
+
+    Boolean updateUser(User user);
+
+    Boolean delUser(Long userId);
+
 }

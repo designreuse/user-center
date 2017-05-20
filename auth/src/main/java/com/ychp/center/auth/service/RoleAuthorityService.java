@@ -10,4 +10,6 @@ import java.util.List;
 public interface RoleAuthorityService {
 
     List<String> loadRoleAuthorities(Long roleId, List<Long> appIds);
+
+    List<String> loadRoleAuthorities(List<Long> roleIds, List<Long> appIds);
 }

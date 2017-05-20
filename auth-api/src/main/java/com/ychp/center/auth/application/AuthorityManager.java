@@ -5,6 +5,7 @@ import com.ychp.center.auth.model.Authority;
 import com.ychp.center.auth.model.Role;
 import com.ychp.center.auth.model.dto.RoleAppDto;
 import com.ychp.center.auth.model.dto.RoleAuthByAppDto;
+import com.ychp.center.auth.model.dto.UserRoleDto;
 import com.ychp.coding.common.model.Paging;
 import org.apache.shiro.cache.CacheManager;
 
@@ -53,4 +54,9 @@ public interface AuthorityManager {
     List<RoleAuthByAppDto> loadRolePerms(Long roleId);
 
     Boolean grantAuthorities(Long roleId, Long[] permIds);
+
+    List<UserRoleDto> findRoles(Long userId);
+
+    Boolean grantRole(Long userId, List<Long> roleIds);
+
 }

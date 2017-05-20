@@ -17,5 +17,7 @@ public interface RoleAuthorityRepository extends MybatisRepository<RoleAuthority
 
     List<RoleAuthority> findByRoleIdAndAppIds( @Param("roleId") Long roleId, @Param("appIds") List<Long> appIds);
 
+    List<RoleAuthority> findByRoleIdAndAppIds( @Param("roleIds") List<Long> roleIds, @Param("appIds") List<Long> appIds);
+
     List<RoleAuthority> findByRoleId( @Param("roleId") Long roleId);
 }

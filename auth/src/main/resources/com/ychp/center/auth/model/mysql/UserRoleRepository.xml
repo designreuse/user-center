@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ychp.center.auth.model.mysql.RoleRepository">
-    <resultMap id="listMap" type="com.ychp.center.auth.model.Role" >
+<mapper namespace="com.ychp.center.auth.model.mysql.UserRoleRepository">
+    <resultMap id="listMap" type="com.ychp.center.auth.model.UserRole" >
     </resultMap>
-    <parameterMap id="paramMap" type="com.ychp.center.auth.model.Role"></parameterMap>
+    <parameterMap id="paramMap" type="com.ychp.center.auth.model.UserRole"></parameterMap>
 
-    <sql id="tb">`center_roles`</sql>
+    <sql id="tb">`center_user_roles`</sql>
 
     <sql id="allColumns">`id`,<include refid="columns"/></sql>
 
-    <sql id="columns">`name`, `code`, `created_at`, `updated_at`</sql>
+    <sql id="columns">`user_id`, `role_json`, `created_at`, `updated_at`</sql>
 
-    <sql id="values">#{name}, #{code}</sql>
+    <sql id="values">#{userId}, #{roleJson}</sql>
 
     <insert id="create" parameterMap="paramMap" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO <include refid="tb"/>
@@ -29,8 +29,8 @@
     <update id="update" parameterMap="paramMap" >
         UPDATE <include refid="tb"/>
         SET
-        <if test="name !=null">`name`=#{name},</if>
-        <if test="code !=null">`code`=#{code},</if>
+        <if test="userId !=null">`user_id`=#{userId},</if>
+        <if test="roleJson !=null">`role_json`=#{roleJson},</if>
         `updated_at`= now()
         WHERE id = #{id}
     </update>
@@ -38,20 +38,16 @@
     <sql id="criteria">
         WHERE 1=1
         <if test="id != null">AND `id`=#{id}</if>
-        <if test="name != null">AND `name`=#{name}</if>
-        <if test="code != null">AND `code`=#{code}</if>
-        AND id != 1
+        <if test="userId !=null">AND `user_id`=#{userId},</if>
+        <if test="roleJson != null">AND `role_json`=#{roleJson}</if>
     </sql>
 
     <select id="findById" parameterType="long" resultMap="listMap">
         SELECT * FROM <include refid="tb"/> WHERE id = #{id}
     </select>
 
-    <select id="findByIds" parameterType="list" resultMap="listMap">
-        SELECT * FROM <include refid="tb"/> WHERE id IN
-        <foreach collection="list" item="id" open="(" close=")" separator=",">
-          #{id}
-        </foreach>
+    <select id="findByUser" parameterType="map" resultMap="listMap">
+        SELECT * FROM <include refid="tb"/> WHERE `user_id`=#{userId}
     </select>
 
     <delete id="delete" >
@@ -68,16 +64,4 @@
         <include refid="criteria"/>
         LIMIT #{offset},#{limit}
     </select>
-
-    <select id="findRoleList" resultMap="listMap">
-        SELECT * FROM <include refid="tb"/>
-    </select>
-
-    <select id="findByCodes" parameterType="list" resultMap="listMap">
-        SELECT * FROM <include refid="tb"/> WHERE code IN
-        <foreach collection="list" item="code" open="(" close=")" separator=",">
-            #{code}
-        </foreach>
-    </select>
-
 </mapper>

@@ -22,9 +22,6 @@ public class UserManagerImpl implements UserManager {
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private UserService userService;
-
     public User findById(Long id) {
         return userRepository.findById(id);
     }
@@ -47,5 +44,25 @@ public class UserManagerImpl implements UserManager {
         userPaging.setDatas(users);
         userPaging.setTotal(total);
         return userPaging;
+    }
+
+    @Override
+    public Boolean addUser(User user) {
+        return null;
+    }
+
+    @Override
+    public Boolean addDefaultUser(User user) {
+        return null;
+    }
+
+    @Override
+    public Boolean updateUser(User user) {
+        return null;
+    }
+
+    @Override
+    public Boolean delUser(Long userId) {
+        return null;
     }
 }

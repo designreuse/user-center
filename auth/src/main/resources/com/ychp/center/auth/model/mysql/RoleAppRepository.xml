@@ -50,6 +50,13 @@
         SELECT * FROM <include refid="tb"/> WHERE `role_id`=#{roleId}
     </select>
 
+    <select id="findByRoles" parameterType="list" resultMap="listMap">
+        SELECT * FROM <include refid="tb"/> WHERE `role_id` IN
+        <foreach collection="list" item="roleId" separator="," open="(" close=")">
+          #{roleId}
+        </foreach>
+    </select>
+
     <delete id="delete" >
         DELETE FROM <include refid="tb"/> WHERE id=#{id}
     </delete>

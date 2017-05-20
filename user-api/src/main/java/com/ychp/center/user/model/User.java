@@ -23,8 +23,6 @@ public class User extends BaseModel {
 
     private String salt;
 
-    private Long roleId;
-
     private Long outerId;
 
     private String email;

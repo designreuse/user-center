@@ -1,6 +1,6 @@
 package com.ychp.center.auth.model.mysql;
 
-import com.ychp.center.auth.model.RoleApp;
+import com.ychp.center.auth.model.UserRole;
 import com.ychp.coding.common.mysql.MybatisRepository;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -13,9 +13,7 @@ import java.util.List;
  * Date: 16/12/13
  */
 @Repository
-public interface RoleAppRepository extends MybatisRepository<RoleApp> {
+public interface UserRoleRepository extends MybatisRepository<UserRole> {
 
-    List<RoleApp> findByRole(@Param("roleId") Long roleId);
-
-    List<RoleApp> findByRoles(List<Long> roleIds);
+    UserRole findByUser(@Param("userId") Long userId);
 }

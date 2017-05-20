@@ -8,6 +8,7 @@ import com.ychp.center.auth.model.*;
 import com.ychp.center.auth.model.dto.RoleAppDto;
 import com.ychp.center.auth.model.dto.RoleAuthByAppDto;
 import com.ychp.center.auth.model.dto.RoleAuthDto;
+import com.ychp.center.auth.model.dto.UserRoleDto;
 import com.ychp.center.auth.model.mysql.*;
 import com.ychp.center.auth.service.AuthorityService;
 import com.ychp.coding.common.model.PageInfo;
@@ -51,6 +52,9 @@ public class AuthorityManagerImpl implements AuthorityManager {
 
     @Autowired
     private RoleAuthorityRepository roleAuthorityRepository;
+
+    @Autowired
+    private UserRoleRepository userRoleRepository;
 
     @Override
     public CacheManager getCache() {
@@ -323,6 +327,48 @@ public class AuthorityManagerImpl implements AuthorityManager {
                 roleAuthorityRepository.create(roleAuthority);
             }
         }
+        return true;
+    }
+
+    @Override
+    public List<UserRoleDto> findRoles(Long userId) {
+        List<Role> roles = roleRepository.findRoleList();
+        UserRole userRole = userRoleRepository.findByUser(userId);
+        List<String> roleCodes = userRole.getRoles();
+
+        UserRoleDto userRoleDto;
+        List<UserRoleDto> userRoleDtos = Lists.newArrayList();
+        for (Role role : roles){
+            userRoleDto = new UserRoleDto();
+            userRoleDto.setRoleId(role.getId());
+            userRoleDto.setName(role.getName());
+            if(roleCodes.contains(role.getCode())){
+                userRoleDto.setIsGrant(true);
+            }
+            userRoleDtos.add(userRoleDto);
+        }
+        return userRoleDtos;
+    }
+
+    @Override
+    public Boolean grantRole(Long userId, List<Long> roleIds) {
+        if(roleIds == null || roleIds.isEmpty()){
+            throw new IllegalArgumentException("roleId not empty");
+        }
+
+        List<Role> roles = roleRepository.findByIds(roleIds);
+        List<String> roleCodes = Lists.transform(roles, Role::getCode);
+        UserRole userRole = userRoleRepository.findByUser(userId);
+        List<String> userRoles = userRole.getRoles();
+
+        for(String roleCode : roleCodes) {
+            if(!userRoles.contains(roleCode)) {
+                userRoles.add(roleCode);
+            }
+        }
+
+        userRole.setRoles(userRoles);
+        userRoleRepository.update(userRole);
         return true;
     }
 }

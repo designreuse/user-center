@@ -5,9 +5,11 @@ import com.google.common.collect.Maps;
 import com.ychp.center.auth.model.App;
 import com.ychp.center.auth.model.Role;
 import com.ychp.center.auth.model.RoleApp;
+import com.ychp.center.auth.model.UserRole;
 import com.ychp.center.auth.model.mysql.AppRepository;
 import com.ychp.center.auth.model.mysql.RoleAppRepository;
 import com.ychp.center.auth.model.mysql.RoleRepository;
+import com.ychp.center.auth.model.mysql.UserRoleRepository;
 import com.ychp.center.auth.model.shiro.CustomerUsernamePasswordToken;
 import com.ychp.center.auth.service.RoleAuthorityService;
 import com.ychp.center.auth.utils.AuthUtils;
@@ -32,6 +34,8 @@ import java.util.Objects;
 public class CustomerShiroRealm extends AuthorizingRealm {
 
     @Autowired
+    private UserRoleRepository userRoleRepository;
+    @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
@@ -48,21 +52,25 @@ public class CustomerShiroRealm extends AuthorizingRealm {
         String username = (String) super.getAvailablePrincipal(principalCollection);
 
         if(!StringUtils.isEmpty(username) && username.contains(CustomerStringUtils.SPLIT_CHARACTER)){
-            Long roleId = Long.valueOf(username.split(CustomerStringUtils.SPLIT_CHARACTER)[1]);
-            Role role = roleRepository.findById(roleId);
+            Long userId = Long.valueOf(username.split(CustomerStringUtils.SPLIT_CHARACTER)[1]);
+            UserRole userRole = userRoleRepository.findByUser(userId);
+            List<String> roles = userRole.getRoles();
+
 
             SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-            simpleAuthorizationInfo.addRole(role.getName());
+            simpleAuthorizationInfo.addRoles(roles);
 
+            List<Role> roleList = roleRepository.findByCodes(roles);
+            List<Long> roleIds = Lists.transform(roleList, Role::getId);
             List<Long> appIds;
-            if(AuthUtils.isRoot(roleId)){
+            if(AuthUtils.isRoot(roles)){
                 List<App> apps = appRepository.findListBy(Maps.newHashMap());
                 appIds = Lists.transform(apps, App::getId);
             } else {
-                List<RoleApp> roleApps = roleAppRepository.findByRole(roleId);
+                List<RoleApp> roleApps = roleAppRepository.findByRoles(roleIds);
                 appIds = Lists.transform(roleApps, RoleApp::getAppId);
             }
-            List<String> permissions = roleAuthorityService.loadRoleAuthorities(roleId, appIds);
+            List<String> permissions = roleAuthorityService.loadRoleAuthorities(roleIds, appIds);
 
             simpleAuthorizationInfo.addStringPermissions(permissions);
             return simpleAuthorizationInfo;
