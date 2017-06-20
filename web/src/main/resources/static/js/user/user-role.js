@@ -34,7 +34,7 @@ function factoryRoleChild(role) {
         return $('<div class="checkbox">' +
             '<label>' +
             '<input type="checkbox" id="blankCheckbox" name="roleIds" value="' +
-            role.appId + '" aria-label="' +
+            role.roleId + '" aria-label="' +
             role.name + '" checked="checked">' +
             role.name + '</label> ' +
             '</div>');
@@ -42,22 +42,22 @@ function factoryRoleChild(role) {
         return $('<div class="checkbox">' +
             '<label>' +
             '<input type="checkbox" id="blankCheckbox" name="roleIds" value="' +
-            role.appId + '" aria-label="' +
+            role.roleId + '" aria-label="' +
             role.name + '">' +
             role.name + '</label> ' +
             '</div>');
     }
 }
 
-$(".app-grant-footer").on("click",'.js-grant-role', function(){grantApp(this)});
+$(".role-grant-footer").on("click",'.js-grant-role', function(){grantRole(this)});
 
-function grantApp() {
-    var roleId = $("input[name = 'userRoleId']").val();
-    var apps = $("input[name = 'roleIds']");
-    var paramStr = 'userId=' + roleId;
-    for(var i = 0; i < apps.length; i++){
-        if($(apps[i]).is(':checked')){
-            paramStr = paramStr + "&roleIds=" + $(apps[i]).val();
+function grantRole() {
+    var userId = $("input[name = 'userId']").val();
+    var roles = $("input[name = 'roleIds']");
+    var paramStr = 'userId=' + userId;
+    for(var i = 0; i < roles.length; i++){
+        if($(roles[i]).is(':checked')){
+            paramStr = paramStr + "&roleIds=" + $(roles[i]).val();
         }
     }
 

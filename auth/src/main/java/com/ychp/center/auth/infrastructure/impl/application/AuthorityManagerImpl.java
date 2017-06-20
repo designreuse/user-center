@@ -365,7 +365,12 @@ public class AuthorityManagerImpl implements AuthorityManager {
         List<Role> roles = roleRepository.findByIds(roleIds);
         List<String> roleCodes = Lists.transform(roles, Role::getCode);
         UserRole userRole = userRoleRepository.findByUser(userId);
-        List<String> userRoles = userRole.getRoles();
+        List<String> userRoles;
+        if(userRole != null) {
+            userRoles = userRole.getRoles();
+        } else {
+            userRoles = Lists.newArrayList();
+        }
 
         for(String roleCode : roleCodes) {
             if(!userRoles.contains(roleCode)) {
@@ -373,8 +378,15 @@ public class AuthorityManagerImpl implements AuthorityManager {
             }
         }
 
-        userRole.setRoles(userRoles);
-        userRoleRepository.update(userRole);
+        if(userRole != null) {
+            userRole.setRoles(userRoles);
+            userRoleRepository.update(userRole);
+        } else {
+            userRole = new UserRole();
+            userRole.setUserId(userId);
+            userRole.setRoles(userRoles);
+            userRoleRepository.create(userRole);
+        }
         return true;
     }
 }
