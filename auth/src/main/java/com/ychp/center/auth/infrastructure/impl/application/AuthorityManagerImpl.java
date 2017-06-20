@@ -334,7 +334,13 @@ public class AuthorityManagerImpl implements AuthorityManager {
     public List<UserRoleDto> findRoles(Long userId) {
         List<Role> roles = roleRepository.findRoleList();
         UserRole userRole = userRoleRepository.findByUser(userId);
-        List<String> roleCodes = userRole.getRoles();
+        List<String> roleCodes;
+
+        if(userRole != null) {
+            roleCodes = userRole.getRoles();
+        } else {
+            roleCodes = Lists.newArrayList();
+        }
 
         UserRoleDto userRoleDto;
         List<UserRoleDto> userRoleDtos = Lists.newArrayList();

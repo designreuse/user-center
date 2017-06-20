@@ -34,12 +34,12 @@ function loadAuthData(obj) {
 }
 
 function factoryAuthChild(auth) {
-    if(!auth.isGrant){
+    if(auth.isGrant){
         return $('<div class="checkbox lp-50">' +
             '<label>' +
             '<input type="checkbox" id="blankCheckbox" name="permIds" value="' +
             auth.permId + '" aria-label="' +
-            auth.name + '">' +
+            auth.name + '" checked="checked">' +
             auth.name + '</label> ' +
             '</div>');
     } else {
@@ -47,7 +47,7 @@ function factoryAuthChild(auth) {
             '<label>' +
             '<input type="checkbox" id="blankCheckbox" name="permIds" value="' +
             auth.permId + '" aria-label="' +
-            auth.name + '" checked="checked">' +
+            auth.name + '">' +
             auth.name + '</label> ' +
             '</div>');
     }

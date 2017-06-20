@@ -29,17 +29,17 @@
     <update id="update" parameterMap="paramMap" >
         UPDATE <include refid="tb"/>
         SET
-        <if test="name !=null">`name`=#{name},</if>
-        <if test="code !=null">`code`=#{code},</if>
-        `updated_at`= now()
+        <if test="name !=null">`name` = #{name},</if>
+        <if test="code !=null">`code` = #{code},</if>
+        `updated_at` = now()
         WHERE id = #{id}
     </update>
 
     <sql id="criteria">
         WHERE 1=1
-        <if test="id != null">AND `id`=#{id}</if>
-        <if test="name != null">AND `name`=#{name}</if>
-        <if test="code != null">AND `code`=#{code}</if>
+        <if test="id != null">AND `id` = #{id}</if>
+        <if test="name != null">AND `name` = #{name}</if>
+        <if test="code != null">AND `code` = #{code}</if>
         AND id != 1
     </sql>
 
@@ -55,7 +55,7 @@
     </select>
 
     <delete id="delete" >
-        DELETE FROM <include refid="tb"/> WHERE id=#{id}
+        DELETE FROM <include refid="tb"/> WHERE id = #{id}
     </delete>
 
     <select id="countBy" parameterType="map" resultType="long">

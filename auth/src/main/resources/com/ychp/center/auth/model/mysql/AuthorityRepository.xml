@@ -9,7 +9,7 @@
 
     <sql id="allColumns">`id`,<include refid="columns"/></sql>
 
-    <sql id="columns">`pid`, ``name`, `auth`, `perm_key`, `role_key`, `url`, `app_id`, `created_at`, `updated_at`</sql>
+    <sql id="columns">`pid`, `name`, `auth`, `perm_key`, `role_key`, `url`, `app_id`, `created_at`, `updated_at`</sql>
 
     <sql id="values">#{pid}, #{name}, #{auth}, #{permKey}, #{roleKey}, #{url}, #{appId}</sql>
 
@@ -29,27 +29,27 @@
     <update id="update" parameterMap="paramMap" >
         UPDATE <include refid="tb"/>
         SET
-        <if test="pid !=null">`pid`=#{pid},</if>
-        <if test="name !=null">`name`=#{name},</if>
-        <if test="auth !=null">`auth`=#{auth},</if>
-        <if test="permKey !=null">`perm_key`=#{permKey},</if>
-        <if test="roleKey !=null">`role_key`=#{roleKey},</if>
-        <if test="url !=null">`url`=#{url},</if>
-        <if test="appId !=null">`app_id`=#{appId},</if>
-        `updated_at`= now()
+        <if test="pid !=null">`pid` = #{pid},</if>
+        <if test="name !=null">`name` = #{name},</if>
+        <if test="auth !=null">`auth` = #{auth},</if>
+        <if test="permKey !=null">`perm_key` = #{permKey},</if>
+        <if test="roleKey !=null">`role_key` = #{roleKey},</if>
+        <if test="url !=null">`url` = #{url},</if>
+        <if test="appId !=null">`app_id` = #{appId},</if>
+        `updated_at` = now()
         WHERE id = #{id}
     </update>
 
     <sql id="criteria">
         WHERE 1=1
-        <if test="id != null">AND `id`=#{id}</if>
-        <if test="pid != null">AND `pid`=#{pid}</if>
-        <if test="name != null">AND `name`=#{name}</if>
-        <if test="auth !=null">AND `auth`=#{auth}</if>
-        <if test="permKey !=null">AND `perm_key`=#{permKey}</if>
-        <if test="roleKey !=null">AND `role_key`=#{roleKey}</if>
-        <if test="url !=null">AND `url`=#{url}</if>
-        <if test="appId !=null">AND `app_id`=#{appId}</if>
+        <if test="id != null">AND `id` = #{id}</if>
+        <if test="pid != null">AND `pid` = #{pid}</if>
+        <if test="name != null">AND `name` = #{name}</if>
+        <if test="auth !=null">AND `auth` = #{auth}</if>
+        <if test="permKey !=null">AND `perm_key` = #{permKey}</if>
+        <if test="roleKey !=null">AND `role_key` = #{roleKey}</if>
+        <if test="url !=null">AND `url` = #{url}</if>
+        <if test="appId !=null">AND `app_id` = #{appId}</if>
     </sql>
 
     <select id="findById" parameterType="long" resultMap="listMap">
@@ -75,7 +75,7 @@
     </select>
 
     <delete id="delete" >
-        DELETE FROM <include refid="tb"/> WHERE id=#{id}
+        DELETE FROM <include refid="tb"/> WHERE id = #{id}
     </delete>
 
     <select id="countBy" parameterType="map" resultType="long">

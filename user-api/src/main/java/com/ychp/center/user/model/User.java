@@ -17,7 +17,7 @@ public class User extends BaseModel {
 
     private String name;
 
-    private String username;
+    private String userName;
 
     private String password;
 

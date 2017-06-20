@@ -35,7 +35,7 @@ function factoryAppChild(app) {
             '<label>' +
             '<input type="checkbox" id="blankCheckbox" name="appIds" value="' +
             app.appId + '" aria-label="' +
-            app.name + '">' +
+            app.name + '" checked="checked">' +
             app.name + '</label> ' +
             '</div>');
     } else {
@@ -43,7 +43,7 @@ function factoryAppChild(app) {
             '<label>' +
             '<input type="checkbox" id="blankCheckbox" name="appIds" value="' +
             app.appId + '" aria-label="' +
-            app.name + '" checked="checked">' +
+            app.name + '">' +
             app.name + '</label> ' +
             '</div>');
     }

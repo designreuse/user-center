@@ -5,11 +5,11 @@ function factoryChild(it) {
     return $('<tr>'
         + '<td>' + it['id'] + '</td>'
         + '<td>' + it['name'] + '</td>'
-        + '<td>' + it['username'] + '</td>'
+        + '<td>' + it['userName'] + '</td>'
         + '<td>'
-        + '\r\n<a href="#">分配角色</a>'
-        + '\r\n<a data-info="' + JSON.stringify(it) + '" href="#">编辑</a>'
-        + '\r\n<a href="#">删除</a>'
+        + '\r\n<a class="js-role-form" data-id=\'' + it['id'] + '\' href="#" data-toggle="modal" data-target="#userRoleModal">分配角色</a>'
+        + '\r\n<a data-info=\'' + JSON.stringify(it) + '\' class="js-update-form" href="#" data-toggle="modal" data-target="#userModal">编辑</a>'
+        + '\r\n<a class="js-del" href="#" data-id="' + it['id'] + '">删除</a>'
         + '</td>'
         + '</tr>');
 }
@@ -44,6 +44,12 @@ var panel_head = $(".panel-heading");
 panel_head.on("click",'.js-add-form', function(){
     $("input[name='id']").val('');
     $("input[name='name']").val('');
+    $("input[name='userName']").val('');
+    $("input[name='password']").val('');
+    $("input[name='email']").val('');
+    $("input[name='mobile']").val('');
+    $("input[name='qq']").val('');
+    $("input[name='outerId']").val('');
     $(".js-add").show();
     $(".js-update").hide();
 });
@@ -67,9 +73,9 @@ function add() {
             alert('success');
             location.reload();
         },
-        error: function (error) {
-            alert(error['responseJSON']['message'])
-        }
+        // error: function (error) {
+        //     alert(error['responseJSON']['message'])
+        // }
     });
 }
 
@@ -78,6 +84,12 @@ user_infos.on("click",'.js-update-form', function(){
     var userInfo = JSON.parse(dataset.info);
     $("input[name='id']").val(userInfo['id']);
     $("input[name='name']").val(userInfo['name']);
+    $("input[name='userName']").val(userInfo['userName']);
+    $("input[name='password']").val(userInfo['password']);
+    $("input[name='email']").val(userInfo['email']);
+    $("input[name='mobile']").val(userInfo['mobile']);
+    $("input[name='qq']").val(userInfo['qq']);
+    $("input[name='outerId']").val(userInfo['outerId']);
     $(".js-add").hide();
     $(".js-update").show();
 });

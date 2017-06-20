@@ -29,17 +29,17 @@
     <update id="update" parameterMap="paramMap" >
         UPDATE <include refid="tb"/>
         SET
-        <if test="userId !=null">`user_id`=#{userId},</if>
-        <if test="roleJson !=null">`role_json`=#{roleJson},</if>
-        `updated_at`= now()
+        <if test="userId !=null">`user_id` = #{userId},</if>
+        <if test="roleJson !=null">`role_json` = #{roleJson},</if>
+        `updated_at` = now()
         WHERE id = #{id}
     </update>
 
     <sql id="criteria">
         WHERE 1=1
-        <if test="id != null">AND `id`=#{id}</if>
-        <if test="userId !=null">AND `user_id`=#{userId},</if>
-        <if test="roleJson != null">AND `role_json`=#{roleJson}</if>
+        <if test="id != null">AND `id` = #{id}</if>
+        <if test="userId !=null">AND `user_id` = #{userId},</if>
+        <if test="roleJson != null">AND `role_json` = #{roleJson}</if>
     </sql>
 
     <select id="findById" parameterType="long" resultMap="listMap">
@@ -47,11 +47,11 @@
     </select>
 
     <select id="findByUser" parameterType="map" resultMap="listMap">
-        SELECT * FROM <include refid="tb"/> WHERE `user_id`=#{userId}
+        SELECT * FROM <include refid="tb"/> WHERE `user_id` = #{userId}
     </select>
 
     <delete id="delete" >
-        DELETE FROM <include refid="tb"/> WHERE id=#{id}
+        DELETE FROM <include refid="tb"/> WHERE id = #{id}
     </delete>
 
     <select id="countBy" parameterType="map" resultType="long">

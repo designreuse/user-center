@@ -15,6 +15,12 @@
                             <input type="text" class="form-control" name="name" placeholder="名称">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">编码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="code" placeholder="编码">
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer add-footer">

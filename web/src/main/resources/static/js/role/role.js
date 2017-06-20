@@ -77,6 +77,7 @@ role_infos.on("click",'.js-update-form', function(){
     var roleInfo = JSON.parse(dataset.info);
     $("input[name='id']").val(roleInfo['id']);
     $("input[name='name']").val(roleInfo['name']);
+    $("input[name='code']").val(roleInfo['code']);
     $(".js-add").hide();
     $(".js-update").show();
 });

@@ -52,7 +52,7 @@ public class Login {
         CustomerUsernamePasswordToken token;
         if(user != null) {
             token = new CustomerUsernamePasswordToken(
-                    user.getUsername() + CustomerStringUtils.SPLIT_CHARACTER + user.getId(),
+                    user.getUserName() + CustomerStringUtils.SPLIT_CHARACTER + user.getId(),
                     password, user.getSalt(), user.getPassword(), user.getStatus(), remember);
         } else {
             token = new CustomerUsernamePasswordToken(null, null, null, null, null, false);

@@ -1,12 +1,15 @@
 package com.ychp.center.user.infrastructure.impl.application;
 
-import com.ychp.coding.common.model.PageInfo;
-import com.ychp.coding.common.model.Paging;
+import com.google.common.base.Preconditions;
 import com.ychp.center.user.application.UserManager;
 import com.ychp.center.user.model.User;
 import com.ychp.center.user.model.mysql.UserRepository;
+import com.ychp.coding.common.model.PageInfo;
+import com.ychp.coding.common.model.Paging;
+import com.ychp.coding.common.util.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -48,21 +51,43 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public Boolean addUser(User user) {
-        return null;
+        Preconditions.checkArgument(user != null, "user not empty");
+        Preconditions.checkArgument(!StringUtils.isEmpty(user.getName()), "user name not empty");
+        Preconditions.checkArgument(!StringUtils.isEmpty(user.getUserName()), "user name not empty");
+        Preconditions.checkArgument(!StringUtils.isEmpty(user.getPassword()), "user password not empty");
+        String salt = Encryption.getSalt();
+        user.setSalt(salt);
+        user.setPassword(Encryption.Encrypt3DES(user.getPassword(), salt));
+        user.setStatus(1);
+        return userRepository.create(user) == 1;
     }
 
     @Override
     public Boolean addDefaultUser(User user) {
-        return null;
+        return addUser(user);
     }
 
     @Override
     public Boolean updateUser(User user) {
-        return null;
+        Preconditions.checkArgument(user != null, "user not empty");
+        Preconditions.checkArgument(user.getId() != null, "user is not empty");
+
+        User exist = userRepository.findById(user.getId());
+        Preconditions.checkArgument(exist != null, "user not exist");
+
+        if(!StringUtils.isEmpty(user.getPassword())) {
+            user.setPassword(Encryption.Encrypt3DES(user.getPassword(), exist.getSalt()));
+        }
+        userRepository.update(user);
+        return true;
     }
 
     @Override
     public Boolean delUser(Long userId) {
-        return null;
+        Preconditions.checkArgument(userId != null, "user is not empty");
+
+        User exist = userRepository.findById(userId);
+        Preconditions.checkArgument(exist != null, "user not exist");
+        return userRepository.delete(userId) == 1;
     }
 }

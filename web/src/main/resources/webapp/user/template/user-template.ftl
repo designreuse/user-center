@@ -9,10 +9,46 @@
             <div class="modal-body">
                 <form class="form-horizontal data-info" role="form">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label"> 用户名</label>
+                        <label class="col-sm-2 control-label"> 名称</label>
                         <div class="col-sm-10">
                             <input type="hidden" name="id">
                             <input type="text" class="form-control" name="name" placeholder="名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"> 用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="userName" placeholder="用户名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"> 密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="password" placeholder="密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"> 邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="email" placeholder="邮箱">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"> 手机号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="mobile" placeholder="手机号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"> QQ</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="qq" placeholder="QQ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"> 外部ID</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="outerId" placeholder="外部ID">
                         </div>
                     </div>
                 </form>

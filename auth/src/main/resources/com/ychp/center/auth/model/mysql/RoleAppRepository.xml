@@ -29,17 +29,17 @@
     <update id="update" parameterMap="paramMap" >
         UPDATE <include refid="tb"/>
         SET
-        <if test="roleId !=null">`role_id`=#{roleId},</if>
-        <if test="appId !=null">`app_id`=#{appId},</if>
-        `updated_at`= now()
+        <if test="roleId !=null">`role_id` = #{roleId},</if>
+        <if test="appId !=null">`app_id` = #{appId},</if>
+        `updated_at` = now()
         WHERE id = #{id}
     </update>
 
     <sql id="criteria">
         WHERE 1=1
-        <if test="id != null">AND `id`=#{id}</if>
-        <if test="roleId != null">AND `role_id`=#{roleId}</if>
-        <if test="appId != null">AND `app_id`=#{appId}</if>
+        <if test="id != null">AND `id` = #{id}</if>
+        <if test="roleId != null">AND `role_id` = #{roleId}</if>
+        <if test="appId != null">AND `app_id` = #{appId}</if>
     </sql>
 
     <select id="findById" parameterType="long" resultMap="listMap">
@@ -47,7 +47,7 @@
     </select>
 
     <select id="findByRole" parameterType="map" resultMap="listMap">
-        SELECT * FROM <include refid="tb"/> WHERE `role_id`=#{roleId}
+        SELECT * FROM <include refid="tb"/> WHERE `role_id` = #{roleId}
     </select>
 
     <select id="findByRoles" parameterType="list" resultMap="listMap">
@@ -58,7 +58,7 @@
     </select>
 
     <delete id="delete" >
-        DELETE FROM <include refid="tb"/> WHERE id=#{id}
+        DELETE FROM <include refid="tb"/> WHERE id = #{id}
     </delete>
 
     <select id="countBy" parameterType="map" resultType="long">

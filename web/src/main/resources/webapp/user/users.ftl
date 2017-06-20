@@ -1,5 +1,6 @@
 <#import "../common/pagination-js.ftl" as pagination/>
 <#import "./template/user-template.ftl" as userForm/>
+<#import "./template/role-template.ftl" as roleForm/>
 <@override name="body">
 <div class="container-fluid">
     <div class="panel panel-default">
@@ -12,7 +13,7 @@
                     </ol>
                 </div>
                 <div class="col-md-4 text-right">
-                    <button type="button" class="btn btn-primary btn-sm">添加</button>
+                    <button type="button" class="btn btn-primary js-add-form btn-sm" data-toggle="modal" data-target="#userModal">添加</button>
                 </div>
             </div>
         </div>
@@ -23,8 +24,9 @@
             <tbody class="js-info-content">
             </tbody>
         </table>
-
+        <script src="/static/js/serialize.js"></script>
         <@userForm.user_from/>
+        <@roleForm.user_role_from/>
 
 
         <@pagination.pagination_js

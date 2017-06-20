@@ -13,6 +13,7 @@
                         <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
                             <input type="hidden" name="id">
+                            <input type="hidden" name="pid" value="0">
                             <input type="hidden" name="appId" value="${currentAppId}">
                             <input type="text" class="form-control" name="name" placeholder="名称">
                         </div>
